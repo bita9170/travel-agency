@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import Register from "@/components/ui/register";
+import Register from "@/components/Register";
 
 export default function Home() {
   return (

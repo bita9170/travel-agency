@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { cva } from "class-variance-authority";
+import { Button } from "@/components/ui/button";
 
 const inputStyles = cva(
   "border p-2 rounded focus:outline-none focus:border-blue-500",
@@ -95,7 +96,7 @@ export default function Register() {
           className={inputStyles({ error })}
           required
         />
-        <button
+        <Button
           style={{
             border: "2px solid green",
             padding: "10px",
@@ -104,7 +105,7 @@ export default function Register() {
           type="submit"
         >
           Register
-        </button>
+        </Button>
       </form>
       <p>{message}</p>
     </div>
