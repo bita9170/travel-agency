@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nestjs/cli": "^10.3.2",
     "@radix-ui/react-slot": "^1.0.2",
+    "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.372.0",
