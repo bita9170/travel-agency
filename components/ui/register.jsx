@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
+// import { useRouter } from "next/router";
 import { cva } from "class-variance-authority";
 
 const inputStyles = cva(
@@ -30,6 +31,8 @@ export default function Register() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
 
+  // const router = useRouter();
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -40,6 +43,7 @@ export default function Register() {
       const response = await axios.post("/api/users", formData);
       setMessage("Registration successful: " + response.data.message);
       setError(false);
+      // router.push("/welcome");
     } catch (error) {
       setMessage("Registration failed: " + error.response.data.error);
       setError(true);
@@ -47,7 +51,15 @@ export default function Register() {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        width: "600px",
+        border: "2px solid green",
+        marginTop: "100px",
+        position: "absolute",
+        left: "50%",
+      }}
+    >
       <h1>Register New User</h1>
       <form onSubmit={handleSubmit}>
         <input
