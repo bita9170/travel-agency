@@ -34,18 +34,18 @@ export default function Register() {
 
   // const router = useRouter();
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/users", formData);
       setMessage("Registration successful: " + response.data.message);
       setError(false);
       // router.push("/welcome");
-    } catch (error) {
+    } catch (error: any) {
       setMessage("Registration failed: " + error.response.data.error);
       setError(true);
     }
