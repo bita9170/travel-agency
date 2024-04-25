@@ -1,8 +1,11 @@
+// ENDPOINT für REQUEST
+
 import connectMongoDB from "@/lib/mongodb";
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/lib/model/User";
 import bcrypt from "bcrypt";
 
+// LOGIN Get user
 export async function GET() {
   try {
     await connectMongoDB();
@@ -13,13 +16,13 @@ export async function GET() {
   }
 }
 
+// Register Post user
 export async function POST(req) {
-  console.log("test");
   try {
     const { name, username, address, email, password } = await req.json();
     const saltRounds = 10;
 
-    await connectMongoDB(); //connect to Database
+    await connectMongoDB();
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
@@ -36,4 +39,44 @@ export async function POST(req) {
   }
 }
 
-// ENDPOINT für REQUEST
+// Delete
+
+export async function DELETE(req) {
+  try {
+    const { userId } = await req.json();
+
+    await connectMongoDB();
+
+    const deletedUser = await User.findByIdAndDelete(userId);
+    if (!deletedUser) {
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ message: "User deleted" }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ error }, { status: 400 });
+  }
+}
+
+//  PUT request to update a user's details such as their name, email, or address
+export async function PUT(req) {
+  try {
+    const { userId, name, username, address, email } = await req.json();
+
+    await connectMongoDB();
+
+    const updateUser = await User.findByIdAndUpdate(
+      userId,
+      { name, username, address, email },
+
+      { new: true }
+    );
+
+    if (!updateUser) {
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
+    }
+    return NextResponse.json({ user: updateUser }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ error }, { status: 400 });
+  }
+}
