@@ -9,9 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nestjs/cli": "^10.3.2",
     "@radix-ui/react-slot": "^1.0.2",
+    "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.5",
+    "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.372.0",
     "mongoose": "^8.3.2",
     "next": "14.2.2",
