@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 import Register from "@/components/Register";
-import { Search } from "@/controllers/tripadvisorController";
+import { searchAllLocations } from "@/controllers/tripadvisorController";
 
 export default async function Home() {
-  const data = await Search("Berlin", "en");
+  const data = await searchAllLocations("Berlin", "en");
 
   console.log(data);
   return (
