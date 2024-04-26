@@ -8,7 +8,9 @@ export default async function Home() {
   // console.log(data);
   return (
     <main>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <h1 className="text-3xl border border-[rgb(0,0,0)] font-bold underline">
+        Hello world!
+      </h1>
       <Button>Click me</Button>
       <Register />
     </main>
