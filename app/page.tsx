@@ -2,6 +2,7 @@ import { Button } from "../components/ui/button";
 import Register from "../components/Register";
 import Reviews from "../components/Reviews";
 import { searchAllLocations } from "../controllers/tripadvisorController";
+import Footer from "../components/footer/Footer";
 
 export default async function Home() {
   const data = await searchAllLocations("Berlin", "en");
@@ -17,6 +18,8 @@ export default async function Home() {
       <div className="reviews">
         <h1>Review Formular</h1>
         <Reviews />
+
+        <Footer />
       </div>
     </main>
   );
