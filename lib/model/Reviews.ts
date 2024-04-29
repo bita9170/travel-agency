@@ -1,11 +1,11 @@
-// models/Review.js
+// model/Review.js
 import mongoose, { Schema } from "mongoose";
 
 const reviewSchema = new Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+
       required: true,
     },
     text: {
@@ -27,6 +27,7 @@ const reviewSchema = new Schema(
   { timestamps: true }
 );
 
-const Review = mongoose.model("Review", reviewSchema);
+const Review =
+  mongoose.models.Reviews || mongoose.model("Review", reviewSchema);
 
 export default Review;
