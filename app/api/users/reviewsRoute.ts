@@ -1,5 +1,5 @@
 // controllers/reviewController.js
-import Review from "../models/Review";
+import Review from "../../../lib/model/Reviews";
 
 // Get reviews
 export const getReviews = async (req, res) => {
