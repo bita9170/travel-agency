@@ -14,22 +14,13 @@ function Footer() {
           eats, and experiences—decided by you.
         </p>
         <button className="btn">See the winners</button>
-
         <div className="image"></div>
       </div>
       <h2>Trending in Travel</h2>
 
-      <div
-        className="flex gap-4  "
-        style={{
-          fontSize: "10px",
-          fontFamily: "Fira Sans, sans-serif",
-          marginLeft: "40px",
-          fontWeight: 600,
-        }}
-      >
+      <div className="header-drei ">
         <h3>Spring Destinations</h3>
-        <h3>Summer Destinations</h3>
+        <h3 className=" md:flex">Summer Destinations</h3>
       </div>
 
       <div className="trending-travel">
@@ -41,7 +32,7 @@ function Footer() {
           <li>Washington DC</li>
         </ul>
 
-        <ul className="list">
+        <ul className="list hidden md:block">
           <li>Nashville</li>
           <li>Charleston</li>
           <li>Sedona</li>
@@ -49,7 +40,7 @@ function Footer() {
           <li>Washington DC</li>
         </ul>
 
-        <ul className="list">
+        <ul className="hidden md:block">
           <li>Nashville</li>
           <li>Charleston</li>
           <li>Sedona</li>
@@ -57,7 +48,7 @@ function Footer() {
           <li>Washington DC</li>
         </ul>
 
-        <ul className="list">
+        <ul className="list hidden md:block">
           <li>Nashville</li>
           <li>Charleston</li>
           <li>Sedona</li>

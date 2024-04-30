@@ -1,109 +1,76 @@
 .card {
-  padding: 50px;
-  height: 468px;
-  background-color: #fff7e1;
+  @apply p-12 h-[468px] bg-[#fff7e1] md:h-[468px];
 }
 
 .header {
-  color: #000000;
-  font-size: 40px;
-  font-family: "Fira Sans";
-  font-weight: 500;
-  line-height: 52px;
+  @apply text-black text-4xl font-sans font-medium leading-[52px] mb-4; /* Maintain margin-bottom for spacing below the header */
+  @apply md:text-5xl;
+}
+
+.text {
+  @apply block text-sm mb-4; /* Ensure it's always visible and with margin-bottom for spacing */
 }
 
 .btn {
-  cursor: pointer;
-  top: 2597px;
-  left: 287px;
-  width: 111px;
-  height: 33px;
-  padding: 0px 8px;
-  border: 0;
-  box-sizing: border-box;
-  border-radius: 23px;
-  background-color: #000000;
-  color: #ffffff;
-  font-size: 12px;
-  font-family: "Fira Sans";
-  font-weight: 700;
-  line-height: 15px;
-  outline: none;
+  @apply cursor-pointer relative w-[150px]  h-[43px] px-2 py-2 border-0 box-border rounded-full bg-black text-white text-xs font-bold leading-[15px] outline-none mb-4; /* Added margin-bottom for spacing below the button */
 }
 
 .image {
-  position: absolute;
-  top: 5%;
-  left: 30%;
-  width: 557px;
-  height: 468px;
+  @apply block w-[371px] h-[339px] bg-center bg-cover bg-no-repeat mt-4 mb-4;
   background-image: url("https://assets.api.uizard.io/api/cdn/stream/d715e985-d7f0-46ac-907e-c6d06aac2649.png");
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  @apply md:absolute md:bg-contain md:top-[0%] md:left-[30%] md:w-[557px] md:h-[468px];
 }
 
-h2 {
-  margin-top: 50px;
-  margin-left: 40px;
+.header-drei {
+  @apply mt-16;
 }
+h2 {
+  @apply mt-32 ml-10 text-right font-semibold;
+  @apply md:absolute md:top-[20%] md:left-[0%];
+}
+
+.text {
+  @apply hidden md:block mt-4; /* Added margin-top to space it when visible on larger screens */
+}
+
 .trending-travel {
-  margin-top: 10px;
-  display: flex;
-  gap: 260px;
-  background-color: #fff;
-  padding: 20px 40px;
-  font-family: Arial, sans-serif;
+  @apply mt-2.5 flex gap-[260px] bg-white p-10 font-sans;
+  @apply md:mt-5;
 }
 
 .trending-travel ul li {
-  font-size: 10px;
+  @apply text-xs;
 }
 
 .footer-container {
-  width: 100%;
-  padding: 40px 20px;
-
-  color: #333;
-  font-family: Arial, sans-serif;
+  @apply w-full py-10 px-5 text-gray-800 font-sans;
 }
 
 .bottom-sections {
-  padding: 50px;
-  height: "291px";
-  background-color: #faf1ed;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
+  @apply p-12 bg-[#faf1ed] grid grid-cols-4 gap-4;
 }
 
 .section h3 {
-  font-size: 16px;
-  margin-bottom: 10px;
+  @apply text-lg mb-2.5;
 }
 
 .section ul {
-  list-style: none;
-  padding: 0;
+  @apply list-none p-0;
 }
 
 .section li {
-  margin-bottom: 5px;
-  font-size: 14px;
+  @apply mb-1.5 text-sm;
 }
 
 .footer-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 40px;
+  @apply flex justify-between items-center mt-10;
 }
 
 .footer-info p,
 .footer-info a {
-  font-size: 14px;
+  @apply text-sm;
 }
 
 .social-icons a {
-  margin-right: 10px;
+  @apply mr-2.5;
 }
