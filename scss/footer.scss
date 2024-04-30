@@ -1,45 +1,26 @@
-// Media Queries for Responsive Design
-
-.footerContainer {
-  width: 1440px;
-  margin: auto;
-  overflow: hidden;
-}
-
-.containerStyle {
-  width: 100%;
+.card {
+  padding: 50px;
   height: 468px;
   background-color: #fff7e1;
-  display: flex;
-  flex-direction: row;
 }
 
-.textContainer {
-  flex: 1;
-  padding: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.header {
+  color: #000000;
+  font-size: 40px;
   font-family: "Fira Sans";
-  margin-left: 150px;
+  font-weight: 500;
+  line-height: 52px;
 }
 
-.imageContainer {
-  flex: 2;
-  height: 468px;
-  background-image: url("https://assets.api.uizard.io/api/cdn/stream/d715e985-d7f0-46ac-907e-c6d06aac2649.png");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.buttonStyle {
-  margin-top: 20px;
+.btn {
   cursor: pointer;
+  top: 2597px;
+  left: 287px;
   width: 111px;
   height: 33px;
   padding: 0px 8px;
   border: 0;
+  box-sizing: border-box;
   border-radius: 23px;
   background-color: #000000;
   color: #ffffff;
@@ -50,91 +31,79 @@
   outline: none;
 }
 
-// .lowerSection {
-//   @apply
-//   width: 100%;
-//   height: 20vh;
-//   background-color: white;
-//   margin-top: 40px;
-//   display: flex;
-//   flex-direction: column;
-//   padding-left: 200px;
-//   gap: 20px;
-// }
-
-.infoText {
-  color: #000000;
-  font-size: 17px;
-  font-family: "Fira Sans";
-  font-weight: 700;
-  line-height: 32px;
+.image {
+  position: absolute;
+  top: 5%;
+  left: 30%;
+  width: 557px;
+  height: 468px;
+  background-image: url("https://assets.api.uizard.io/api/cdn/stream/d715e985-d7f0-46ac-907e-c6d06aac2649.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.smallInfoText {
-  color: #000000;
+h2 {
+  margin-top: 50px;
+  margin-left: 40px;
+}
+.trending-travel {
+  margin-top: 10px;
+  display: flex;
+  gap: 260px;
+  background-color: #fff;
+  padding: 20px 40px;
+  font-family: Arial, sans-serif;
+}
+
+.trending-travel ul li {
   font-size: 10px;
-  font-family: "Fira Sans";
-  font-weight: 600;
-  line-height: 18px;
-  text-decoration: underline;
-  margin-top: 5px;
 }
 
-.tableSection {
-  display: flex;
-  gap: 50px;
-  align-content: center;
-  margin-left: 200px;
+.footer-container {
+  width: 100%;
+  padding: 40px 20px;
+
+  color: #333;
+  font-family: Arial, sans-serif;
 }
 
-.table {
-  display: flex;
-  flex-direction: column;
+.bottom-sections {
+  padding: 50px;
+  height: "291px";
+  background-color: #faf1ed;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.section h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.section li {
+  margin-bottom: 5px;
   font-size: 14px;
 }
 
-.lastSection {
-  width: 100%;
-  height: 30vh;
-  background-color: #faf1ed;
+.footer-info {
   display: flex;
-  gap: 50px;
-  align-content: center;
-  padding-left: 200px;
-  margin-top: 50px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
 }
 
-@media (max-width: 768px) {
-  .containerStyle {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .textContainer,
-  .imageContainer {
-    flex: none;
-    width: 100%;
-    height: auto;
-  }
-
-  .textContainer {
-    padding: 20px;
-  }
+.footer-info p,
+.footer-info a {
+  font-size: 14px;
 }
 
-@media (max-width: 480px) {
-  .buttonStyle {
-    width: 100%;
-    font-size: 14px;
-  }
-
-  h1 {
-    font-size: 24px;
-    line-height: 30px;
-  }
-
-  p {
-    font-size: 14px;
-    line-height: 20px;
-  }
+.social-icons a {
+  margin-right: 10px;
 }

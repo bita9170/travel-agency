@@ -1,310 +1,177 @@
 import React from "react";
+import Image from "next/image";
 
 function Footer() {
-  const styles = {
-    textContainer: {
-      flex: 1,
-      padding: "50px",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-
-      fontFamily: "Fira Sans",
-    },
-    ImageContainer: {
-      flex: 2,
-      height: "468px",
-      backgroundImage: `url("https://assets.api.uizard.io/api/cdn/stream/d715e985-d7f0-46ac-907e-c6d06aac2649.png")`,
-      backgroundSize: "contain",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-    },
-    containerStyle: {
-      width: "100%",
-      height: "468px",
-      backgroundColor: "#fff7e1",
-      display: "flex",
-      flexDirection: "row",
-    },
-    buttonStyle: {
-      marginTop: "20px",
-      cursor: "pointer",
-      width: "111px",
-      height: "33px",
-      padding: "0px 8px",
-      border: "0",
-      borderRadius: "23px",
-      backgroundColor: "#000000",
-      color: "#ffffff",
-      fontSize: "12px",
-      fontFamily: "Fira Sans",
-      fontWeight: 700,
-      lineHeight: "15px",
-      outline: "none",
-    },
-  };
-
   return (
-    <div
-      style={{
-        width: "1440px",
-        margin: "auto",
-        overflow: "hidden",
-      }}
-    >
-      {/* Container to center the content */}
-      <div style={styles.containerStyle}>
-        <div style={styles.textContainer}>
-          <div style={{ marginLeft: "150px" }}>
-            <h1
-              style={{
-                fontSize: "40px",
-                fontWeight: "500",
-                lineHeight: "52px",
-              }}
-            >
-              Travelers Choice
-              <br /> Awards Best of <br /> the Best
-            </h1>
-            <p>
-              Among our top 1% of places, stays, <br />
-              eats, and experiences—decided by you.
-            </p>
-            <button style={styles.buttonStyle}>See the winners</button>
-          </div>
-        </div>
-        <div style={styles.ImageContainer} />
+    <div className="footer-container">
+      <div className="top-section card">
+        <h1 className="header">
+          Travelers Choice
+          <br /> Awards Best of <br /> the Best
+        </h1>
+        <p className="text">
+          Among our top 1% of places, stays, <br />
+          eats, and experiences—decided by you.
+        </p>
+        <button className="btn">See the winners</button>
+
+        <div className="image"></div>
       </div>
+      <h2>Trending in Travel</h2>
+
       <div
+        className="flex gap-4  "
         style={{
-          width: "100%",
-          height: "20vh",
-          backgroundColor: "white",
-          marginTop: "40px",
+          fontSize: "10px",
+          fontFamily: "Fira Sans, sans-serif",
+          marginLeft: "40px",
+          fontWeight: 600,
         }}
       >
-        <p
-          style={{
-            color: "#000000",
-            fontSize: "17px",
-            fontFamily: "Fira Sans",
-            fontWeight: 700,
-            lineHeight: "32px",
-            marginLeft: "200px",
-          }}
-        >
-          Trending in Travel
-        </p>
-        <div style={{ display: "flex", gap: "20px", marginLeft: "200px" }}>
-          <p
-            style={{
-              color: "#000000",
-              fontSize: "10px",
-              fontFamily: "Fira Sans",
-              fontWeight: "600",
-              lineHeight: "18px",
-              textUnderlinePosition: "2px",
-              marginTop: "5px",
-            }}
-          >
-            Spring Destinations
-          </p>
-          <p
-            style={{
-              color: "#000000",
-              fontSize: "10px",
-              fontFamily: "Fira Sans",
-              fontWeight: "600",
-              lineHeight: "18px",
-              marginTop: "5px",
-            }}
-          >
-            Sommer Destinations
-          </p>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            gap: "50px",
-            alignContent: "center",
-            marginLeft: "200px",
-          }}
-        >
-          <table
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              fontSize: "14px",
-            }}
-          >
-            <td>Nashville</td>
-            <td>Charleston</td>
-            <td>Sedana</td>
-            <td>New Orleans</td>
-            <td>Washington DC</td>
-          </table>
-          <table
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              fontSize: "14px",
-            }}
-          >
-            <td>Nashville</td>
-            <td>Charleston</td>
-            <td>Sedana</td>
-            <td>New Orleans</td>
-            <td>Washington DC</td>
-          </table>
-          <table
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              fontSize: "14px",
-            }}
-          >
-            <td>Nashville</td>
-            <td>Charleston</td>
-            <td>Sedana</td>
-            <td>New Orleans</td>
-            <td>Washington DC</td>
-          </table>
-          <table
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              fontSize: "14px",
-            }}
-          >
-            <td>Nashville</td>
-            <td>Charleston</td>
-            <td>Sedana</td>
-            <td>New Orleans</td>
-            <td>Washington DC</td>
-          </table>
-        </div>
+        <h3>Spring Destinations</h3>
+        <h3>Summer Destinations</h3>
       </div>
-      <div
-        style={{ width: "100%", height: "30vh", backgroundColor: "#faf1ed" }}
-      >
-        <div
-          style={{
-            display: "flex",
-            gap: "50px",
-            alignContent: "center",
-            marginLeft: "200px",
-          }}
-        >
-          <div style={{ marginTop: "50px", display: "flex", gap: "40px" }}>
-            <table
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                fontSize: "14px",
-              }}
+
+      <div className="trending-travel">
+        <ul className="list">
+          <li>Nashville</li>
+          <li>Charleston</li>
+          <li>Sedona</li>
+          <li>New Orleans</li>
+          <li>Washington DC</li>
+        </ul>
+
+        <ul className="list">
+          <li>Nashville</li>
+          <li>Charleston</li>
+          <li>Sedona</li>
+          <li>New Orleans</li>
+          <li>Washington DC</li>
+        </ul>
+
+        <ul className="list">
+          <li>Nashville</li>
+          <li>Charleston</li>
+          <li>Sedona</li>
+          <li>New Orleans</li>
+          <li>Washington DC</li>
+        </ul>
+
+        <ul className="list">
+          <li>Nashville</li>
+          <li>Charleston</li>
+          <li>Sedona</li>
+          <li>New Orleans</li>
+          <li>Washington DC</li>
+        </ul>
+      </div>
+
+      <div className="bottom-sections">
+        <div className="section">
+          <h3>About Tripadvisor</h3>
+          <ul>
+            <li>About Us</li>
+            <li>Press</li>
+            <li>Resources and Policies</li>
+            <li>Careers</li>
+            <li>Investor Relations</li>
+            <li>Trust & Safety</li>
+            <li>Contact Us</li>
+            <li>Accessibility Statement</li>
+          </ul>
+        </div>
+
+        <div className="section">
+          <h3>Explore</h3>
+          <ul>
+            <li>About Us</li>
+            <li>Press</li>
+            <li>Resources and Policies</li>
+            <li>Careers</li>
+            <li>Investor Relations</li>
+            <li>Trust & Safety</li>
+            <li>Contact Us</li>
+            <li>Accessibility Statement</li>
+          </ul>
+        </div>
+
+        <div className="section">
+          <h3>Do Business With Us</h3>
+          <ul>
+            <li>About Us</li>
+            <li>Press</li>
+            <li>Resources and Policies</li>
+            <li>Careers</li>
+            <li>Investor Relations</li>
+            <li>Trust & Safety</li>
+            <li>Contact Us</li>
+            <li>Accessibility Statement</li>
+          </ul>
+        </div>
+
+        <div className="section">
+          <h3>BiHamTha Sites</h3>
+          <ul>
+            <li>Discover your dream destination with Jetsetter</li>
+            <li>Book the best restaurants with TheFork</li>
+            <li>Book tours and attraction tickets on Viator</li>
+            <li>Read cruise reviews on Cruise Critic</li>
+            <li>Get airline seating charts on Seat Guru</li>
+            <li>Find vacation rentals on Flipkey</li>
+            <li>Search for holiday rentals on Holiday Lettings</li>
+            <li>Plan and book your next trip with Reco Trip Designers</li>
+          </ul>
+        </div>
+        <div className="footer-info flex  items-center p-3 mt-5">
+          <p>© 2024 BiHamTha LLC All rights reserved.</p>
+
+          <p>Term of Use</p>
+
+          <p>Privacy and Cookies Statement</p>
+        </div>
+
+        <div className="social-icons flex space-x-4">
+          {[
+            {
+              href: "https://twitter.com",
+              src: "/twitter.png",
+              alt: "Twitter",
+            },
+            {
+              href: "https://twitter.com",
+              src: "/twitter.png",
+              alt: "Twitter",
+            },
+            {
+              href: "https://twitter.com",
+              src: "/twitter.png",
+              alt: "Twitter",
+            },
+            {
+              href: "https://twitter.com",
+              src: "/twitter.png",
+              alt: "Twitter",
+            },
+          ].map((icon, index) => (
+            <a
+              key={index}
+              href={icon.href}
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <p
+              <Image
                 style={{
-                  color: "#333333",
-                  fontSize: "14px",
-                  fontFamily: "Fira Sans",
-                  lineHeight: "18px",
-                  marginBottom: "10px",
+                  position: "relative",
+                  top: "50%",
+                  left: "150%",
                 }}
-              >
-                About BiHamTha
-              </p>
-              <td>About Us</td>
-              <td>Press</td>
-              <td>Resourcs and Policies</td>
-              <td>Careers</td>
-              <td>Investor Relations</td>
-              <td>Trust & Safety</td>
-              <td>Contact Us</td>
-              <td>Accessibility Statement</td>
-            </table>
-            <table
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                fontSize: "14px",
-              }}
-            >
-              <p
-                style={{
-                  color: "#333333",
-                  fontSize: "14px",
-                  fontFamily: "Fira Sans",
-                  lineHeight: "18px",
-                  marginBottom: "10px",
-                }}
-              >
-                Explore
-              </p>
-              <td>About Us</td>
-              <td>Press</td>
-              <td>Resourcs and Policies</td>
-              <td>Careers</td>
-              <td>Investor Relations</td>
-              <td>Trust & Safety</td>
-              <td>Contact Us</td>
-              <td>Accessibility Statement</td>
-            </table>
-            <table
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                fontSize: "14px",
-              }}
-            >
-              <p
-                style={{
-                  color: "#333333",
-                  fontSize: "14px",
-                  fontFamily: "Fira Sans",
-                  lineHeight: "18px",
-                  marginBottom: "10px",
-                }}
-              >
-                Do Business With Us
-              </p>
-              <td>About Us</td>
-              <td>Press</td>
-              <td>Resourcs and Policies</td>
-              <td>Careers</td>
-              <td>Investor Relations</td>
-              <td>Trust & Safety</td>
-              <td>Contact Us</td>
-              <td>Accessibility Statement</td>
-            </table>
-            <table
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                fontSize: "14px",
-              }}
-            >
-              <p
-                style={{
-                  color: "#333333",
-                  fontSize: "14px",
-                  fontFamily: "Fira Sans",
-                  lineHeight: "18px",
-                  marginBottom: "10px",
-                }}
-              >
-                BiHamTha Sites
-              </p>
-              <td>discover your dream destination with Jetsetter</td>
-              <td>Book the best restaurants with TheFork</td>
-              <td>Book tours and attraction tickets on Viator</td>
-              <td>React cruise reviews on Cruise Critic</td>
-              <td>Get airline seating charts on Seat Guru</td>
-              <td>Find vacation rentals on FlipKey</td>
-              <td>Search for holiday rentals on Holiday Lettings</td>
-              <td>Plan and book your next trip with Reco Trip Designers</td>
-            </table>
-          </div>
+                src={icon.src}
+                alt={icon.alt}
+                width={25}
+                height={25}
+              />
+            </a>
+          ))}
         </div>
       </div>
     </div>
