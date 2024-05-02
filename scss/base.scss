@@ -7,14 +7,7 @@
   font-family: "Fira Sans", sans-serif;
 }
 
-
 body {
-  font-family: "Fira Sans", sans-serif;
-  margin: 0;
-  padding: 0;
-
-  .body-inner {
-    @apply grid min-h-screen;
-    grid-template-rows: 1fr;
-  }
+  font-size: 1rem;
+  line-height: 1.5;
 }
