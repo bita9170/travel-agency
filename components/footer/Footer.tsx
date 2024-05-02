@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import IconsFooter from "./IconsFooter";
+import Logo from "../elements/Logo";
 
-// Define the structure of a section
 interface Section {
   title: string;
   links: string[];
@@ -66,23 +66,6 @@ const Footer: React.FC = () => {
 
   return (
     <div className="footer-container mt-10">
-      <div className="top-section card p-5 flex flex-col md:flex-row items-center">
-        <div className="text-container">
-          <h1 className="header mb-3">
-            Travelers Choice
-            <br />
-            Awards Best of the <br />
-            Best
-          </h1>
-          <p className="text mb-4">
-            Among our top 1% of places, stays, eats, and experiences—decided by
-            you.
-          </p>
-          <button className="btn mb-5">See the winners</button>
-        </div>
-        <div className="image mt-5"></div>
-      </div>
-
       {/* Middle section */}
       <div className="trending-section ml-8 mb-5">
         <h2 className="font-bold mt-4">Trending in Travel</h2>
@@ -90,7 +73,7 @@ const Footer: React.FC = () => {
         <div className="header-drei flex ">
           <div className="flex-1">
             <h3 className="underline mb-2">Spring Destinations</h3>
-            <ul className="list">
+            <ul className="list text-xs">
               <li>Nashville</li>
               <li>Charleston</li>
               <li>Sedona</li>
@@ -101,7 +84,7 @@ const Footer: React.FC = () => {
 
           <div className="flex-1">
             <h3 className=" mb-2">Spring Destinations</h3>
-            <ul className="list hidden md:block">
+            <ul className="list hidden md:block text-xs">
               <li>Nashville</li>
               <li>Charleston</li>
               <li>Sedona</li>
@@ -112,7 +95,7 @@ const Footer: React.FC = () => {
 
           <div className="flex-1 hidden md:block">
             <h3 className=" mb-2">Spring Destinations</h3>
-            <ul className="list hidden md:block">
+            <ul className="list hidden md:block text-xs">
               <li>Nashville</li>
               <li>Charleston</li>
               <li>Sedona</li>
@@ -123,7 +106,7 @@ const Footer: React.FC = () => {
 
           <div className="flex-1 hidden md:block">
             <h3 className=" mb-2">Spring Destinations</h3>
-            <ul className="list hidden md:block">
+            <ul className="list hidden md:block text-xs">
               <li>Nashville</li>
               <li>Charleston</li>
               <li>Sedona</li>
@@ -135,10 +118,10 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Bottom section */}
-      <div className="h-100 bg-faf1ed p-50 mt-24">
+      <div className="h-100 bg-faf1ed p-50 mt-24  bg-custom-pale-pink">
         <div className="hidden md:block p-5">
           <div className="bottom-sections grid grid-cols-1 md:grid-cols-4 gap-2 p-2 ml-5">
-            <div className="section">
+            <div className="section text-xs">
               <h3 className="mb-2.5">About BiHamTha</h3>
               <p>About Us</p>
               <p>Press</p>
@@ -150,7 +133,7 @@ const Footer: React.FC = () => {
               <p>Accessibility Statement</p>
             </div>
 
-            <div className="section">
+            <div className="section text-xs">
               <h3 className="mb-2.5">Explore</h3>
               <p>About Us</p>
               <p>Press</p>
@@ -162,7 +145,7 @@ const Footer: React.FC = () => {
               <p>Accessibility Statement</p>
             </div>
 
-            <div className="section">
+            <div className="section text-xs">
               <h3 className="mb-2.5">Do Business With Us</h3>
               <p>About Us</p>
               <p>Press</p>
@@ -174,7 +157,7 @@ const Footer: React.FC = () => {
               <p>Accessibility Statement</p>
             </div>
 
-            <div className="section">
+            <div className="section text-xs">
               <h3 className="mb-2.5">BiHamTha Sites</h3>
               <p>Find press releases and media resources here.</p>
               <p>Read cruise reviews on Cruise Critic</p>
@@ -218,11 +201,13 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Footer Text */}
-        <div className="flex mt-5 ml-10 text-xs">
+
+        <div className="flex items-center mt-5 ml-4 text-xs space-x-2">
+          <Logo imageOnly={true} />
           <p>© 2024 BiHamTha LLC All rights reserved.</p>
         </div>
         <div>
-          <p className="flex text-sm ml-10 font-semibold">
+          <p className="flex text-xs ml-8 font-semibold">
             <a href="/terms-of-use" className="mr-5">
               Terms of Use
             </a>
