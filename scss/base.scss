@@ -6,3 +6,15 @@
   box-sizing: border-box;
   font-family: "Fira Sans", sans-serif;
 }
+
+
+body {
+  font-family: "Fira Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+
+  .body-inner {
+    @apply grid min-h-screen;
+    grid-template-rows: 1fr;
+  }
+}
