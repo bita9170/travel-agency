@@ -1,57 +1,46 @@
 .card {
-  @apply p-12 h-[468px] bg-[#fff7e1] md:h-[468px];
+  @apply p-12 h-[668px] bg-[#fff7e1] md:h-[668px];
 }
 
 .header {
-  @apply text-black text-4xl font-sans font-medium leading-[52px] mb-4; /* Maintain margin-bottom for spacing below the header */
-  @apply md:text-5xl;
-}
-
-.text {
-  @apply block text-sm mb-4; /* Ensure it's always visible and with margin-bottom for spacing */
+  @apply text-black text-2xl font-sans font-medium leading-[38px];
 }
 
 .btn {
   @apply cursor-pointer relative w-[150px]  h-[43px] px-2 py-2 border-0 box-border rounded-full bg-black text-white text-xs font-bold leading-[15px] outline-none mb-4; /* Added margin-bottom for spacing below the button */
 }
 
+// .image {
+//   position: relative;
+//   @apply w-[271px] h-[239px]  bg-cover bg-no-repeat mb-[10%];
+//   background-image: url("https://assets.api.uizard.io/api/cdn/stream/d715e985-d7f0-46ac-907e-c6d06aac2649.png");
+//   @apply md:relative md:bg-contain md:left-[30%] md:w-[507px] md:h-[408px];
+//   top: -200px;
+// }
+
 .image {
-  @apply block w-[371px] h-[339px] bg-center bg-cover bg-no-repeat mt-4 mb-4;
+  position: relative;
+  @apply w-[271px] h-[239px] bg-cover bg-no-repeat;
   background-image: url("https://assets.api.uizard.io/api/cdn/stream/d715e985-d7f0-46ac-907e-c6d06aac2649.png");
-  @apply md:absolute md:bg-contain md:top-[0%] md:left-[30%] md:w-[557px] md:h-[468px];
+  @apply md:relative md:bg-cover md:left-[30%] md:w-[507px] md:h-[408px];
+  top: 10px; /* Positionierung anpassen, falls nötig */
 }
 
 .header-drei {
-  @apply mt-16;
-}
-h2 {
-  @apply mt-32 ml-10 text-right font-semibold;
-  @apply md:absolute md:top-[20%] md:left-[0%];
+  @apply mt-14;
 }
 
 .text {
-  @apply hidden md:block mt-4; /* Added margin-top to space it when visible on larger screens */
-}
-
-.trending-travel {
-  @apply mt-2.5 flex gap-[260px] bg-white p-10 font-sans;
-  @apply md:mt-5;
-}
-
-.trending-travel ul li {
-  @apply text-xs;
+  @apply md:block mt-4;
 }
 
 .footer-container {
   @apply w-full py-10 px-5 text-gray-800 font-sans;
 }
 
-.bottom-sections {
-  @apply p-12 bg-[#faf1ed] grid grid-cols-4 gap-4;
-}
-
 .section h3 {
   @apply text-lg mb-2.5;
+  @apply sm:flex;
 }
 
 .section ul {
