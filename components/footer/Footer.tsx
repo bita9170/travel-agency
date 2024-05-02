@@ -1,15 +1,21 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
+import IconsFooter from "./IconsFooter";
 
-function Footer() {
-  const [openSection, setOpenSection] = useState(null);
+// Define the structure of a section
+interface Section {
+  title: string;
+  links: string[];
+}
 
-  const toggleSection = (index) => {
+const Footer: React.FC = () => {
+  const [openSection, setOpenSection] = useState<number | null>(null);
+
+  const toggleSection = (index: number): void => {
     setOpenSection(openSection === index ? null : index);
   };
 
-  const sections = [
+  const sections: Section[] = [
     {
       title: "About Tripadvisor",
       links: [
@@ -74,12 +80,12 @@ function Footer() {
           </p>
           <button className="btn mb-5">See the winners</button>
         </div>
-        <div className="image" style={{ marginTop: "20px" }}></div>
+        <div className="image mt-5"></div>
       </div>
 
       {/* Middle section */}
       <div className="trending-section ml-8 mb-5">
-        <h2>Trending in Travel</h2>
+        <h2 className="font-bold mt-4">Trending in Travel</h2>
 
         <div className="header-drei flex ">
           <div className="flex-1">
@@ -129,28 +135,71 @@ function Footer() {
       </div>
 
       {/* Bottom section */}
-      <div
-        style={{
-          height: "400px",
-          backgroundColor: "#faf1ed",
-          padding: "20px",
-          marginTop: "100px",
-        }}
-      >
-        <div
-          className="bottom-sections  sm:flex"
-          style={{ gap: "50px", padding: "10px", marginLeft: "20px" }}
-        >
+      <div className="h-100 bg-faf1ed p-50 mt-24">
+        <div className="hidden md:block p-5">
+          <div className="bottom-sections grid grid-cols-1 md:grid-cols-4 gap-2 p-2 ml-5">
+            <div className="section">
+              <h3 className="mb-2.5">About BiHamTha</h3>
+              <p>About Us</p>
+              <p>Press</p>
+              <p>Resource and Policies</p>
+              <p>Career</p>
+              <p>Investor Relations</p>
+              <p>Trust & Safety</p>
+              <p>Contact Us</p>
+              <p>Accessibility Statement</p>
+            </div>
+
+            <div className="section">
+              <h3 className="mb-2.5">Explore</h3>
+              <p>About Us</p>
+              <p>Press</p>
+              <p>Resource and Policies</p>
+              <p>Career</p>
+              <p>Investor Relations</p>
+              <p>Trust & Safety</p>
+              <p>Contact Us</p>
+              <p>Accessibility Statement</p>
+            </div>
+
+            <div className="section">
+              <h3 className="mb-2.5">Do Business With Us</h3>
+              <p>About Us</p>
+              <p>Press</p>
+              <p>Resource and Policies</p>
+              <p>Career</p>
+              <p>Investor Relations</p>
+              <p>Trust & Safety</p>
+              <p>Contact Us</p>
+              <p>Accessibility Statement</p>
+            </div>
+
+            <div className="section">
+              <h3 className="mb-2.5">BiHamTha Sites</h3>
+              <p>Find press releases and media resources here.</p>
+              <p>Read cruise reviews on Cruise Critic</p>
+              <p>Get airline seating charts on Seat Guru</p>
+              <p>Search for holiday rentals on Holiday Letting</p>
+              <p>Search for holiday rentals on Holiday Letting</p>
+              <p>Search for holiday rentals on Holiday Letting</p>
+              <p>Find vacation rentals on FlipKey</p>
+              <p>Plan and book your next trip with Reco Trip Designers</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Dropdown for mobile */}
+        <div className="bottom-sections sm:flex md:hidden gap-12 p-2 ml-2">
           {sections.map((section, index) => (
             <div key={index} className="section">
               <button
                 onClick={() => toggleSection(index)}
-                className="text-left w-full py-2 flex  items-center"
+                className="toggle-button text-left w-full py-2 flex items-center "
               >
-                <span style={{ padding: "5px" }}>
+                <span className="toggle-icon px-1">
                   {openSection === index ? "-" : "+"}
                 </span>
-                <span style={{ padding: "5px" }}>{section.title}</span>
+                <span className="px-1">{section.title}</span>
               </button>
               {openSection === index && (
                 <ul>
@@ -163,50 +212,18 @@ function Footer() {
           ))}
         </div>
 
-        <div className="social-icons flex space-x-4 mt-3 ml-auto justify-end ">
-          {[
-            {
-              href: "https://twitter.com",
-              src: "/twitter.png",
-              alt: "Twitter",
-            },
-            {
-              href: "https://facebook.com",
-              src: "/facebook.png",
-              alt: "Facebook",
-            },
-            {
-              href: "https://www.pinterest.de/",
-              src: "/pinterest.png",
-              alt: "Pinterest",
-            },
-            {
-              href: "https://instagram.com",
-              src: "/insta.png",
-              alt: "Instagram",
-            },
-          ].map((icon, index) => (
-            <a
-              style={{
-                border: "2px solid black",
-                borderRadius: "50%",
-                padding: "5px",
-              }}
-              key={index}
-              href={icon.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image src={icon.src} alt={icon.alt} width={25} height={25} />
-            </a>
-          ))}
+        {/* Icons Section */}
+        <div className="flex justify-end items-center mt-5 px-5 bg-faf1ed">
+          <IconsFooter />
         </div>
-        <div style={{ display: "flex", marginTop: "20px", fontSize: "12px" }}>
+
+        {/* Footer Text */}
+        <div className="flex mt-5 ml-10 text-xs">
           <p>© 2024 BiHamTha LLC All rights reserved.</p>
         </div>
         <div>
-          <p style={{ display: "flex", fontSize: "14px", fontWeight: "500" }}>
-            <a href="/terms-of-use" style={{ marginRight: "20px" }}>
+          <p className="flex text-sm ml-10 font-semibold">
+            <a href="/terms-of-use" className="mr-5">
               Terms of Use
             </a>
             <a href="/privacy-policy">Privacy and Cookies Statement</a>
@@ -215,6 +232,6 @@ function Footer() {
       </div>
     </div>
   );
-}
+};
 
 export default Footer;

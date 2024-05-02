@@ -10,56 +10,14 @@
   @apply cursor-pointer relative w-[150px]  h-[43px] px-2 py-2 border-0 box-border rounded-full bg-black text-white text-xs font-bold leading-[15px] outline-none mb-4; /* Added margin-bottom for spacing below the button */
 }
 
-// .image {
-//   position: relative;
-//   @apply w-[271px] h-[239px]  bg-cover bg-no-repeat mb-[10%];
-//   background-image: url("https://assets.api.uizard.io/api/cdn/stream/d715e985-d7f0-46ac-907e-c6d06aac2649.png");
-//   @apply md:relative md:bg-contain md:left-[30%] md:w-[507px] md:h-[408px];
-//   top: -200px;
-// }
-
 .image {
   position: relative;
-  @apply w-[271px] h-[239px] bg-cover bg-no-repeat;
+  @apply w-[271px] h-[239px] bg-contain bg-no-repeat;
   background-image: url("https://assets.api.uizard.io/api/cdn/stream/d715e985-d7f0-46ac-907e-c6d06aac2649.png");
-  @apply md:relative md:bg-cover md:left-[30%] md:w-[507px] md:h-[408px];
-  top: 10px; /* Positionierung anpassen, falls nötig */
+  @apply md:relative md:bg-contain md:left-[30%] md:w-[507px] md:h-[408px];
+  top: 10px; /* */
 }
 
 .header-drei {
   @apply mt-14;
-}
-
-.text {
-  @apply md:block mt-4;
-}
-
-.footer-container {
-  @apply w-full py-10 px-5 text-gray-800 font-sans;
-}
-
-.section h3 {
-  @apply text-lg mb-2.5;
-  @apply sm:flex;
-}
-
-.section ul {
-  @apply list-none p-0;
-}
-
-.section li {
-  @apply mb-1.5 text-sm;
-}
-
-.footer-info {
-  @apply flex justify-between items-center mt-10;
-}
-
-.footer-info p,
-.footer-info a {
-  @apply text-sm;
-}
-
-.social-icons a {
-  @apply mr-2.5;
 }
