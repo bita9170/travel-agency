@@ -8,23 +8,31 @@ function ReviewForm() {
     userId: "",
     text: "",
     rating: "1",
+    locationId: "",
   });
+
   const [message, setMessage] = useState("");
+
   const [error, setError] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/reviews", formData);
+      const response = await axios.post("/api/users/reviews", formData);
       setMessage("Review erfolgreich gespeichert!");
       setError(false);
-      setFormData({ userId: formData.userId, text: "", rating: "1" });
-    } catch (error) {
+      setFormData({
+        userId: formData.userId,
+        text: "",
+        rating: "1",
+        locationId: "",
+      });
+    } catch (error: any) {
       console.error(
         "Fehler beim Speichern des Reviews:",
         error.response?.data?.message

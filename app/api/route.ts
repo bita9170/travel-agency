@@ -10,13 +10,14 @@ import { NextRequest, NextResponse } from "next/server";
 //     await connectMongoDB();
 //     const reviews = await Review.find({});
 //     return NextResponse.json({ reviews }, { status: 200 });
-//   } catch (error) {
+//   } catch (error: any) {
 //     return NextResponse.json({ message: error.message }, { status: 500 });
 //   }
 // }
 
 // Create a review
 export async function POST(req: NextRequest) {
+  console.log(req.body);
   try {
     await connectMongoDB();
     const { userId, text, rating } = await req.json();
@@ -39,7 +40,7 @@ export async function POST(req: NextRequest) {
 
     await newReview.save();
     return NextResponse.json(newReview, { status: 201 });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ message: error.message }, { status: 400 });
   }
 }
@@ -61,7 +62,7 @@ export async function PUT(req: NextRequest) {
       );
     }
     return NextResponse.json(updatedReview, { status: 200 });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
@@ -79,7 +80,7 @@ export async function DELETE(req: NextRequest) {
       );
     }
     return NextResponse.json({ message: "Review deleted" }, { status: 200 });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ message: error.message }, { status: 400 });
   }
 }

@@ -1,12 +1,11 @@
-// model/Review.js
 import mongoose, { Schema } from "mongoose";
 
 const reviewSchema = new Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-
       required: true,
+      ref: "User",
     },
     text: {
       type: String,
@@ -19,12 +18,18 @@ const reviewSchema = new Schema(
       min: 1,
       max: 5,
     },
+    locationid: {
+      type: String,
+      required: true,
+    },
     datePosted: {
       type: Date,
       default: Date.now,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 const Review =
