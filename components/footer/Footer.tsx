@@ -61,8 +61,11 @@ function Footer() {
 
   return (
     <div className="footer-container mt-10">
-      {/* <div className="top-section card p-5 flex flex-col md:flex-row items-center">
-        <div className="text-container">
+      {/* <div className="top-section card p-5 flex flex-col md:flex-row items-center"> */}
+
+      {/* yello Section  */}
+
+      {/* <div className="text-container">
           <h1 className="header mb-3">
             Travelers Choice
             <br />
@@ -78,7 +81,6 @@ function Footer() {
         <div className="image" style={{ marginTop: "20px" }}></div>
       </div> */}
 
-      {/* Middle section */}
       {/* <div className="trending-section ml-8 mb-5">
         <h2>Trending in Travel</h2>
 
@@ -129,10 +131,9 @@ function Footer() {
         </div>
       </div> */}
 
-      {/* Bottom section */}
-
+      {/* Dropdown for mobile */}
       <div className="bg-[#faf1ed] py-8 px-4 xl:px-0">
-        <div className="footer-inner max-w-screen-xl m-auto">
+        <div className="footer-inner max-w-screen-xl m-auto ">
           <div className="footer-top grid md:grid-cols-4">
             {sections.map((section, index) => (
               <div key={index} className="section">
@@ -156,6 +157,7 @@ function Footer() {
             ))}
           </div>
 
+          {/* LOGO & ICONS section */}
           <div className="footer-bottom flex flex-col-reverse md:flex-row justify-between items-center gap-4 mt-6">
             <div className="flex space-x-6 items-center justify-start w-full">
               <Logo imageOnly={true} className="inline-block" />
@@ -173,6 +175,8 @@ function Footer() {
                 </div>
               </div>
             </div>
+
+            {/* Icons start */}
             <div className="social-icons flex space-x-2 justify-end w-full">
               <Button asChild variant={"link"} className="px-0">
                 <a
@@ -227,6 +231,7 @@ function Footer() {
                 </a>
               </Button>
             </div>
+            {/* ICONS end */}
           </div>
         </div>
       </div>
