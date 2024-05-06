@@ -13,8 +13,7 @@ export default async function Home() {
       </h1>
       <Button>Click me</Button>
       <Register /> */}
-      <Logo />
-      <Avatar src="/avatar.jpeg" alt="avatar" fallBack="BS" />
+    
     </main>
   );
 }
