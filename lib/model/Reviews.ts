@@ -12,16 +12,16 @@ const reviewSchema = new Schema(
       required: true,
       trim: true,
     },
-    rating: {
-      type: Number,
-      required: true,
-      min: 1,
-      max: 5,
-    },
-    locationid: {
-      type: String,
-      required: true,
-    },
+    // rating: {
+    //   type: Number,
+    //   required: true,
+    //   min: 1,
+    //   max: 5,
+    // },
+    // locationid: {
+    //   type: String,
+    //   required: true,
+    // },
     datePosted: {
       type: Date,
       default: Date.now,

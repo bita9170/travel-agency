@@ -8,7 +8,6 @@ function ReviewForm() {
     userId: "",
     text: "",
     rating: "1",
-    locationId: "",
   });
 
   const [message, setMessage] = useState("");
@@ -23,14 +22,13 @@ function ReviewForm() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/users/reviews", formData);
+      const response = await axios.post("/api/users/review", formData);
       setMessage("Review erfolgreich gespeichert!");
       setError(false);
       setFormData({
         userId: formData.userId,
         text: "",
         rating: "1",
-        locationId: "",
       });
     } catch (error: any) {
       console.error(
