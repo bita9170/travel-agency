@@ -1,3 +1,5 @@
+import { searchAllLocations } from "@/controllers/tripadvisorController";
+import Footer from "../components/footer/Footer";
 import { Button } from "@/components/ui/button";
 import Register from "@/components/Register";
 import Logo from "@/components/elements/Logo";

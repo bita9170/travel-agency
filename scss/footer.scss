@@ -1,0 +1,23 @@
+.card {
+  @apply p-12 h-[668px] bg-[#fff7e1] md:h-[668px];
+}
+
+.header {
+  @apply text-black text-2xl font-sans font-medium leading-[38px];
+}
+
+.btn {
+  @apply cursor-pointer relative w-[150px]  h-[43px] px-2 py-2 border-0 box-border rounded-full bg-black text-white text-xs font-bold leading-[15px] outline-none mb-4; /* Added margin-bottom for spacing below the button */
+}
+
+.image {
+  position: relative;
+  @apply w-[271px] h-[239px] bg-contain bg-no-repeat;
+  background-image: url("https://assets.api.uizard.io/api/cdn/stream/d715e985-d7f0-46ac-907e-c6d06aac2649.png");
+  @apply md:relative md:bg-contain md:left-[30%] md:w-[507px] md:h-[408px];
+  top: 10px; /* */
+}
+
+.header-drei {
+  @apply mt-14;
+}
