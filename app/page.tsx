@@ -35,10 +35,10 @@ export default async function Home() {
         ctaLink="#"
         className="mt-4"
       />
-      <section className="py-10 mt-4">
+      <section className="py-10 mt-4 px-2 md:px-0">
         <h3>Stay somewhere award- winning</h3>
         <p>2024's Travelers' Choice Awards Best of the Best Hotels</p>
-        <div className="grid grid-cols-4 gap-8 my-4">
+        <div className="grid md:grid-cols-4 gap-8 my-4">
           {images.map((item, index) => (
             <Layout1
               key={index}
