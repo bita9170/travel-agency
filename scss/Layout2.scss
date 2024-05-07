@@ -1,0 +1,52 @@
+.container {
+  max-width: 100%;
+  padding: 8px 16px;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.content {
+  flex: 1;
+}
+
+.headline {
+  font-size: 40px;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 500;
+  line-height: 52px;
+}
+
+.text {
+  margin-top: 16px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.image {
+  width: 557px;
+  height: 468px;
+  background-image: url("../public/images/hero2.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
