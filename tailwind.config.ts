@@ -1,11 +1,12 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from "tailwindcss";
+
+const config = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{js,jsx}",
-    "./components/**/*.{js,jsx}",
-    "./app/**/*.{js,jsx}",
-    "./src/**/*.{js,jsx}",
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -51,6 +52,15 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        green: {
+          "90": "var(--green-90)",
+          "80": "var(--green-80)",
+          "70": "var(--green-70)",
+          brand: "var(--brand-green)",
+          "40": "var(--green-40)",
+          "30": "var(--green-30)",
+          "10": "var(--green-10)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -74,4 +84,6 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-};
+} satisfies Config;
+
+export default config;
