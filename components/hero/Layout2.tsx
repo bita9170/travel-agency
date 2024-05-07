@@ -6,7 +6,7 @@ function TravelersChoice() {
     <div>
       <div className="w-full relative bg-custom-cream py-8 mt-10">
         <div className="max-w-screen-xl mx-auto ">
-          <div className="flex flex-col lg:flex-row items-start">
+          <div className="flex flex-col lg:flex-row items-start ">
             <div className="flex flex-col lg:flex-grow lg:mr-2 mb-2 lg:mb-0">
               <h1 className="font-semibold leading-snug font-sans text-left text-2xl lg:text-4xl mb-4">
                 Travelers Choice
@@ -32,9 +32,13 @@ function TravelersChoice() {
                 See the winners
               </button>
             </div>
+
             <div
               className="relative flex mt-6 lg:mt-0 lg:flex-1 w-full lg:w-auto "
-              style={{ width: "100%", height: "300px" }}
+              style={{
+                width: "100%",
+                height: "300px",
+              }}
             >
               <ImageComponent />
             </div>
