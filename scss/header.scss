@@ -1,0 +1,12 @@
+header {
+  .search-navigation {
+    @apply relative;
+    .navigation {
+      @apply w-full flex md:justify-center overflow-auto whitespace-nowrap;
+    }
+
+    &::after {
+      @apply content-[''] absolute top-0 right-0 w-[50px] h-full bg-gradient-to-r from-transparent to-white;
+    }
+  }
+}
