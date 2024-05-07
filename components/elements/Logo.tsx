@@ -8,7 +8,7 @@ interface Props {
 
 export default function Logo({ imageOnly = false, className }: Props) {
   return (
-    <div className={cn("logo flex items-center", className)}>
+    <div className={cn("logo w-[33px] h-[38] flex items-center", className)}>
       <svg
         width="48"
         height="48"
