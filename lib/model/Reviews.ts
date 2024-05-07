@@ -22,10 +22,6 @@ const reviewSchema = new Schema(
       type: String,
       required: true,
     },
-    datePosted: {
-      type: Date,
-      default: Date.now,
-    },
   },
   {
     timestamps: true,

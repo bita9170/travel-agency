@@ -1,7 +1,7 @@
 // app/api/reviews/reviewsRoute.ts
-import Review from "../../lib/model/Reviews";
-import User from "../../lib/model/User";
-import connectMongoDB from "../../lib/mongodb";
+import Review from "@/lib/model/Reviews";
+import User from "@/lib/model/User";
+import connectMongoDB from "@/lib/mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
 // Get reviews

@@ -1,9 +1,9 @@
 // api/users/route.ts
 
-import connectMongoDB from "../../../lib/mongodb";
-import User from "../../../lib/model/User";
+import connectMongoDB from "@/lib/mongodb";
+import User from "@/lib/model/User";
 import bcrypt from "bcrypt";
-import { authenticateToken } from "../../../lib/auth";
+import { authenticateToken } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 
 // Handle GET requests
