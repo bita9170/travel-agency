@@ -1,29 +1,32 @@
-import { searchAllLocations } from "@/controllers/tripadvisorController";
-import Footer from "../components/footer/Footer";
-import { Button } from "@/components/ui/button";
-import Register from "@/components/Register";
-import Logo from "@/components/elements/Logo";
-import Avatar from "@/components/elements/Avatar";
 import Hero from "@/components/hero/Hero";
-import {
-  searchRestaurants,
-  searchAttractions,
-  nearbySearchHotels,
-  searchGeos,
-} from "@/controllers/tripadvisorController";
+import Layout1 from "@/components/tiles/Layout1";
 
 export default async function Home() {
-  // const restaurants = await searchRestaurants("stuttgart");
-  // const attractions = await searchAttractions("sindelfingen");
-  // const hotels = await nearbySearchHotels("48.775845,9.182932");
-  const geos = await searchGeos("stuttgart");
-  console.log(searchGeos);
+  const images = [
+    {
+      image: "/image1.jpeg",
+      ctaText: "Top Hotels",
+      ctaLink: "#",
+    },
+    {
+      image: "/image2.jpeg",
+      ctaText: "All-Inclusive Hotels",
+      ctaLink: "#",
+    },
+    {
+      image: "/image3.jpeg",
+      ctaText: "Family-Friendly Hotels",
+      ctaLink: "#",
+    },
+    {
+      image: "/image4.jpeg",
+      ctaText: "Luxury Hotels",
+      ctaLink: "#",
+    },
+  ];
+
   return (
     <main>
-      {/* <Button>Click me</Button> */}
-      {/* <Register /> */}
-      {/* <Logo />
-      <Avatar src="/avatar.jpeg" alt="avatar" fallBack="BS" /> */}
       <Hero
         title="World's best hotels for 2024"
         image="/hero.jpeg"
@@ -32,6 +35,20 @@ export default async function Home() {
         ctaLink="#"
         className="mt-4"
       />
+      <section className="py-10 mt-4">
+        <h3>Stay somewhere award- winning</h3>
+        <p>2024's Travelers' Choice Awards Best of the Best Hotels</p>
+        <div className="grid grid-cols-4 gap-8 my-4">
+          {images.map((item, index) => (
+            <Layout1
+              key={index}
+              image={item.image}
+              ctaText={item.ctaText}
+              ctaLink={item.ctaLink}
+            />
+          ))}
+        </div>
+      </section>
     </main>
   );
 }
