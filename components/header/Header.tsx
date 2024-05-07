@@ -10,6 +10,7 @@ function Header() {
         <div className="logo">
           <Logo />
         </div>
+
         <div className="avatar flex items-center">
           <Avatar src="/avatar.jpeg" alt="avatar" fallBack="BS" />
 
