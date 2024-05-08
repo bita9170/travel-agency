@@ -1,36 +1,10 @@
 // pages/api/reviews/[locationId].ts
 import type { NextApiRequest, NextApiResponse } from "next";
-import connectMongoDB from "../../../lib/mongodb";
-import Review from "../../../lib/model/Reviews";
+import connectMongoDB from "@/lib/mongodb";
+import Review from "@/lib/model/Reviews";
 import axios from "axios";
 
-// dbConnect();
-
-// export default async function handler(
-//   req: NextApiRequest,
-//   res: NextApiResponse
-// ) {
-//   const {
-//     query: { locationId },
-//     method,
-//   } = req;
-
-//   switch (method) {
-//     case "GET":
-//       try {
-//         const reviews = await Review.find({});
-//         res.status(200).json({ success: true, data: reviews });
-//       } catch (error: any) {
-//         res.status(400).json({ success: false });
-//       }
-//       break;
-//     default:
-//       res.setHeader("Allow", ["GET"]);
-//       res.status(405).end(`Method ${method} Not Allowed`);
-//   }
-// }
-
-// Funktion, um Standortdetails von TripAdvisor zu holen
+// Function to get location details
 async function getLocationDetails(locationId: string, language: string = "de") {
   const TRIPADVISOR_BASE_URL = process.env.TRIPADVISOR_BASE_URL;
   const TRIPADVISOR_API_KEY = process.env.TRIPADVISOR_API_KEY;
@@ -60,7 +34,7 @@ export default async function handler(
   switch (method) {
     case "GET":
       try {
-        // TripAdvisor-Daten abrufen
+        //
         const tripAdvisorData = await getLocationDetails(locationId as string);
 
         // Lokale Reviews abrufen

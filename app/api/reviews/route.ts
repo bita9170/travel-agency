@@ -4,6 +4,13 @@ import User from "../../../lib/model/User";
 import connectMongoDB from "../../../lib/mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
+interface ReviewData {
+  userId: string;
+  text: string;
+  rating: number;
+  locationId: string;
+}
+
 // Get reviews
 export async function GET(req: NextRequest) {
   try {
@@ -14,13 +21,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
-
-// Diese Methode holt alle Reviews aus der Datenbank
-// ohne jegliche Filterung nach spezifischen Kriterien.
-// Sie dient dazu, eine komplette Liste aller vorhandenen Reviews
-// zu erhalten, was nützlich sein kann, wenn Sie eine Übersicht
-// über alle Reviews
-// benötigen oder wenn keine spezifische Filterung erforderlich ist.
 
 // Create a review
 export async function POST(req: NextRequest) {
@@ -69,7 +69,7 @@ export async function PUT(req: NextRequest) {
     const { id, text, rating, locationId } = await req.json();
     const updatedReview = await Review.findByIdAndUpdate(
       id,
-      { text, rating, locationId },
+      { $set: { text, rating, locationId } },
       { new: true }
     );
     if (!updatedReview) {
@@ -89,8 +89,8 @@ export async function DELETE(req: NextRequest) {
   try {
     await connectMongoDB();
     const { id } = await req.json();
-    const deletedReview = await Review.findByIdAndDelete(id);
-    if (!deletedReview) {
+    const deletedReview = await Review.deleteOne({ _id: id });
+    if (deletedReview.deletedCount === 0) {
       return NextResponse.json(
         { message: "Review not found" },
         { status: 404 }
