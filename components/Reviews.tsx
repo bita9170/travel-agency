@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "../components/ui/button";
-import { getLocationDetails } from "@/controllers/tripadvisorController";}
+import { getLocationDetails } from "@/controllers/tripadvisorController";
 
 function ReviewForm() {
   const [formData, setFormData] = useState({
@@ -23,13 +23,19 @@ function ReviewForm() {
 
   const fetchLocationIdDetails = async () => {
     try {
-      const details = await getLocationDetails(parseInt(formData.locationId), "de");
+      const details = await getLocationDetails(
+        parseInt(formData.locationId),
+        "de"
+      );
       setLocationDetails(details);
       setMessage("Location Details erfolgreich geladen!");
       setError(false);
     } catch (error: any) {
       console.error("Fehler beim Laden der Location Details:", error.message);
-      setMessage("Fehler beim Laden der Location Details: " + (error.message || "Unbekannter Fehler"));
+      setMessage(
+        "Fehler beim Laden der Location Details: " +
+          (error.message || "Unbekannter Fehler")
+      );
       setError(true);
     }
   };
