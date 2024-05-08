@@ -19,6 +19,7 @@ const config = {
     },
     extend: {
       colors: {
+        "custom-pale-pink": "#faf1ed",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -52,6 +53,15 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        green: {
+          "90": "var(--green-90)",
+          "80": "var(--green-80)",
+          "70": "var(--green-70)",
+          brand: "var(--brand-green)",
+          "40": "var(--green-40)",
+          "30": "var(--green-30)",
+          "10": "var(--green-10)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -71,6 +81,11 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      boxShadow: {
+        shadowLarge: "var(--shadowLarge)",
+        shadowMedium: "var(--shadowMedium)",
+        shadowSmall: "var(--shadowSmall)",
       },
     },
   },

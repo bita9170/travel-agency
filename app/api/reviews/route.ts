@@ -1,32 +1,48 @@
 // app/api/reviews/reviewsRoute.ts
-import Review from "../../lib/model/Reviews";
-import User from "../../lib/model/User";
-import connectMongoDB from "../../lib/mongodb";
+import Review from "../../../lib/model/Reviews";
+import User from "../../../lib/model/User";
+import connectMongoDB from "../../../lib/mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
 // Get reviews
-// export async function GET(req: NextRequest) {
-//   try {
-//     await connectMongoDB();
-//     const reviews = await Review.find({});
-//     return NextResponse.json({ reviews }, { status: 200 });
-//   } catch (error: any) {
-//     return NextResponse.json({ message: error.message }, { status: 500 });
-//   }
-// }
+export async function GET(req: NextRequest) {
+  try {
+    await connectMongoDB();
+    const reviews = await Review.find({});
+    return NextResponse.json({ reviews }, { status: 200 });
+  } catch (error: any) {
+    return NextResponse.json({ message: error.message }, { status: 500 });
+  }
+}
+
+// Diese Methode holt alle Reviews aus der Datenbank
+// ohne jegliche Filterung nach spezifischen Kriterien.
+// Sie dient dazu, eine komplette Liste aller vorhandenen Reviews
+// zu erhalten, was nützlich sein kann, wenn Sie eine Übersicht
+// über alle Reviews
+// benötigen oder wenn keine spezifische Filterung erforderlich ist.
 
 // Create a review
 export async function POST(req: NextRequest) {
   console.log(req.body);
   try {
+    const { userId, text, rating, locationId } = await req.json();
     await connectMongoDB();
-    const { userId, text, rating } = await req.json();
+
     if (!userId) {
       return NextResponse.json(
         { message: "UserId is required" },
         { status: 400 }
       );
     }
+
+    if (!locationId) {
+      return NextResponse.json(
+        { message: "locationId is required" },
+        { status: 400 }
+      );
+    }
+
     const userExists = await User.findById(userId);
     if (!userExists) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
@@ -36,6 +52,7 @@ export async function POST(req: NextRequest) {
       userId,
       text,
       rating,
+      locationId,
     });
 
     await newReview.save();
@@ -49,10 +66,10 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   try {
     await connectMongoDB();
-    const { id, text, rating } = await req.json();
+    const { id, text, rating, locationId } = await req.json();
     const updatedReview = await Review.findByIdAndUpdate(
       id,
-      { text, rating },
+      { text, rating, locationId },
       { new: true }
     );
     if (!updatedReview) {

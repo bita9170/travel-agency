@@ -22,17 +22,19 @@ const reviewSchema = new Schema(
       type: String,
       required: true,
     },
-    datePosted: {
-      type: Date,
-      default: Date.now,
-    },
   },
   {
     timestamps: true,
   }
 );
 
-const Review =
-  mongoose.models.Reviews || mongoose.model("Review", reviewSchema);
+function getModel(modelName: string, schema: mongoose.Schema) {
+  if (mongoose.models[modelName]) {
+    return mongoose.models[modelName];
+  }
+  return mongoose.model(modelName, schema);
+}
+
+const Review = getModel("Review", reviewSchema);
 
 export default Review;

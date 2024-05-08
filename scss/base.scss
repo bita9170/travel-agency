@@ -6,3 +6,12 @@
   box-sizing: border-box;
   font-family: "Fira Sans", sans-serif;
 }
+
+body,
+html {
+  @apply text-base;
+}
+
+h1 {
+  @apply text-center text-6xl font-bold;
+}

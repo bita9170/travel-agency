@@ -1,34 +1,57 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "../components/ui/button";
+import { getLocationDetails } from "@/controllers/tripadvisorController";}
 
 function ReviewForm() {
   const [formData, setFormData] = useState({
     userId: "",
     text: "",
     rating: "1",
+    locationId: "",
   });
 
   const [message, setMessage] = useState("");
-
   const [error, setError] = useState(false);
+  const [locationDetails, setLocationDetails] = useState(null);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const fetchLocationIdDetails = async () => {
+    try {
+      const details = await getLocationDetails(parseInt(formData.locationId), "de");
+      setLocationDetails(details);
+      setMessage("Location Details erfolgreich geladen!");
+      setError(false);
+    } catch (error: any) {
+      console.error("Fehler beim Laden der Location Details:", error.message);
+      setMessage("Fehler beim Laden der Location Details: " + (error.message || "Unbekannter Fehler"));
+      setError(true);
+    }
+  };
+
+  // Aufrufen der fetchLocationIdDetails, wenn sich locationId ändert
+  useEffect(() => {
+    if (formData.locationId) {
+      fetchLocationIdDetails();
+    }
+  }, [formData.locationId]);
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/users/review", formData);
+      const response = await axios.post("/api/users/reviews", formData);
       setMessage("Review erfolgreich gespeichert!");
       setError(false);
       setFormData({
         userId: formData.userId,
         text: "",
         rating: "1",
+        locationId: "",
       });
     } catch (error: any) {
       console.error(
