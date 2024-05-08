@@ -1,6 +1,5 @@
 import React from "react";
 
-// Type definitions are good practice and nicely done
 type DestinationListProps = {
   destinations: string[];
   hidden: boolean;
@@ -17,7 +16,6 @@ const DestinationList: React.FC<DestinationListProps> = ({
   </ul>
 );
 
-// Added React.FC here for consistency
 const Trending: React.FC = () => {
   const destinations = [
     "Nashville",
@@ -33,7 +31,6 @@ const Trending: React.FC = () => {
 
       <div className="flex gap-5 mt-2">
         <p className="underline text-sm">Spring Destinations</p>{" "}
-        {/* Ensure text-sm is defined if you meant a size step up from xs */}
         <p className="text-sm">Summer Destinations</p>
       </div>
       <div className="sm:grid md:flex gap-4 md:gap-56 justify-left mt-2">
