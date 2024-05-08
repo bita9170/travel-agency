@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 // import { useRouter } from "next/router";
 import { cva } from "class-variance-authority";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 
 const inputStyles = cva(
   "border p-2 rounded focus:outline-none focus:border-blue-500",

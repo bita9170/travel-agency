@@ -6,7 +6,8 @@ if (!TRIPADVISOR_API_KEY) {
   throw new Error("TripAdvisor API key is missing in environment variables");
 }
 
-const TRIPADVISOR_BASE_URL = "https://api.content.tripadvisor.com/api/v1/location";
+const TRIPADVISOR_BASE_URL =
+  "https://api.content.tripadvisor.com/api/v1/location";
 
 async function fetchData(url: string) {
   try {
@@ -54,10 +55,7 @@ export async function searchRestaurants(
   return fetchData(url);
 }
 
-export async function searchGeos(
-  searchQuery: string,
-  language: string = "de"
-) {
+export async function searchGeos(searchQuery: string, language: string = "de") {
   const url = `${TRIPADVISOR_BASE_URL}/search?searchQuery=${searchQuery}&category=geos&language=${language}&key=${TRIPADVISOR_API_KEY}`;
   return fetchData(url);
 }
@@ -86,10 +84,7 @@ export async function getLocationReviews(
   return fetchData(url);
 }
 
-export async function nearbySearch(
-  latLong: string,
-  language: string = "de"
-) {
+export async function nearbySearch(latLong: string, language: string = "de") {
   const url = `${TRIPADVISOR_BASE_URL}/nearby_search?language=${language}&latLong=${latLong}&key=${TRIPADVISOR_API_KEY}&language=en`;
   return fetchData(url);
 }
