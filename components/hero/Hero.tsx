@@ -5,7 +5,7 @@ import Link from "next/link";
 import MaxLimitWrapper from "../elements/MaxLimitWrapper";
 
 interface HeroProps {
-  title: string;
+  title?: string;
   image: string;
   subtitle?: string;
   ctaText?: string;
