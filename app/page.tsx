@@ -1,7 +1,14 @@
 import Hero from "@/components/hero/Hero";
 import Layout1 from "@/components/tiles/Layout1";
+import Layout2 from "@/components/tiles/Layout2";
+import { getLocationDetails } from "@/controllers/tripadvisorController";
+import { LocationDetails } from "@/lib/class/location";
 
 export default async function Home() {
+  const locationDetails: LocationDetails[] = await getLocationDetails([
+    188151, 188757, 188679, 188709,
+  ]);
+
   const images = [
     {
       image: "/image1.jpeg",
@@ -35,6 +42,7 @@ export default async function Home() {
         ctaLink="#"
         className="mt-4"
       />
+
       <section className="py-10 mt-4 px-2 md:px-0">
         <h3>Stay somewhere award- winning</h3>
         <p>2024's Travelers' Choice Awards Best of the Best Hotels</p>
@@ -45,6 +53,22 @@ export default async function Home() {
               image={item.image}
               ctaText={item.ctaText}
               ctaLink={item.ctaLink}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section className="py-10 mt-4 px-2 md:px-0">
+        <h3>You might like these</h3>
+        <p>More things to do in Paris</p>
+        <div className="grid md:grid-cols-4 gap-8 my-4">
+          {locationDetails.map(async (location) => (
+            <Layout2
+              key={location.getLocationId()}
+              image={(await location.getPhotos())[0].getLarge().url}
+              ctaText={location.getName()}
+              rating={location.getRatingImageUrl()}
+              ctaLink="#"
             />
           ))}
         </div>
