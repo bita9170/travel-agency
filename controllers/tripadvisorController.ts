@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import { LocationDetails, LocationPhotos } from "@/lib/class/location";
 
 const TRIPADVISOR_API_KEY = process.env.TRIPADVISOR_API_KEY;
 
@@ -6,7 +7,8 @@ if (!TRIPADVISOR_API_KEY) {
   throw new Error("TripAdvisor API key is missing in environment variables");
 }
 
-const TRIPADVISOR_BASE_URL = "https://api.content.tripadvisor.com/api/v1/location";
+const TRIPADVISOR_BASE_URL =
+  "https://api.content.tripadvisor.com/api/v1/location";
 
 async function fetchData(url: string) {
   try {
@@ -54,42 +56,61 @@ export async function searchRestaurants(
   return fetchData(url);
 }
 
-export async function searchGeos(
-  searchQuery: string,
-  language: string = "de"
-) {
+export async function searchGeos(searchQuery: string, language: string = "de") {
   const url = `${TRIPADVISOR_BASE_URL}/search?searchQuery=${searchQuery}&category=geos&language=${language}&key=${TRIPADVISOR_API_KEY}`;
   return fetchData(url);
 }
 
 export async function getLocationDetails(
-  locationId: number,
+  locationId: number | number[],
   language: string = "de"
-) {
-  const url = `${TRIPADVISOR_BASE_URL}/${locationId}/details?language=${language}&key=${TRIPADVISOR_API_KEY}`;
-  return fetchData(url);
+): Promise<LocationDetails[]> {
+  if (Array.isArray(locationId)) {
+    const promises = locationId.map((id) => {
+      const url = `${TRIPADVISOR_BASE_URL}/${id}/details?language=${language}&key=${TRIPADVISOR_API_KEY}`;
+      return fetchData(url);
+    });
+
+    const results = await Promise.all(promises);
+    return results.map((data) => new LocationDetails(data));
+  } else {
+    const url = `${TRIPADVISOR_BASE_URL}/${locationId}/details?language=${language}&key=${TRIPADVISOR_API_KEY}`;
+    const data = await fetchData(url);
+    return [new LocationDetails(data)];
+  }
 }
 
 export async function getLocationPhotos(
-  locationId: number,
+  locationIds: number,
   language: string = "de"
-) {
-  const url = `${TRIPADVISOR_BASE_URL}/${locationId}/photos?language=${language}&key=${TRIPADVISOR_API_KEY}`;
-  return fetchData(url);
+): Promise<LocationPhotos[]> {
+  const url = `${TRIPADVISOR_BASE_URL}/${locationIds}/photos?language=${language}&key=${TRIPADVISOR_API_KEY}`;
+  const result = await fetchData(url);
+
+  const locationPhotos = Array.isArray(result.data)
+    ? result.data.map((item: LocationPhotos) => new LocationPhotos(item))
+    : [new LocationPhotos(result.data)];
+  return locationPhotos;
 }
 
 export async function getLocationReviews(
-  locationId: number,
+  locationId: number | number[],
   language: string = "de"
 ) {
-  const url = `${TRIPADVISOR_BASE_URL}/${locationId}/reviews?language=${language}&key=${TRIPADVISOR_API_KEY}`;
-  return fetchData(url);
+  if (Array.isArray(locationId)) {
+    const promises = locationId.map((id) => {
+      const url = `${TRIPADVISOR_BASE_URL}/${id}/reviews?language=${language}&key=${TRIPADVISOR_API_KEY}`;
+      return fetchData(url);
+    });
+
+    return Promise.all(promises);
+  } else {
+    const url = `${TRIPADVISOR_BASE_URL}/${locationId}/reviews?language=${language}&key=${TRIPADVISOR_API_KEY}`;
+    return fetchData(url);
+  }
 }
 
-export async function nearbySearch(
-  latLong: string,
-  language: string = "de"
-) {
+export async function nearbySearch(latLong: string, language: string = "de") {
   const url = `${TRIPADVISOR_BASE_URL}/nearby_search?language=${language}&latLong=${latLong}&key=${TRIPADVISOR_API_KEY}&language=en`;
   return fetchData(url);
 }
