@@ -3,7 +3,6 @@ import "@/scss/globals.scss";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/footer/Footer";
 import Header from "@/components/header/Header";
-import Tab from "@/components/tabsection/Tab";
 
 export const metadata: Metadata = {
   title: "Travel Agency",
@@ -19,7 +18,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={cn("min-h-screen bg-background font-sans antialiased")}>
         <Header />
-        <main>{children}</main>
+        <div className={cn("max-w-screen-xl mx-auto")}>{children}</div>
         <Footer />
       </body>
     </html>

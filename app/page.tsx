@@ -1,5 +1,6 @@
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Hero from "@/components/hero/Hero";
+import Tab from "@/components/tabsection/Tab";
 import Layout1 from "@/components/tiles/Layout1";
 import Layout2 from "@/components/tiles/Layout2";
 import { getLocationDetails } from "@/controllers/tripadvisorController";
@@ -30,6 +31,17 @@ export default async function Home() {
       image: "/image4.jpeg",
       ctaText: "Luxury Hotels",
       ctaLink: "#",
+    },
+  ];
+
+  const data = [
+    {
+      title: "spring",
+      content: <SpringContent />,
+    },
+    {
+      title: "Sommer",
+      content: <SommerContent />,
     },
   ];
 
@@ -80,6 +92,53 @@ export default async function Home() {
           </div>
         </section>
       </MaxLimitWrapper>
+      <MaxLimitWrapper>
+        <Tab data={data} defaultValue="spring" />
+      </MaxLimitWrapper>
     </>
   );
 }
+
+export const SommerContent = () => {
+  return (
+    <div className="grid md:grid-cols-4 w-full">
+      <ul>
+        <li>Nashville 1</li>
+        <li>Charleston</li>
+        <li>New Orleans</li>
+        <li>Washington DC</li>
+      </ul>
+      <ul>
+        <li>Nashville 1</li>
+        <li>Charleston</li>
+        <li>New Orleans</li>
+        <li>Washington DC</li>
+      </ul>
+      <ul>
+        <li>Nashville 1</li>
+        <li>Charleston</li>
+        <li>New Orleans</li>
+        <li>Washington DC</li>
+      </ul>
+      <ul>
+        <li>Nashville 1</li>
+        <li>Charleston</li>
+        <li>New Orleans</li>
+        <li>Washington DC</li>
+      </ul>
+    </div>
+  );
+};
+
+export const SpringContent = () => {
+  return (
+    <div>
+      <ul>
+        <li>Nashville 2</li>
+        <li>Charleston 2</li>
+        <li>New Orleans</li>
+        <li>Washington DC</li>
+      </ul>
+    </div>
+  );
+};
