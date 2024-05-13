@@ -7,9 +7,10 @@ type DestinationListProps = {
 
 const DestinationList: React.FC<DestinationListProps> = ({
   destinations,
-  hidden,
+  // hidden,
 }) => (
-  <ul className={`list ${hidden ? "hidden md:block" : ""} text-xs`}>
+  // <ul className={`list ${hidden ? "hidden md:block" : ""} text-xs`}>
+  <ul>
     {destinations.map((destination, index) => (
       <li key={index}>{destination}</li>
     ))}
@@ -33,14 +34,43 @@ const Trending: React.FC = () => {
         <p className="underline text-sm">Spring Destinations</p>{" "}
         <p className="text-sm">Summer Destinations</p>
       </div>
-      <div className="sm:grid md:flex gap-4 md:gap-56 justify-left mt-2">
-        {destinations.map((destination, index) => (
-          <DestinationList
-            key={index}
-            destinations={[destination]}
-            hidden={index >= 3}
-          />
-        ))}
+      <div className="md:flex m-auto max-w-screen-xl justify-between mt-2 text-xs">
+        <div className="sm:grid md:block justify-left mt-2">
+          {destinations.map((destination, index) => (
+            <DestinationList
+              key={index}
+              destinations={[destination]}
+              hidden={index >= 5}
+            />
+          ))}
+        </div>
+        <div className="sm:grid md:block  justify-left mt-2">
+          {destinations.map((destination, index) => (
+            <DestinationList
+              key={index}
+              destinations={[destination]}
+              hidden={index >= 5}
+            />
+          ))}
+        </div>
+        <div className="sm:grid md:block  justify-left mt-2 mr-10">
+          {destinations.map((destination, index) => (
+            <DestinationList
+              key={index}
+              destinations={[destination]}
+              hidden={index >= 5}
+            />
+          ))}
+        </div>
+        <div className="sm:grid md:block justify-left mt-2 mr-20">
+          {destinations.map((destination, index) => (
+            <DestinationList
+              key={index}
+              destinations={[destination]}
+              hidden={index >= 5}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
