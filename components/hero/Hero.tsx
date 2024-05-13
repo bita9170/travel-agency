@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import MaxLimitWrapper from "../elements/MaxLimitWrapper";
 
 interface HeroProps {
   title: string;

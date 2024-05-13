@@ -1,3 +1,4 @@
+import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Hero from "@/components/hero/Hero";
 import Layout1 from "@/components/tiles/Layout1";
 import Layout2 from "@/components/tiles/Layout2";
@@ -33,46 +34,52 @@ export default async function Home() {
   ];
 
   return (
-    <main>
-      <Hero
-        title="World's best hotels for 2024"
-        image="/hero.jpeg"
-        subtitle="See our Travelers' Choice Awards Best of the Best winners."
-        ctaText="See the list"
-        ctaLink="#"
-        className="mt-4"
-      />
+    <>
+      <MaxLimitWrapper>
+        <Hero
+          title="World's best hotels for 2024"
+          image="/hero.jpeg"
+          subtitle="See our Travelers' Choice Awards Best of the Best winners."
+          ctaText="See the list"
+          ctaLink="#"
+          className="mt-4"
+        />
+      </MaxLimitWrapper>
 
-      <section className="py-10 mt-4 px-2 md:px-0">
-        <h3>Stay somewhere award- winning</h3>
-        <p>2024's Travelers' Choice Awards Best of the Best Hotels</p>
-        <div className="grid md:grid-cols-4 gap-8 my-4">
-          {images.map((item, index) => (
-            <Layout1
-              key={index}
-              image={item.image}
-              ctaText={item.ctaText}
-              ctaLink={item.ctaLink}
-            />
-          ))}
-        </div>
-      </section>
+      <MaxLimitWrapper>
+        <section className="py-10 mt-4 px-2 md:px-0">
+          <h3>Stay somewhere award- winning</h3>
+          <p>2024's Travelers' Choice Awards Best of the Best Hotels</p>
+          <div className="grid md:grid-cols-4 gap-8 my-4">
+            {images.map((item, index) => (
+              <Layout1
+                key={index}
+                image={item.image}
+                ctaText={item.ctaText}
+                ctaLink={item.ctaLink}
+              />
+            ))}
+          </div>
+        </section>
+      </MaxLimitWrapper>
 
-      <section className="py-10 mt-4 px-2 md:px-0">
-        <h3>You might like these</h3>
-        <p>More things to do in Paris</p>
-        <div className="grid md:grid-cols-4 gap-8 my-4">
-          {locationDetails.map(async (location) => (
-            <Layout2
-              key={location.getLocationId()}
-              image={(await location.getPhotos())[0].getLarge().url}
-              ctaText={location.getName()}
-              rating={location.getRatingImageUrl()}
-              ctaLink="#"
-            />
-          ))}
-        </div>
-      </section>
-    </main>
+      <MaxLimitWrapper>
+        <section className="py-10 mt-4 px-2 md:px-0">
+          <h3>You might like these</h3>
+          <p>More things to do in Paris</p>
+          <div className="grid md:grid-cols-4 gap-8 my-4">
+            {locationDetails.map(async (location) => (
+              <Layout2
+                key={location.getLocationId()}
+                image={(await location.getPhotos())[0].getLarge().url}
+                ctaText={location.getName()}
+                rating={location.getRatingImageUrl()}
+                ctaLink="#"
+              />
+            ))}
+          </div>
+        </section>
+      </MaxLimitWrapper>
+    </>
   );
 }
