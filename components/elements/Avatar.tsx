@@ -27,7 +27,7 @@ function Avatar({ src, alt, fallBack }: AvatarProps) {
     <>
       <Sheet>
         <SheetTrigger asChild>
-          <AvatarShadCn>
+          <AvatarShadCn className="h-12 w-12">
             <AvatarImage src={src} alt={alt} />
             <AvatarFallback>{fallBack}</AvatarFallback>
           </AvatarShadCn>

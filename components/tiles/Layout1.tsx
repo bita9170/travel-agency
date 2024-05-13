@@ -12,7 +12,7 @@ const Layout1: React.FC<Layout1Props> = ({ image, ctaText, ctaLink }) => {
   return (
     <div className="tile-layout-1 ">
       <div className="relative min-h-[270px] rounded-xl overflow-hidden text-white">
-        <Image src={image} alt="layout-1" layout="fill" objectFit="cover" />
+        <Image src={image} alt="layout-1" fill className="object-cover" />
         <div className="absolute bottom-5 left-5 z-10">
           {ctaText && ctaLink && (
             <Link href={ctaLink}>

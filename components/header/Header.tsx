@@ -11,9 +11,8 @@ function Header() {
           <Logo />
         </div>
         <div className="avatar flex items-center">
+          {/* <div className="mr-2 font-bold hidden md:block">EUR</div> */}
           <Avatar src="/avatar.jpeg" alt="avatar" fallBack="BS" />
-
-          <div className="ml-2 font-bold hidden md:block">EUR</div>
         </div>
       </div>
       <Options />
