@@ -36,11 +36,11 @@ export default async function Home() {
 
   const data = [
     {
-      title: "spring",
+      title: "Spring Destinations",
       content: <SpringContent />,
     },
     {
-      title: "Sommer",
+      title: "Summer Destinations",
       content: <SommerContent />,
     },
   ];
@@ -99,30 +99,12 @@ export default async function Home() {
   );
 }
 
-export const SommerContent = () => {
+export const SpringContent = () => {
   return (
-    <div className="grid md:grid-cols-4 w-full">
-      <ul>
-        <li>Nashville 1</li>
-        <li>Charleston</li>
-        <li>New Orleans</li>
-        <li>Washington DC</li>
-      </ul>
-      <ul>
-        <li>Nashville 1</li>
-        <li>Charleston</li>
-        <li>New Orleans</li>
-        <li>Washington DC</li>
-      </ul>
-      <ul>
-        <li>Nashville 1</li>
-        <li>Charleston</li>
-        <li>New Orleans</li>
-        <li>Washington DC</li>
-      </ul>
-      <ul>
-        <li>Nashville 1</li>
-        <li>Charleston</li>
+    <div className="w-full">
+      <ul className="text-xs leading-4">
+        <li>Nashville 2</li>
+        <li>Charleston 2</li>
         <li>New Orleans</li>
         <li>Washington DC</li>
       </ul>
@@ -130,15 +112,21 @@ export const SommerContent = () => {
   );
 };
 
-export const SpringContent = () => {
+export const SommerContent = () => {
   return (
-    <div>
-      <ul>
-        <li>Nashville 2</li>
-        <li>Charleston 2</li>
-        <li>New Orleans</li>
-        <li>Washington DC</li>
-      </ul>
+    <div className="flex">
+      <div className="grid  md:grid-cols-4 w-full ">
+        {Array(4)
+          .fill(null)
+          .map((_, i) => (
+            <ul className="text-xs leading-4" key={i}>
+              <li>Nashville 1</li>
+              <li>Charleston</li>
+              <li>New Orleans</li>
+              <li>Washington DC</li>
+            </ul>
+          ))}
+      </div>
     </div>
   );
 };
