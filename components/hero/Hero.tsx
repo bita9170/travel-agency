@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import MaxLimitWrapper from "../elements/MaxLimitWrapper";
 
 interface HeroProps {
   title: string;
@@ -23,7 +24,7 @@ const Hero: React.FC<HeroProps> = ({
   return (
     <section className={cn("hero-container", className)}>
       <div className="absolute inset-0 z-0"></div>
-      <Image src={image} alt="Hero Image" layout="fill" objectFit="cover" />
+      <Image src={image} alt="Hero Image" fill className="object-cover" />
       <div className="absolute bottom-5 left-5 space-y-4 z-10">
         <h2 className="text-4xl font-bold">{title}</h2>
         {subtitle && <p className="text-lg">{subtitle}</p>}

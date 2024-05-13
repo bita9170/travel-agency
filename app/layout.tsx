@@ -19,8 +19,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={cn("min-h-screen bg-background font-sans antialiased")}>
         <Header />
-        <div className={cn("max-w-screen-xl mx-auto")}>{children}</div>
-        <Tab />
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

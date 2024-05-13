@@ -21,7 +21,8 @@ export async function GET(req: NextRequest) {
 // Handle POST requests
 export async function POST(req: NextRequest) {
   try {
-    const { name, username, address, email, password } = await req.json();
+    const { name, username, address, email, password, avatar, birthday } =
+      await req.json();
     await connectMongoDB();
 
     const saltRounds = 10; //Salting: Beim Salting wird ein zusätzlicher, zufälliger Datenstring an das ursprüngliche Passwort angehängt, bevor dieses gehasht wird. Dieser zusätzliche String wird als "Salt" bezeichnet. Salting hilft, gegen Rainbow-Table-Angriffe zu schützen, bei denen Angreifer vorberechnete Hashes verwenden, um Passwörter schnell zu entschlüsseln.
@@ -34,6 +35,8 @@ export async function POST(req: NextRequest) {
       address,
       email,
       password: hashedPassword,
+      avatar,
+      birthday,
     });
     return NextResponse.json(
       { message: "User Created", newUser },
@@ -64,13 +67,14 @@ export async function DELETE(req: NextRequest) {
 // Handle PUT requests
 export async function PUT(req: NextRequest) {
   try {
-    const { userId, name, username, address, email } = await req.json();
+    const { userId, name, username, address, email, avatar, birthday } =
+      await req.json();
 
     await connectMongoDB();
 
     const updateUser = await User.findByIdAndUpdate(
       userId,
-      { name, username, address, email },
+      { $set: { name, username, address, email, avatar, birthday } },
       { new: true }
     );
     if (!updateUser) {
