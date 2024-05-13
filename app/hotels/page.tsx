@@ -5,6 +5,7 @@ import Link from "next/link";
 import Layout1 from "@/components/tiles/Layout1";
 import Hero from "@/components/hero/Hero";
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
+import Layout4 from "@/components/tiles/Layout4";
 
 const HotelsPage = () => {
   const images = [
@@ -33,7 +34,6 @@ const HotelsPage = () => {
   return (
     <>
       <Hero image="/caption.jpg" className="mt-4 md:rounded-none" />
-
       <MaxLimitWrapper>
         <section className="py-10 mt-4 px-2 md:px-0">
           <h3>Popular hotels in Paris right now</h3>
@@ -49,6 +49,13 @@ const HotelsPage = () => {
           </div>
         </section>
       </MaxLimitWrapper>
+      <Layout4 
+        image="/image1.jpeg"
+        ctaText="Hotel Name"
+        ctaLink="#"
+        rating="/rating.svg"
+        category="Hotel Category"
+      />
     </>
   );
 };
