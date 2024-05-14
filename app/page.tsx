@@ -4,6 +4,7 @@ import Layout from "@/components/hero/Layout";
 import Tab, { TabProps } from "@/components/tabsection/Tab";
 import Layout1 from "@/components/tiles/Layout1";
 import Layout2 from "@/components/tiles/Layout2";
+import Layout3 from "@/components/tiles/Layout3";
 import { getLocationDetails } from "@/controllers/tripadvisorController";
 import { LocationDetails } from "@/lib/class/location";
 
@@ -93,6 +94,24 @@ export default async function Home() {
           </div>
         </section>
       </MaxLimitWrapper>
+
+      <section className="bg-[#faf1ed] py-10 mt-4 px-2 md:px-0">
+        <MaxLimitWrapper>
+          <h3>More to explore</h3>
+          <div className="grid md:grid-cols-3 gap-8 my-4">
+            {locationDetails.slice(0, 3).map(async (location) => (
+              <Layout3
+                key={location.getLocationId()}
+                image={(await location.getPhotos())[2].getLarge().url}
+                ctaText={location.getName()}
+                rating={location.getRatingImageUrl()}
+                ctaLink="#"
+              />
+            ))}
+          </div>
+        </MaxLimitWrapper>
+      </section>
+
       <div className="bg-[#fff7e1]">
         <MaxLimitWrapper className="px-2">
           <Layout />
