@@ -47,6 +47,9 @@ export default async function Home() {
     },
   ];
 
+  
+  
+
   return (
     <>
       <MaxLimitWrapper>
@@ -99,7 +102,28 @@ export default async function Home() {
         <MaxLimitWrapper>
           <h3>More to explore</h3>
           <div className="grid md:grid-cols-3 gap-8 my-4">
-            {locationDetails.slice(0, 3).map(async (location) => (
+          <Layout3
+        image="/image (5).jpeg"
+        ctaText="7 New York City restaurants to try when
+        the top tables are booked"
+        rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
+        ctaLink="#"
+      />
+      <Layout3
+        image="/image (6).jpeg"
+        ctaText="10 best places to visit in May around
+        the world"
+        rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
+        ctaLink="#"
+      />
+      <Layout3
+        image="/image (7).jpeg"
+        ctaText="One perfect day in Milan"
+        rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
+        ctaLink="#"
+      />
+
+            {/* {locationDetails.slice(0, 3).map(async (location) => (
               <Layout3
                 key={location.getLocationId()}
                 image={(await location.getPhotos())[2].getLarge().url}
@@ -107,7 +131,7 @@ export default async function Home() {
                 rating={location.getRatingImageUrl()}
                 ctaLink="#"
               />
-            ))}
+            ))} */}
           </div>
         </MaxLimitWrapper>
       </section>

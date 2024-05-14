@@ -36,10 +36,10 @@ const Layout3: React.FC<Layout3Props> = ({
         <div>
           {ctaText && ctaLink && (
             <Link href={ctaLink}>
-              <h3>{ctaText}</h3>
+              <p className="mt-2 text-base text-center">{ctaText}</p>
             </Link>
           )}
-          <img src={rating} alt="Rating" />
+
 
           <p>{category}</p>
         </div>
