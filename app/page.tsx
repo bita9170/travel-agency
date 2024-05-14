@@ -1,5 +1,6 @@
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Hero from "@/components/hero/Hero";
+import Tab, { TabProps } from "@/components/tabsection/Tab";
 import Layout1 from "@/components/tiles/Layout1";
 import Layout2 from "@/components/tiles/Layout2";
 import { getLocationDetails } from "@/controllers/tripadvisorController";
@@ -30,6 +31,17 @@ export default async function Home() {
       image: "/image4.jpeg",
       ctaText: "Luxury Hotels",
       ctaLink: "#",
+    },
+  ];
+
+  const data: TabProps[] = [
+    {
+      title: "Spring Destinations",
+      content: <SpringContent />,
+    },
+    {
+      title: "Summer Destinations",
+      content: <SommerContent />,
     },
   ];
 
@@ -80,6 +92,43 @@ export default async function Home() {
           </div>
         </section>
       </MaxLimitWrapper>
+      <MaxLimitWrapper>
+        <Tab data={data} tabsHeading="Trending in Travel" />
+      </MaxLimitWrapper>
     </>
   );
 }
+
+export const SpringContent = () => {
+  return (
+    <div className="grid xs:grid-cols-2 md:grid-cols-4 w-full ">
+      {Array(4)
+        .fill(null)
+        .map((_, i) => (
+          <ul className="text-sm leading-6" key={i}>
+            <li>Nashville 2</li>
+            <li>Charleston</li>
+            <li>New Orleans</li>
+            <li>Washington DC</li>
+          </ul>
+        ))}
+    </div>
+  );
+};
+
+export const SommerContent = () => {
+  return (
+    <div className="grid xs:grid-cols-2 md:grid-cols-4 w-full ">
+      {Array(4)
+        .fill(null)
+        .map((_, i) => (
+          <ul className="text-sm leading-6" key={i}>
+            <li>Nashville 1</li>
+            <li>Charleston</li>
+            <li>New Orleans</li>
+            <li>Washington DC</li>
+          </ul>
+        ))}
+    </div>
+  );
+};
