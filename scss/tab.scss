@@ -1,0 +1,17 @@
+body {
+  .tab-section {
+    [role="tablist"] {
+      button {
+        @apply font-bold text-sm;
+
+        &[data-state="active"] {
+          @apply underline;
+        }
+
+        &:hover {
+          @apply underline;
+        }
+      }
+    }
+  }
+}
