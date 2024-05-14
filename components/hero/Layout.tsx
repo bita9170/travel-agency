@@ -1,6 +1,6 @@
 import React from "react";
 
-const Test: React.FC = () => {
+const TravelersChoice: React.FC = () => {
   return (
     <div className=" w-full grid md:grid-cols-2 items-center">
       <div className="md:w-1/2">
@@ -28,4 +28,4 @@ const Test: React.FC = () => {
   );
 };
 
-export default Test;
+export default TravelersChoice;
