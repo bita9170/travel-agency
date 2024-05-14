@@ -4,6 +4,7 @@ import Layout from "@/components/hero/Layout";
 import Tab, { TabProps } from "@/components/tabsection/Tab";
 import Layout1 from "@/components/tiles/Layout1";
 import Layout2 from "@/components/tiles/Layout2";
+import Layout3 from "@/components/tiles/Layout3";
 import { getLocationDetails } from "@/controllers/tripadvisorController";
 import { LocationDetails } from "@/lib/class/location";
 import { getLocationDetailsByIds } from "@/lib/data/location";
@@ -49,6 +50,9 @@ export default async function Home() {
       content: <SommerContent />,
     },
   ];
+
+  
+  
 
   return (
     <>
@@ -97,6 +101,45 @@ export default async function Home() {
           </div>
         </section>
       </MaxLimitWrapper>
+
+      <section className="bg-[#faf1ed] py-10 mt-4 px-2 md:px-0">
+        <MaxLimitWrapper>
+          <h3>More to explore</h3>
+          <div className="grid md:grid-cols-3 gap-8 my-4">
+          <Layout3
+        image="/image (5).jpeg"
+        ctaText="7 New York City restaurants to try when
+        the top tables are booked"
+        rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
+        ctaLink="#"
+      />
+      <Layout3
+        image="/image (6).jpeg"
+        ctaText="10 best places to visit in May around
+        the world"
+        rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
+        ctaLink="#"
+      />
+      <Layout3
+        image="/image (7).jpeg"
+        ctaText="One perfect day in Milan"
+        rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
+        ctaLink="#"
+      />
+
+            {/* {locationDetails.slice(0, 3).map(async (location) => (
+              <Layout3
+                key={location.getLocationId()}
+                image={(await location.getPhotos())[2].getLarge().url}
+                ctaText={location.getName()}
+                rating={location.getRatingImageUrl()}
+                ctaLink="#"
+              />
+            ))} */}
+          </div>
+        </MaxLimitWrapper>
+      </section>
+
       <div className="bg-[#fff7e1]">
         <MaxLimitWrapper className="px-2">
           <Layout />
