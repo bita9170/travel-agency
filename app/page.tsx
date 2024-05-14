@@ -51,9 +51,6 @@ export default async function Home() {
     },
   ];
 
-  
-  
-
   return (
     <>
       <MaxLimitWrapper>
@@ -106,46 +103,53 @@ export default async function Home() {
         <MaxLimitWrapper>
           <h3>More to explore</h3>
           <div className="grid md:grid-cols-3 gap-8 my-4">
-          <Layout3
-        image="/image (5).jpeg"
-        ctaText="7 New York City restaurants to try when
+            <Layout3
+              image="/image (5).jpeg"
+              ctaText="7 New York City restaurants to try when
         the top tables are booked"
-        rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
-        ctaLink="#"
-      />
-      <Layout3
-        image="/image (6).jpeg"
-        ctaText="10 best places to visit in May around
+              rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
+              ctaLink="#"
+            />
+            <Layout3
+              image="/image (6).jpeg"
+              ctaText="10 best places to visit in May around
         the world"
-        rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
-        ctaLink="#"
-      />
-      <Layout3
-        image="/image (7).jpeg"
-        ctaText="One perfect day in Milan"
-        rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
-        ctaLink="#"
-      />
-
-            {/* {locationDetails.slice(0, 3).map(async (location) => (
-              <Layout3
-                key={location.getLocationId()}
-                image={(await location.getPhotos())[2].getLarge().url}
-                ctaText={location.getName()}
-                rating={location.getRatingImageUrl()}
-                ctaLink="#"
-              />
-            ))} */}
+              rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
+              ctaLink="#"
+            />
+            <Layout3
+              image="/image (7).jpeg"
+              ctaText="One perfect day in Milan"
+              rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
+              ctaLink="#"
+            />
           </div>
         </MaxLimitWrapper>
       </section>
+
+      <MaxLimitWrapper>
+        <section className="py-10 mt-4 px-2 md:px-0">
+          <h3>Dream Your Next Trip</h3>
+          <p>2024's Travelers' Choice Awards Best of the Best Hotels</p>
+          <div className="grid md:grid-cols-4 gap-8 my-4">
+            {images.map((item, index) => (
+              <Layout1
+                key={index}
+                image={item.image}
+                ctaText={item.ctaText}
+                ctaLink={item.ctaLink}
+              />
+            ))}
+          </div>
+        </section>
+      </MaxLimitWrapper>
 
       <div className="bg-[#fff7e1]">
         <MaxLimitWrapper className="px-2">
           <Layout />
         </MaxLimitWrapper>
       </div>
-      <MaxLimitWrapper>
+      <MaxLimitWrapper className="pt-8">
         <Tab data={data} tabsHeading="Trending in Travel" />
       </MaxLimitWrapper>
     </>
