@@ -1,59 +1,52 @@
 import React from "react";
-import Layout2 from "@/components/tiles/Layout2";
-import MaxLimitWrapper from "../elements/MaxLimitWrapper";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Layout4Props {
   image: string;
   ctaText?: string;
   ctaLink?: string;
   rating?: string;
-  category?: string;
+  about?: string;
 }
 
-function Layout4({ ctaText, ctaLink, rating, category }: Layout4Props) {
+function Layout4({ image, ctaText, ctaLink, rating, about }: Layout4Props) {
   return (
-    <>
-      <MaxLimitWrapper>
-        <div className="tile-layout-4 border hover:shadow-lg rounded-xl">
-          <div className="flex flex-wrap justify-center md:justify-start -mx-4">
-            <div className="w-full md:w-[320px] px-4">
-              <Layout2 image="/image1.jpeg" />
-            </div>
+    <div className="mt-6 flex flex-col rounded-lg bg-white text-surface shadow-shadowSmall border-2 dark:bg-surface-dark dark:text-white sm:shrink-0 sm:grow sm:basis-0">
+      <a href="#!">
+        <Image
+          src={image}
+          alt={ctaText ? ctaText : ""}
+          width={500}
+          height={200}
+          className="overflow-hidden rounded-t-lg"
+        />
+      </a>
+      <div className="p-6">
+        <h5 className="mb-2 text-xl font-medium leading-tight">{ctaText}</h5>
+        <p className="mb-4 text-base">{about}</p>
 
-            <div
-              className="w-full flex flex-col justify-center
-             md:w-1/3 px-24 mb-8"
-            >
-              <Button className="text-black hover:bg-primary-dark w-full">
-                Booking/Preis?
-              </Button>
-
-              <input //Later, shadcn will be used for this part
-                type="text"
-                placeholder="Date Picker"
-                className="w-full border-2 rounded-lg p-2 my-2"
-              />
-            </div>
-
-            <div className="w-full grid md:w-1/3 px-4 mb-8">
-              {/* <img src={rating} alt="Rating" /> */}
-              <div>
-                {ctaText && ctaLink && (
-                  <Link href={ctaLink}>
-                    <h3>{ctaText}</h3>
-                  </Link>
-                )}
-                <p>{category}</p>
-              </div>
-              <Link href="#">View on map</Link>
-              <Link href="#">Visit hotel website</Link>
-            </div>
+        <div className="flex flex-col mt-auto space-y-2 text-sm text-neutral-500 dark:text-neutral-300">
+          <div>
+            <img src={rating} alt="Rating" />
           </div>
+          <Link
+            href={ctaLink ? ctaLink : ""}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
+          >
+            Visit hotel website
+          </Link>
         </div>
-      </MaxLimitWrapper>
-    </>
+      </div>
+      <div className="mt-auto border-t-2 border-neutral-100 px-6 py-3 text-center text-surface/75 dark:border-white/10 dark:text-neutral-300">
+        <Button variant={"orange"} className="w-full">
+          Show prices
+        </Button>
+      </div>
+    </div>
   );
 }
 
