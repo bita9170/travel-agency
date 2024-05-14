@@ -6,8 +6,11 @@ import Layout1 from "@/components/tiles/Layout1";
 import Hero from "@/components/hero/Hero";
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Layout4 from "@/components/tiles/Layout4";
+import { getAllLocationDetails } from "@/lib/data/location";
+import { LocationDetails } from "@/lib/class/location";
 
 const HotelsPage = () => {
+  const locations: LocationDetails[] = getAllLocationDetails();
   const images = [
     {
       image: "/image1.jpeg",
@@ -52,29 +55,16 @@ const HotelsPage = () => {
       </MaxLimitWrapper>
 
       <MaxLimitWrapper>
-        <div className="grid-cols-1 sm:grid md:grid-cols-3 gap-4">
-          <Layout4
-            image="/Hotel1.jpg"
-            ctaText="Hôtel du Plat d'Etain"
-            ctaLink="https://www.hotelplatdetain.com/en/?utm_source=tripadvisor&utm_medium=link&utm_campaign=website"
-            rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
-            about="Welcome to Hôtel du Plat d'Etain, your Paris “home away from home.” Hôtel du Plat d'Etain aims to make your visit as relaxing and enjoyable as possible, which is why so many guests continue to come back year after year."
-          />
-
-          <Layout4
-            image="/Hotel2.jpg"
-            ctaText="1. Hotel Malte - Astotel"
-            ctaLink="https://www.secure-hotel-booking.com"
-            rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
-            about="Welcome to Hôtel du Plat d'Etain, your Paris “home away from home.” Hôtel du Plat d'Etain aims to make your visit as relaxing and enjoyable as possible, which is why so many guests continue to come back year after year."
-          />
-          <Layout4
-            image="/Hotel-indoorpool.jpg"
-            ctaText="2. Hôtel Astra Opéra - Astotel"
-            ctaLink="https://www.secure-hotel-booking.com/smart/Gp-Astotel/21E2-6664/en-US/?utm_source=TripAdvisor_usa&utm_medium=espace_contact&utm_campaign=TripAdvisor_astra"
-            rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
-            about="The Hotel Astra is located in the 9th arrondissement, just a stone's throw from the Opéra Garnier, the Grands Boulevards, Place Vendôme and Rue de la Paix. Ideally situated close to the capital's business centers, our 4-star establishment invites you to enjoy yourself, thanks to its location in the heart of the theater district and the Grands Magasins, the must-see sites of the City of Light. "
-          />
+        <div className="grid-cols-1 sm:grid md:grid-cols-2 gap-4">
+          {locations.map((location) => (
+            <Layout4
+              image={location.getPhotos()[0].getLarge().url}
+              ctaText={location.getName()}
+              ctaLink={location.getWebsite()}
+              rating={location.getRatingImageUrl()}
+              about={location.getDescription()}
+            />
+          ))}
         </div>
       </MaxLimitWrapper>
     </>

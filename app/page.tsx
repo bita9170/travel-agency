@@ -6,9 +6,13 @@ import Layout1 from "@/components/tiles/Layout1";
 import Layout2 from "@/components/tiles/Layout2";
 import { getLocationDetails } from "@/controllers/tripadvisorController";
 import { LocationDetails } from "@/lib/class/location";
+import { getLocationDetailsByIds } from "@/lib/data/location";
 
 export default async function Home() {
-  const locationDetails: LocationDetails[] = await getLocationDetails([
+  // const locationDetails: LocationDetails[] = await getLocationDetails([
+  //   188151, 188757, 188679, 188709,
+  // ]);
+  const locationDetails: LocationDetails[] = getLocationDetailsByIds([
     188151, 188757, 188679, 188709,
   ]);
 
