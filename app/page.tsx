@@ -1,5 +1,6 @@
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Hero from "@/components/hero/Hero";
+import Layout from "@/components/hero/Layout";
 import Tab, { TabProps } from "@/components/tabsection/Tab";
 import Layout1 from "@/components/tiles/Layout1";
 import Layout2 from "@/components/tiles/Layout2";
@@ -92,6 +93,11 @@ export default async function Home() {
           </div>
         </section>
       </MaxLimitWrapper>
+      <div className="bg-[#fff7e1]">
+        <MaxLimitWrapper className="px-2">
+          <Layout />
+        </MaxLimitWrapper>
+      </div>
       <MaxLimitWrapper>
         <Tab data={data} tabsHeading="Trending in Travel" />
       </MaxLimitWrapper>

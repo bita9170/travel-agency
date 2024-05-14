@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/scss/globals.scss";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/footer/Footer";
+import Layout from "../components/hero/Layout2";
 import Header from "@/components/header/Header";
 
 export const metadata: Metadata = {

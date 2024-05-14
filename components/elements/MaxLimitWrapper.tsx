@@ -8,7 +8,9 @@ function MaxLimitWrapper({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <div className={cn("max-w-screen-xl mx-auto")}>{children}</div>;
+  return (
+    <div className={cn("max-w-screen-xl mx-auto", className)}>{children}</div>
+  );
 }
 
 export default MaxLimitWrapper;
