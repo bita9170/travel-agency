@@ -40,7 +40,6 @@ const Layout2: React.FC<Layout2Props> = ({
             </Link>
           )}
           <img src={rating} alt="Rating" />
-
           <p>{category}</p>
         </div>
       </div>
