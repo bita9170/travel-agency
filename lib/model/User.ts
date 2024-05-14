@@ -7,6 +7,8 @@ const UserSchema = new Schema(
     address: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
+    avatar: { type: String, required: false, default: "/public/avatar.jpeg" },
+    birthday: { type: Date, required: false },
   },
   { timestamps: true }
 );
