@@ -1,5 +1,6 @@
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Hero from "@/components/hero/Hero";
+import Test from "@/components/hero/Test";
 import Layout1 from "@/components/tiles/Layout1";
 import Layout2 from "@/components/tiles/Layout2";
 import { getLocationDetails } from "@/controllers/tripadvisorController";
@@ -80,6 +81,11 @@ export default async function Home() {
           </div>
         </section>
       </MaxLimitWrapper>
+      <div className="bg-[#fff7e1]">
+        <MaxLimitWrapper className="px-2">
+          <Test />
+        </MaxLimitWrapper>
+      </div>
     </>
   );
 }

@@ -3,8 +3,8 @@ import ImageComponent from "./ImageComponent";
 
 function TravelersChoice() {
   return (
-    <div>
-      <div className="w-full relative bg-custom-cream py-8 mt-10">
+    <div className=" w-full">
+      <div className="w-full relative bg-custom-cream py-12 mt-10">
         <div className="max-w-screen-xl mx-auto ">
           <div className="flex flex-col lg:flex-row items-start ">
             <div className="flex flex-col lg:flex-grow lg:mr-2 mb-2 lg:mb-0">
