@@ -1,37 +1,30 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ReactElement } from "react";
 
-interface TabProps {
+export interface TabProps {
   title: string;
-  content: JSX.Element;
+  content: ReactElement;
 }
 
-function Tab({
-  data,
-  defaultValue,
-}: {
-  data: TabProps[];
-  defaultValue: string;
-}) {
+function Tab({ tabsHeading, data }: { tabsHeading: string; data: TabProps[] }) {
   return (
-    <Tabs defaultValue={defaultValue}>
-      <h3 className="p-3">Trending in Travel</h3>
-      <TabsList className="md:flex p-3 gap-4 w-[400px]  ">
-        {data?.map((item, index) => (
-          <TabsTrigger key={index} value={item.title}>
-            {item.title === "Spring Destinations" ? (
-              <span className="underline">{item.title}</span>
-            ) : (
-              item.title
-            )}
-          </TabsTrigger>
+    <div className="tab-section">
+      <h3>{tabsHeading}</h3>
+      <Tabs defaultValue={data[0].title}>
+        <TabsList className="md:flex gap-6">
+          {data?.map((item, index) => (
+            <TabsTrigger key={index} value={item.title}>
+              {item.title}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        {data.map((item, index) => (
+          <TabsContent key={index} value={item.title} className="w-full p-0">
+            {item.content}
+          </TabsContent>
         ))}
-      </TabsList>
-      {data?.map((item, index) => (
-        <TabsContent key={index} value={item.title} className="w-full">
-          {item.content}
-        </TabsContent>
-      ))}
-    </Tabs>
+      </Tabs>
+    </div>
   );
 }
 
