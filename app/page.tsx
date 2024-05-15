@@ -5,7 +5,7 @@ import Tab, { TabProps } from "@/components/tabsection/Tab";
 import Layout1 from "@/components/tiles/Layout1";
 import Layout2 from "@/components/tiles/Layout2";
 import Layout3 from "@/components/tiles/Layout3";
-import { getLocationDetails } from "@/controllers/tripadvisorController";
+// import { getLocationDetails } from "@/controllers/tripadvisorController";
 import { LocationDetails } from "@/lib/class/location";
 import { getLocationDetailsByIds } from "@/lib/data/location";
 
@@ -13,9 +13,9 @@ export default async function Home() {
   // const locationDetails: LocationDetails[] = await getLocationDetails([
   //   188151, 188757, 188679, 188709,
   // ]);
-  const locationDetails: LocationDetails[] = getLocationDetailsByIds([
-    188151, 188757, 188679, 188709,
-  ]);
+  // const locationDetails: LocationDetails[] = getLocationDetailsByIds([
+  //   188151, 188757, 188679, 188709,
+  // ]);
 
   const images = [
     {
@@ -80,7 +80,7 @@ export default async function Home() {
           </div>
         </section>
       </MaxLimitWrapper>
-
+      {/* 
       <MaxLimitWrapper>
         <section className="py-10 mt-4 px-2 md:px-0">
           <h3>You might like these</h3>
@@ -97,7 +97,7 @@ export default async function Home() {
             ))}
           </div>
         </section>
-      </MaxLimitWrapper>
+      </MaxLimitWrapper> */}
 
       <section className="bg-[#faf1ed] py-10 mt-4 px-2 md:px-0">
         <MaxLimitWrapper>
@@ -127,7 +127,7 @@ export default async function Home() {
         </MaxLimitWrapper>
       </section>
 
-      <MaxLimitWrapper>
+      {/* <MaxLimitWrapper>
         <section className="py-10 mt-4 px-2 md:px-0">
           <h3>Dream Your Next Trip</h3>
           <p>2024's Travelers' Choice Awards Best of the Best Hotels</p>
@@ -142,7 +142,7 @@ export default async function Home() {
             ))}
           </div>
         </section>
-      </MaxLimitWrapper>
+      </MaxLimitWrapper> */}
 
       <div className="bg-[#fff7e1]">
         <MaxLimitWrapper className="px-2">
