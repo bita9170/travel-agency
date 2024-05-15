@@ -1,4 +1,5 @@
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
+import Options from "@/components/header/Options";
 import Hero from "@/components/hero/Hero";
 import Layout from "@/components/hero/Layout";
 import Tab, { TabProps } from "@/components/tabsection/Tab";
@@ -53,6 +54,10 @@ export default async function Home() {
 
   return (
     <>
+      <MaxLimitWrapper>
+        <Options />
+      </MaxLimitWrapper>
+
       <MaxLimitWrapper>
         <Hero
           title="World's best hotels for 2024"
