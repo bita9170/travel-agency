@@ -13,8 +13,12 @@ function Page() {
         <nav className="flex justify-between items-center py-6 w-full max-w-7xl mx-auto px-4 md:px-0">
           <Logo />
           <div className="flex items-center space-x-4">
-            <Button className="text-black bg-[#34e0a1] hidden md:block">Login</Button>
-            <Button className="bg-white text-black border border-[#34e0a1]">Register</Button>
+            <Button className="text-black bg-[#34e0a1] hidden md:block">
+              Login
+            </Button>
+            <Button className="bg-white text-black border border-[#34e0a1]">
+              Register
+            </Button>
             <span className="md:flex items-center hidden">
               <svg viewBox="0 0 24 24" className="w-[16px] mr-1">
                 <path fill="none" d="M0 0h24v24H0z"></path>
@@ -24,22 +28,32 @@ function Page() {
             </span>
           </div>
         </nav>
-        
+
         <section className="flex flex-col justify-center items-center py-6 w-full">
           <h1>Log in</h1>
 
           <div className="grid w-full max-w-sm items-center gap-4 mt-10">
-            <div className="w-full">
+            <div>
               <Label htmlFor="email">Enter your email address</Label>
-              <Input type="email" id="email" placeholder="email@domain.com" className="w-full border-0 box-border rounded-[22px] shadow-md" />
+              <Input
+                type="email"
+                id="email"
+                placeholder="email@domain.com"
+                className="w-full border-0 box-border rounded-[22px] shadow-md"
+              />
             </div>
-            <div className="w-full">
+            <div>
               <Label htmlFor="password">Password</Label>
-              <Input type="password" id="password" placeholder="*************" className="w-full border-0 box-border rounded-[22px] shadow-md" />
+              <Input
+                type="password"
+                id="password"
+                placeholder="*************"
+                className="w-full border-0 box-border rounded-[22px] shadow-md"
+              />
             </div>
           </div>
 
-          <Button className="text-black px-24 rounded-[26px] md:px-28 py-6 mt-6 w-full md:w-auto bg-[#34e0a1]">
+          <Button className="text-black rounded-[26px] py-6 mt-6 px-24 md:px-28 md:w-auto bg-[#34e0a1]">
             Sign in
           </Button>
 
@@ -47,7 +61,7 @@ function Page() {
 
           <span>Not a member?</span>
 
-          <Button className="text-white bg-black px-24 md:px-28 py-6 mt-6 rounded-[26px] w-full md:w-auto">
+          <Button className="text-white bg-black px-24 md:px-28 py-6 mt-6 rounded-[26px] md:w-auto">
             Register
           </Button>
         </section>
