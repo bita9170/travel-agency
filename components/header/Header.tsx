@@ -8,7 +8,7 @@ import Link from "next/link";
 function Header() {
   return (
     <MaxLimitWrapper>
-      <header className="px-2 md:px-0">
+      <header className="px-2 md:px-0 ">
         <div className="header-top flex justify-between min-h-[80px] items-center">
           <Link href={"/"}>
             <div className="logo">

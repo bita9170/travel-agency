@@ -137,9 +137,7 @@ function Register(props) {
               name="fullName"
               render={({ field }) => (
                 <FormItem className="w-[468px] align-items-center font-family ">
-                  <FormLabel className="text-[14px] pl-1 fira-sans-medium-italic">
-                    Full Name
-                  </FormLabel>
+                  <FormLabel className="text-[14px] pl-1 ">Full Name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Full Name"
