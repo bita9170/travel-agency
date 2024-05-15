@@ -24,7 +24,7 @@ const LocationDetails = [
     about:
       "Der Eiffelturm, ein Wahrzeichen der Architektur und Ingenieurskunst, zieht jährlich Millionen Besucher an. Als Symbol von Paris bietet der Turm atemberaubende Ausblicke auf die Stadt. Der Besuch kann mehr als drei Stunden dauern und umfasst Optionen für Führungen sowie den Zugang zu verschiedenen Ebenen des Turms.",
     duration: "Mehr als 3 Stunden",
-    image: "/public/image1.jpeg",
+    image: "/eifelturm.jpeg",
   },
 ];
 
@@ -35,24 +35,26 @@ const LocationDetails = [
 
 //   return (
 //     <MaxLimitWrapper>
-//       {/* <h3>{location.getName()}</h3>
+//       {/* <h3>{location.getName()}</ h3>
 //       <img src={(await location.getPhotos())[0].getLarge().url} />
 //       <div> {location.getDescription()}</div> */}
 //     </MaxLimitWrapper>
 //   );
 // }
 
-export function LocationDetailsCard() {
+export default function LocationDetailsCard() {
   return (
     <Card className="w-[350px] shadow-lg">
       <MaxLimitWrapper>
         <CardHeader>
-          <Image
-            src={LocationDetails[0].image}
-            alt="Eiffelturm"
-            layout="fill"
-            objectFit="cover"
-          />
+          <div className="relative w-full h-52">
+            <Image
+              src={LocationDetails[0].image}
+              alt="Eiffelturm"
+              fill
+              className="object-contain"
+            />
+          </div>
           <CardTitle>{LocationDetails[0].title}</CardTitle>
           <CardDescription>{LocationDetails[0].reviews}</CardDescription>
         </CardHeader>
