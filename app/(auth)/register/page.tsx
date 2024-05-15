@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
 const formSchema = z.object({
@@ -43,7 +44,7 @@ const defaultProps = {
   color: "black",
 };
 
-function Register(props) {
+function Register(props: any) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -137,14 +138,14 @@ function Register(props) {
               name="fullName"
               render={({ field }) => (
                 <FormItem className="w-[468px] align-items-center font-family ">
-                  <FormLabel className="text-[14px] pl-1 ">Full Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Full Name"
-                      {...field}
-                      className="w-[468px] h-[48px] p-2 border-0 box-border rounded-[22px] shadow-md bg-white text-black text-[14px] font-fira-sans font-medium leading-[18px] outline-none "
-                    />
-                  </FormControl>
+                  <FormLabel className="text-[14px] pl-1">Full Name</FormLabel>
+
+                  <Input
+                    style={{ marginBottom: "10px" }}
+                    placeholder="Full Name"
+                    {...field}
+                    className="w-[468px] h-[48px] p-2 border-0 box-border rounded-[22px] shadow-md bg-white text-black text-[14px] font-fira-sans font-medium leading-[18px] outline-none "
+                  />
                 </FormItem>
               )}
             />
@@ -154,14 +155,13 @@ function Register(props) {
               name="birthday"
               render={({ field }) => (
                 <FormItem className="w-[468px] align-items-center">
-                  <FormLabel className="text-[14px] pl-1">Birthday</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Birthday"
-                      {...field}
-                      className="w-[468px] h-[48px] p-2 border-0 box-border rounded-[22px] shadow-md bg-white text-black text-[14px] font-fira-sans font-medium leading-[18px] outline-none"
-                    />
-                  </FormControl>
+                  <FormLabel className="text-[14px] pl-1 ">Birthday</FormLabel>
+
+                  <Input
+                    placeholder="Birthday"
+                    {...field}
+                    className="w-[468px] h-[48px]  p-2 border-0 box-border rounded-[22px] shadow-md bg-white text-black text-[14px] font-fira-sans font-medium leading-[18px] outline-none "
+                  />
                 </FormItem>
               )}
             />
