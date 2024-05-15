@@ -44,7 +44,7 @@ const LocationDetails = [
 
 export default function LocationDetailsCard() {
   return (
-    <Card className="w-[350px] shadow-lg">
+    <Card className="w-[350px] shadow-lg mt-8">
       <MaxLimitWrapper>
         <CardHeader>
           <div className="relative w-full h-52">
