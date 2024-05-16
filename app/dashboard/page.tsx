@@ -14,7 +14,7 @@ import {
 
 function page() {
   return (
-    <div className="flex py-10">
+    <div className="dashboard-section flex py-10">
       <div className="ml-5 flex flex-col">
         <h5 className="font-bold">User Menu</h5>
         <ul>
@@ -126,7 +126,6 @@ function page() {
           </div>
         </div>
       </div>
-    
     </div>
   );
 }

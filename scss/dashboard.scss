@@ -1,12 +1,14 @@
-li {
-    @apply flex items-center mt-4
+.dashboard-section {
+  li {
+    @apply flex items-center mt-4;
   }
   svg {
-    @apply w-[22px] mr-2
+    @apply w-[22px] mr-2;
   }
-  .menu{
+  .menu {
     @apply flex flex-col items-center ml-40;
-    button{
-      @apply bg-white text-black border box-border rounded-[22px] shadow-md w-[360px] mb-2
+    button {
+      @apply bg-white text-black border box-border rounded-[22px] shadow-md w-[360px] mb-2;
     }
   }
+}
