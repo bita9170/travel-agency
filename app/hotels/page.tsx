@@ -1,7 +1,4 @@
 import React from "react";
-import Image from "next/image";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
 import Layout1 from "@/components/tiles/Layout1";
 import Hero from "@/components/hero/Hero";
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
@@ -58,6 +55,7 @@ const HotelsPage = () => {
         <div className="grid-cols-1 sm:grid md:grid-cols-2 gap-4">
           {locations.map((location) => (
             <Layout4
+              key={location.getLocationId()}
               image={location.getPhotos()[0].getLarge().url}
               ctaText={location.getName()}
               ctaLink={location.getWebsite()}
