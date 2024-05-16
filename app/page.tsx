@@ -54,7 +54,7 @@ export default async function Home() {
 
   return (
     <>
-      <MaxLimitWrapper>
+      <MaxLimitWrapper className="mx-2 md:mx-auto">
         <Options />
       </MaxLimitWrapper>
 
@@ -154,7 +154,7 @@ export default async function Home() {
           <Layout />
         </MaxLimitWrapper>
       </div>
-      <MaxLimitWrapper className="pt-8">
+      <MaxLimitWrapper className="pt-8 mx-2 md:mx-auto">
         <Tab data={data} tabsHeading="Trending in Travel" />
       </MaxLimitWrapper>
     </>
