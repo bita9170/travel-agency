@@ -15,10 +15,11 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 interface AvatarProps {
-  src?: string;
-  alt?: string;
+  src?: string | null;
+  alt?: string | null;
   fallBack: string;
 }
 
@@ -28,7 +29,7 @@ function Avatar({ src, alt, fallBack }: AvatarProps) {
       <Sheet>
         <SheetTrigger asChild>
           <AvatarShadCn className="h-12 w-12">
-            <AvatarImage src={src} alt={alt} />
+            <AvatarImage src={src} alt={} />
             <AvatarFallback>{fallBack}</AvatarFallback>
           </AvatarShadCn>
         </SheetTrigger>
@@ -96,7 +97,7 @@ function Avatar({ src, alt, fallBack }: AvatarProps) {
               </Button>
             </div>
             <Button variant={"outline"} className="mt-4" type="submit">
-              Sign out
+              <LogoutLink>Logout</LogoutLink>
             </Button>
           </div>
         </SheetContent>
