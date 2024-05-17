@@ -5,8 +5,12 @@ import Link from "next/link";
 import Layout1 from "@/components/tiles/Layout1";
 import Hero from "@/components/hero/Hero";
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
+import Layout4 from "@/components/tiles/Layout4";
+import { getAllLocationDetails } from "@/lib/data/location";
+import { LocationDetails } from "@/lib/class/location";
 
 const HotelsPage = () => {
+  const locations: LocationDetails[] = getAllLocationDetails();
   const images = [
     {
       image: "/image1.jpeg",
@@ -48,6 +52,20 @@ const HotelsPage = () => {
             ))}
           </div>
         </section>
+      </MaxLimitWrapper>
+
+      <MaxLimitWrapper>
+        <div className="grid-cols-1 sm:grid md:grid-cols-2 gap-4">
+          {locations.map((location) => (
+            <Layout4
+              image={location.getPhotos()[0].getLarge().url}
+              ctaText={location.getName()}
+              ctaLink={location.getWebsite()}
+              rating={location.getRatingImageUrl()}
+              about={location.getDescription()}
+            />
+          ))}
+        </div>
       </MaxLimitWrapper>
     </>
   );

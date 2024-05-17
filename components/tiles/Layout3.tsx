@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-interface Layout2Props {
+interface Layout3Props {
   image: string;
   ctaText?: string;
   ctaLink?: string;
@@ -10,7 +10,7 @@ interface Layout2Props {
   category?: string;
 }
 
-const Layout2: React.FC<Layout2Props> = ({
+const Layout3: React.FC<Layout3Props> = ({
   image,
   ctaText,
   ctaLink,
@@ -18,7 +18,7 @@ const Layout2: React.FC<Layout2Props> = ({
   category,
 }) => {
   return (
-    <div className="tile-layout-2">
+    <div className="tile-layout-3 ">
       <div className="grid overflow-hidden relative">
         <img
           src={image}
@@ -36,10 +36,11 @@ const Layout2: React.FC<Layout2Props> = ({
         <div>
           {ctaText && ctaLink && (
             <Link href={ctaLink}>
-              <h3>{ctaText}</h3>
+              <p className="mt-2 text-base text-center">{ctaText}</p>
             </Link>
           )}
-          <img src={rating} alt="Rating" />
+
+
           <p>{category}</p>
         </div>
       </div>
@@ -47,4 +48,4 @@ const Layout2: React.FC<Layout2Props> = ({
   );
 };
 
-export default Layout2;
+export default Layout3;
