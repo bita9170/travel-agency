@@ -29,7 +29,7 @@ function Avatar({ src, alt, fallBack }: AvatarProps) {
       <Sheet>
         <SheetTrigger asChild>
           <AvatarShadCn className="h-12 w-12">
-            <AvatarImage src={src} alt={} />
+            {src && alt && <AvatarImage src={src} alt={alt} />}
             <AvatarFallback>{fallBack}</AvatarFallback>
           </AvatarShadCn>
         </SheetTrigger>
@@ -37,7 +37,7 @@ function Avatar({ src, alt, fallBack }: AvatarProps) {
           <SheetHeader>
             <SheetTitle className="flex gap-2 items-center">
               <AvatarShadCn>
-                <AvatarImage src={src} alt={alt} />
+                {src && alt && <AvatarImage src={src} alt={alt} />}
                 <AvatarFallback>{fallBack}</AvatarFallback>
               </AvatarShadCn>
               <Label>John Doe</Label>
