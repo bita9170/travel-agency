@@ -5,12 +5,12 @@ const TravelersChoice: React.FC = () => {
     <div className=" w-full grid md:grid-cols-2 items-center">
       <div className="md:w-1/2">
         <h2 className="text-3xl font-bold mb-4">
-          Travelers' Choice <br /> Awards Best of <br />
+          Travelers Choice <br /> Awards Best of <br />
           the Best
         </h2>
         <p className="mb-4">
-          Among our top 1% of places, stays, <br />
-          eats, and experiences - decided by you.
+          Among our top 1 of places stays <br />
+          eats and experiences decided by you.
         </p>
         <button className="bg-black text-white py-2 px-4 rounded">
           See the winners

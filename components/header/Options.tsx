@@ -16,7 +16,7 @@ function Options() {
       <h1 className="hidden sm:block">Where to?</h1>
 
       <div className="search-navigation">
-        <div className="navigation">
+        <div className="navigation text-center">
           <Button variant={"link"} asChild className="text-black active">
             <Link href="#">
               <SearchAllIcon className="mr-1" />
