@@ -44,29 +44,33 @@ const LocationDetails = [
 
 export default function LocationDetailsCard() {
   return (
-    <Card className="w-[350px] shadow-lg mt-8">
-      <MaxLimitWrapper>
-        <CardHeader>
-          <div className="relative w-full h-52">
-            <Image
-              src={LocationDetails[0].image}
-              alt="Eiffelturm"
-              fill
-              className="object-contain"
-            />
-          </div>
-          <CardTitle>{LocationDetails[0].title}</CardTitle>
-          <CardDescription>{LocationDetails[0].reviews}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>{LocationDetails[0].categories}</p>
-          <p>{LocationDetails[0].hours}</p>
-          <p>{LocationDetails[0].about}</p>
-        </CardContent>
-        <CardFooter>
-          <p>Dauer: {LocationDetails[0].duration}</p>
-        </CardFooter>
-      </MaxLimitWrapper>
-    </Card>
+    <>
+      <div className="relative w-full h-52">
+        <Image
+          style={{ position: "absolute", left: "5%" }}
+          src={LocationDetails[0].image}
+          alt="Eiffelturm"
+          fill
+          className="object-contain"
+        />
+      </div>
+
+      <CardTitle>{LocationDetails[0].title}</CardTitle>
+      <Card className="w-[350px] shadow-lg mt-8">
+        <MaxLimitWrapper>
+          <CardHeader>
+            <CardDescription>{LocationDetails[0].reviews}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>{LocationDetails[0].categories}</p>
+            <p>{LocationDetails[0].hours}</p>
+            <p>{LocationDetails[0].about}</p>
+          </CardContent>
+          <CardFooter>
+            <p>Dauer: {LocationDetails[0].duration}</p>
+          </CardFooter>
+        </MaxLimitWrapper>
+      </Card>
+    </>
   );
 }
