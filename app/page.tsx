@@ -86,8 +86,8 @@ export default async function Home() {
           </div>
         </section>
       </MaxLimitWrapper>
-      {/* 
-      <MaxLimitWrapper>
+      
+      {/* <MaxLimitWrapper>
         <section className="py-10 mt-4 px-2 md:px-0">
           <h3>You might like these</h3>
           <p>More things to do in Paris</p>
@@ -133,7 +133,7 @@ export default async function Home() {
         </MaxLimitWrapper>
       </section>
 
-      {/* <MaxLimitWrapper>
+      <MaxLimitWrapper>
         <section className="py-10 mt-4 px-2 md:px-0">
           <h3>Dream Your Next Trip</h3>
           <p>2024 Travelers Choice Awards Best of the Best Hotels</p>
@@ -148,7 +148,7 @@ export default async function Home() {
             ))}
           </div>
         </section>
-      </MaxLimitWrapper> */}
+      </MaxLimitWrapper>
 
       <div className="bg-[#fff7e1]">
         <MaxLimitWrapper className="px-2">
