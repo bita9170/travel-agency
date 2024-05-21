@@ -1,0 +1,11 @@
+.location-grid {
+  @apply grid mt-10 mb-10 py-16 px-24 bg-green-90;
+
+  .location-container {
+    @apply flex flex-wrap items-center justify-center gap-6 font-medium;
+
+    .location-item {
+      @apply cursor-pointer hover:text-gray-700 hover:underline;
+    }
+  }
+}
