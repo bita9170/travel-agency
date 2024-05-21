@@ -86,24 +86,27 @@ export default async function Home() {
           </div>
         </section>
       </MaxLimitWrapper>
-      {/* 
+
       <MaxLimitWrapper>
         <section className="py-10 mt-4 px-2 md:px-0">
           <h3>You might like these</h3>
           <p>More things to do in Paris</p>
+
           <div className="grid md:grid-cols-4 gap-8 my-4">
-            {locationDetails.map(async (location) => (
-              <Layout2
-                key={location.getLocationId()}
-                image={(await location.getPhotos())[0].getLarge().url}
-                ctaText={location.getName()}
-                rating={location.getRatingImageUrl()}
-                ctaLink="#"
-              />
-            ))}
+            {getLocationDetailsByIds([188151, 188757, 188679, 188709]).map(
+              async (location: LocationDetails) => (
+                <Layout2
+                  key={location.getLocationId()}
+                  image={(await location.getPhotos())[0].getLarge().url}
+                  ctaText={location.getName()}
+                  rating={location.getRatingImageUrl()}
+                  ctaLink="#"
+                />
+              )
+            )}
           </div>
         </section>
-      </MaxLimitWrapper> */}
+      </MaxLimitWrapper>
 
       <section className="bg-[#faf1ed] py-10 mt-4 px-2 md:px-0">
         <MaxLimitWrapper>
@@ -133,7 +136,7 @@ export default async function Home() {
         </MaxLimitWrapper>
       </section>
 
-      {/* <MaxLimitWrapper>
+      <MaxLimitWrapper>
         <section className="py-10 mt-4 px-2 md:px-0">
           <h3>Dream Your Next Trip</h3>
           <p>2024 Travelers Choice Awards Best of the Best Hotels</p>
@@ -148,7 +151,7 @@ export default async function Home() {
             ))}
           </div>
         </section>
-      </MaxLimitWrapper> */}
+      </MaxLimitWrapper>
 
       <div className="bg-[#fff7e1]">
         <MaxLimitWrapper className="px-2">
@@ -160,4 +163,18 @@ export default async function Home() {
       </MaxLimitWrapper>
     </>
   );
+}
+
+{
+  /* <div className="grid md:grid-cols-4 gap-8 my-4">
+  {images.map((item, index) => (
+    <Layout2
+      key={index}
+      image={item.image}
+      ctaText={item.ctaText}
+      ctaLink={item.ctaLink}
+      rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
+    />
+  ))}
+</div>; */
 }
