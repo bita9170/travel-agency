@@ -24,7 +24,7 @@ const mapData = {
     restaurants: "10,000 within 3 miles",
     attractions: "4,022 within 6 miles",
   },
-  mapImage: "/public/map.png",
+  mapImage: "/map.png",
 };
 
 const data = {
@@ -476,30 +476,33 @@ const photos = {
 };
 export function MapDetailsCard() {
   return (
-    <Card className="w-[350px]">
-      <MaxLimitWrapper>
-        <h3>The Area</h3>
-        <p>{mapData.address}</p>
-        <p>Neighborhood: {mapData.neighborhood}</p>
-        <h4>How to get there</h4>
-        {mapData.transport.map((item, index) => (
-          <p key={index}>
-            {item.name}, {item.walkTime}
-          </p>
-        ))}
-        <h4>Reach out directly</h4>
-        <a href={mapData.contact.websiteURL}>Visit website</a>
-        <p>Call: {mapData.contact.phone}</p>
-        <h4>Best nearby</h4>
-        <p>Restaurants: {mapData.nearby.restaurants}</p>
-        <p>Attractions: {mapData.nearby.attractions}</p>
-        <Image
-          src={mapData.mapImage}
-          alt="Map of Eiffel Tower Area"
-          width={300}
-          height={300}
-        />
-      </MaxLimitWrapper>
-    </Card>
+    <div className="flex ">
+      <Card className="w-[400px] p-4 ">
+        <MaxLimitWrapper>
+          <h3 className="">The Area</h3>
+          <p className="mt-3">{mapData.address}</p>
+          <p>Neighborhood: {mapData.neighborhood}</p>
+          <h4 className="mt-3">How to get there</h4>
+          {mapData.transport.map((item, index) => (
+            <p key={index}>
+              {item.name}, {item.walkTime}
+            </p>
+          ))}
+          <h4 className="mt-3">Reach out directly</h4>
+          <a href={mapData.contact.websiteURL}>Visit website</a>
+          <p>Call: {mapData.contact.phone}</p>
+          <h4 className="mt-3">Best nearby</h4>
+          <p>Restaurants: {mapData.nearby.restaurants}</p>
+          <p>Attractions: {mapData.nearby.attractions}</p>
+          <Image
+            src={mapData.mapImage}
+            alt="Map of Eiffel Tower Area"
+            width={500}
+            height={500}
+            className="m-auto"
+          />
+        </MaxLimitWrapper>
+      </Card>
+    </div>
   );
 }
