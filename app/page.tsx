@@ -86,8 +86,8 @@ export default async function Home() {
           </div>
         </section>
       </MaxLimitWrapper>
-      
-      {/* <MaxLimitWrapper>
+
+      <MaxLimitWrapper>
         <section className="py-10 mt-4 px-2 md:px-0">
           <h3>You might like these</h3>
           <p>More things to do in Paris</p>
@@ -163,18 +163,4 @@ export default async function Home() {
       </MaxLimitWrapper>
     </>
   );
-}
-
-{
-  /* <div className="grid md:grid-cols-4 gap-8 my-4">
-  {images.map((item, index) => (
-    <Layout2
-      key={index}
-      image={item.image}
-      ctaText={item.ctaText}
-      ctaLink={item.ctaLink}
-      rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
-    />
-  ))}
-</div>; */
 }
