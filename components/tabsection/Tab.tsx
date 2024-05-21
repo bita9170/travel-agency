@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 
 export interface TabProps {
   title: string;
-  content: ReactElement;
+  content: JSX.Element;
 }
 
 function Tab({ tabsHeading, data }: { tabsHeading: string; data: TabProps[] }) {

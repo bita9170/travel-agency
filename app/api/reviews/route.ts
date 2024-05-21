@@ -15,8 +15,8 @@ interface ReviewData {
 export async function GET(req: NextRequest) {
   try {
     await connectMongoDB();
-    const reviews = await Review.find({});
-    return NextResponse.json({ reviews }, { status: 200 });
+    // const reviews = await Review.find({});
+    // return NextResponse.json({ reviews }, { status: 200 });
   } catch (error: any) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
@@ -67,18 +67,18 @@ export async function PUT(req: NextRequest) {
   try {
     await connectMongoDB();
     const { id, text, rating, locationId } = await req.json();
-    const updatedReview = await Review.findByIdAndUpdate(
-      id,
-      { $set: { text, rating, locationId } },
-      { new: true }
-    );
-    if (!updatedReview) {
-      return NextResponse.json(
-        { message: "Review not found" },
-        { status: 404 }
-      );
-    }
-    return NextResponse.json(updatedReview, { status: 200 });
+    // const updatedReview = await Review.findByIdAndUpdate(
+    //   id,
+    //   { $set: { text, rating, locationId } },
+    //   { new: true }
+    // );
+    // if (!updatedReview) {
+    //   return NextResponse.json(
+    //     { message: "Review not found" },
+    //     { status: 404 }
+    //   );
+    // }
+    // return NextResponse.json(updatedReview, { status: 200 });
   } catch (error: any) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }

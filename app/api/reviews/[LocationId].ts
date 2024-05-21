@@ -38,8 +38,8 @@ export default async function handler(
         const tripAdvisorData = await getLocationDetails(locationId as string);
 
         // Lokale Reviews abrufen
-        const reviews = await Review.find({ locationId });
-        res.status(200).json({ success: true, tripAdvisorData, reviews });
+        // const reviews = await Review.find({ locationId });
+        // res.status(200).json({ success: true, tripAdvisorData, reviews });
       } catch (error: any) {
         console.error("Failed to get data:", error.message);
         res.status(500).json({ success: false, message: error.message });

@@ -2,11 +2,12 @@ import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Options from "@/components/header/Options";
 import Hero from "@/components/hero/Hero";
 import Layout from "@/components/hero/Layout";
+import { SommerContent, SpringContent } from "@/components/tab/content";
 import Tab, { TabProps } from "@/components/tabsection/Tab";
 import Layout1 from "@/components/tiles/Layout1";
 import Layout2 from "@/components/tiles/Layout2";
 import Layout3 from "@/components/tiles/Layout3";
-import { getLocationDetails } from "@/controllers/tripadvisorController";
+// import { getLocationDetails } from "@/controllers/tripadvisorController";
 import { LocationDetails } from "@/lib/class/location";
 import { getLocationDetailsByIds } from "@/lib/data/location";
 
@@ -14,9 +15,9 @@ export default async function Home() {
   // const locationDetails: LocationDetails[] = await getLocationDetails([
   //   188151, 188757, 188679, 188709,
   // ]);
-  const locationDetails: LocationDetails[] = getLocationDetailsByIds([
-    188151, 188757, 188679, 188709,
-  ]);
+  // const locationDetails: LocationDetails[] = getLocationDetailsByIds([
+  //   188151, 188757, 188679, 188709,
+  // ]);
 
   const images = [
     {
@@ -54,7 +55,7 @@ export default async function Home() {
 
   return (
     <>
-      <MaxLimitWrapper>
+      <MaxLimitWrapper className="mx-2 md:mx-auto">
         <Options />
       </MaxLimitWrapper>
 
@@ -71,8 +72,8 @@ export default async function Home() {
 
       <MaxLimitWrapper>
         <section className="py-10 mt-4 px-2 md:px-0">
-          <h3>Stay somewhere award- winning</h3>
-          <p>2024's Travelers' Choice Awards Best of the Best Hotels</p>
+          <h3>Stay somewhere award winning</h3>
+          <p>2024 Travelers Choice Awards Best of the Best Hotels</p>
           <div className="grid md:grid-cols-4 gap-8 my-4">
             {images.map((item, index) => (
               <Layout1
@@ -90,16 +91,19 @@ export default async function Home() {
         <section className="py-10 mt-4 px-2 md:px-0">
           <h3>You might like these</h3>
           <p>More things to do in Paris</p>
+
           <div className="grid md:grid-cols-4 gap-8 my-4">
-            {locationDetails.map(async (location) => (
-              <Layout2
-                key={location.getLocationId()}
-                image={(await location.getPhotos())[0].getLarge().url}
-                ctaText={location.getName()}
-                rating={location.getRatingImageUrl()}
-                ctaLink="#"
-              />
-            ))}
+            {getLocationDetailsByIds([188151, 188757, 188679, 188709]).map(
+              async (location: LocationDetails) => (
+                <Layout2
+                  key={location.getLocationId()}
+                  image={(await location.getPhotos())[0].getLarge().url}
+                  ctaText={location.getName()}
+                  rating={location.getRatingImageUrl()}
+                  ctaLink="#"
+                />
+              )
+            )}
           </div>
         </section>
       </MaxLimitWrapper>
@@ -135,7 +139,7 @@ export default async function Home() {
       <MaxLimitWrapper>
         <section className="py-10 mt-4 px-2 md:px-0">
           <h3>Dream Your Next Trip</h3>
-          <p>2024's Travelers' Choice Awards Best of the Best Hotels</p>
+          <p>2024 Travelers Choice Awards Best of the Best Hotels</p>
           <div className="grid md:grid-cols-4 gap-8 my-4">
             {images.map((item, index) => (
               <Layout1
@@ -154,43 +158,9 @@ export default async function Home() {
           <Layout />
         </MaxLimitWrapper>
       </div>
-      <MaxLimitWrapper className="pt-8">
+      <MaxLimitWrapper className="pt-8 mx-2 md:mx-auto">
         <Tab data={data} tabsHeading="Trending in Travel" />
       </MaxLimitWrapper>
     </>
   );
 }
-
-export const SpringContent = () => {
-  return (
-    <div className="grid xs:grid-cols-2 md:grid-cols-4 w-full ">
-      {Array(4)
-        .fill(null)
-        .map((_, i) => (
-          <ul className="text-sm leading-6" key={i}>
-            <li>Nashville 2</li>
-            <li>Charleston</li>
-            <li>New Orleans</li>
-            <li>Washington DC</li>
-          </ul>
-        ))}
-    </div>
-  );
-};
-
-export const SommerContent = () => {
-  return (
-    <div className="grid xs:grid-cols-2 md:grid-cols-4 w-full ">
-      {Array(4)
-        .fill(null)
-        .map((_, i) => (
-          <ul className="text-sm leading-6" key={i}>
-            <li>Nashville 1</li>
-            <li>Charleston</li>
-            <li>New Orleans</li>
-            <li>Washington DC</li>
-          </ul>
-        ))}
-    </div>
-  );
-};
