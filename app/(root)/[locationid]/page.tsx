@@ -13,6 +13,13 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
+import Layout2 from "@/components/tiles/Layout2";
+import { LocationDetails } from "@/lib/class/location";
+import { getLocationDetailsByIds } from "@/lib/data/location";
+import LayoutHotel from "@/components/hotels/Laout1";
+import Layout from "@/components/hotels/Layout2";
+import Map from "@/components/hotels/Map";
+
 const LocationDetails = [
   //static Data
 
@@ -301,210 +308,210 @@ const data = {
   ],
 };
 
-// const photos = {
-//   data: [
-//     {
-//       id: 446594973,
-//       is_blessed: false,
-//       caption: "Eiffeltoren",
-//       published_date: "2020-01-16T19:17:25.925Z",
-//       images: {
-//         thumbnail: {
-//           height: 50,
-//           width: 50,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-t/1a/9e/7f/9d/eiffeltoren.jpg",
-//         },
-//         medium: {
-//           height: 200,
-//           width: 180,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-i/1a/9e/7f/9d/eiffeltoren.jpg",
-//         },
-//         small: {
-//           height: 150,
-//           width: 150,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-l/1a/9e/7f/9d/eiffeltoren.jpg",
-//         },
-//         large: {
-//           height: 450,
-//           width: 302,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-s/1a/9e/7f/9d/eiffeltoren.jpg",
-//         },
-//         original: {
-//           height: 1524,
-//           width: 1024,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-w/1a/9e/7f/9d/eiffeltoren.jpg",
-//         },
-//       },
-//       album: "Other",
-//       source: {
-//         name: "Traveler",
-//         localized_name: "Traveler",
-//       },
-//       user: {
-//         username: "MichelM_Delft",
-//       },
-//     },
-//     {
-//       id: 454403030,
-//       is_blessed: false,
-//       caption: "© Emeric Livinec - SETE",
-//       published_date: "2020-03-05T13:36:31.561Z",
-//       images: {
-//         thumbnail: {
-//           height: 50,
-//           width: 50,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-t/1b/15/a3/d6/c-emeric-livinec-sete.jpg",
-//         },
-//         small: {
-//           height: 150,
-//           width: 150,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-l/1b/15/a3/d6/c-emeric-livinec-sete.jpg",
-//         },
-//         medium: {
-//           height: 187,
-//           width: 250,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-f/1b/15/a3/d6/c-emeric-livinec-sete.jpg",
-//         },
-//         large: {
-//           height: 412,
-//           width: 550,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-s/1b/15/a3/d6/c-emeric-livinec-sete.jpg",
-//         },
-//         original: {
-//           height: 599,
-//           width: 800,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-o/1b/15/a3/d6/c-emeric-livinec-sete.jpg",
-//         },
-//       },
-//       album: "Other",
-//       source: {
-//         name: "Management",
-//         localized_name: "Management",
-//       },
-//       user: {
-//         username: "Management",
-//       },
-//     },
-//     {
-//       id: 454402977,
-//       is_blessed: false,
-//       caption: "© Emeric Livinec - SETE",
-//       published_date: "2020-03-05T13:36:07.15Z",
-//       images: {
-//         thumbnail: {
-//           height: 50,
-//           width: 50,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-t/1b/15/a3/a1/c-emeric-livinec-sete.jpg",
-//         },
-//         small: {
-//           height: 150,
-//           width: 150,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-l/1b/15/a3/a1/c-emeric-livinec-sete.jpg",
-//         },
-//         medium: {
-//           height: 167,
-//           width: 250,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-f/1b/15/a3/a1/c-emeric-livinec-sete.jpg",
-//         },
-//         large: {
-//           height: 367,
-//           width: 550,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-s/1b/15/a3/a1/c-emeric-livinec-sete.jpg",
-//         },
-//         original: {
-//           height: 853,
-//           width: 1280,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/15/a3/a1/c-emeric-livinec-sete.jpg",
-//         },
-//       },
-//       album: "Other",
-//       source: {
-//         name: "Management",
-//         localized_name: "Management",
-//       },
-//       user: {
-//         username: "Management",
-//       },
-//     },
-//     {
-//       id: 449869802,
-//       is_blessed: false,
-//       caption: "Tour Eiffel",
-//       published_date: "2020-02-06T09:43:31.007Z",
-//       images: {
-//         thumbnail: {
-//           height: 50,
-//           width: 50,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-t/1a/d0/77/ea/tour-eiffel.jpg",
-//         },
-//         small: {
-//           height: 150,
-//           width: 150,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-l/1a/d0/77/ea/tour-eiffel.jpg",
-//         },
-//         medium: {
-//           height: 167,
-//           width: 250,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-f/1a/d0/77/ea/tour-eiffel.jpg",
-//         },
-//         large: {
-//           height: 367,
-//           width: 550,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-s/1a/d0/77/ea/tour-eiffel.jpg",
-//         },
-//         original: {
-//           height: 800,
-//           width: 1200,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-o/1a/d0/77/ea/tour-eiffel.jpg",
-//         },
-//       },
-//       album: "Other",
-//       source: {
-//         name: "Management",
-//         localized_name: "Management",
-//       },
-//       user: {
-//         username: "Management",
-//       },
-//     },
-//     {
-//       id: 454403032,
-//       is_blessed: false,
-//       caption: "© SETE",
-//       published_date: "2020-03-05T13:36:32.061Z",
-//       images: {
-//         thumbnail: {
-//           height: 50,
-//           width: 50,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-t/1b/15/a3/d8/c-sete.jpg",
-//         },
-//         medium: {
-//           height: 200,
-//           width: 180,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-i/1b/15/a3/d8/c-sete.jpg",
-//         },
-//         small: {
-//           height: 150,
-//           width: 150,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-l/1b/15/a3/d8/c-sete.jpg",
-//         },
-//         large: {
-//           height: 492,
-//           width: 328,
-//           url: "https://media-cdn.tripadvisor.com/media/photo-o/1b/15/a3/d8/c-sete.jpg",
-//         },
-//       },
-//       album: "Other",
-//       source: {
-//         name: "Management",
-//         localized_name: "Management",
-//       },
-//       user: {
-//         username: "Management",
-//       },
-//     },
-//   ],
-// };
+const photos = {
+  data: [
+    {
+      id: 446594973,
+      is_blessed: false,
+      caption: "Eiffeltoren",
+      published_date: "2020-01-16T19:17:25.925Z",
+      images: {
+        thumbnail: {
+          height: 50,
+          width: 50,
+          url: "https://media-cdn.tripadvisor.com/media/photo-t/1a/9e/7f/9d/eiffeltoren.jpg",
+        },
+        medium: {
+          height: 200,
+          width: 180,
+          url: "https://media-cdn.tripadvisor.com/media/photo-i/1a/9e/7f/9d/eiffeltoren.jpg",
+        },
+        small: {
+          height: 150,
+          width: 150,
+          url: "https://media-cdn.tripadvisor.com/media/photo-l/1a/9e/7f/9d/eiffeltoren.jpg",
+        },
+        large: {
+          height: 450,
+          width: 302,
+          url: "https://media-cdn.tripadvisor.com/media/photo-s/1a/9e/7f/9d/eiffeltoren.jpg",
+        },
+        original: {
+          height: 1524,
+          width: 1024,
+          url: "https://media-cdn.tripadvisor.com/media/photo-w/1a/9e/7f/9d/eiffeltoren.jpg",
+        },
+      },
+      album: "Other",
+      source: {
+        name: "Traveler",
+        localized_name: "Traveler",
+      },
+      user: {
+        username: "MichelM_Delft",
+      },
+    },
+    {
+      id: 454403030,
+      is_blessed: false,
+      caption: " Emeric Livinec - SETE",
+      published_date: "2020-03-05T13:36:31.561Z",
+      images: {
+        thumbnail: {
+          height: 50,
+          width: 50,
+          url: "https://media-cdn.tripadvisor.com/media/photo-t/1b/15/a3/d6/c-emeric-livinec-sete.jpg",
+        },
+        small: {
+          height: 150,
+          width: 150,
+          url: "https://media-cdn.tripadvisor.com/media/photo-l/1b/15/a3/d6/c-emeric-livinec-sete.jpg",
+        },
+        medium: {
+          height: 187,
+          width: 250,
+          url: "https://media-cdn.tripadvisor.com/media/photo-f/1b/15/a3/d6/c-emeric-livinec-sete.jpg",
+        },
+        large: {
+          height: 412,
+          width: 550,
+          url: "https://media-cdn.tripadvisor.com/media/photo-s/1b/15/a3/d6/c-emeric-livinec-sete.jpg",
+        },
+        original: {
+          height: 599,
+          width: 800,
+          url: "https://media-cdn.tripadvisor.com/media/photo-o/1b/15/a3/d6/c-emeric-livinec-sete.jpg",
+        },
+      },
+      album: "Other",
+      source: {
+        name: "Management",
+        localized_name: "Management",
+      },
+      user: {
+        username: "Management",
+      },
+    },
+    {
+      id: 454402977,
+      is_blessed: false,
+      caption: "Emeric Livinec - SETE",
+      published_date: "2020-03-05T13:36:07.15Z",
+      images: {
+        thumbnail: {
+          height: 50,
+          width: 50,
+          url: "https://media-cdn.tripadvisor.com/media/photo-t/1b/15/a3/a1/c-emeric-livinec-sete.jpg",
+        },
+        small: {
+          height: 150,
+          width: 150,
+          url: "https://media-cdn.tripadvisor.com/media/photo-l/1b/15/a3/a1/c-emeric-livinec-sete.jpg",
+        },
+        medium: {
+          height: 167,
+          width: 250,
+          url: "https://media-cdn.tripadvisor.com/media/photo-f/1b/15/a3/a1/c-emeric-livinec-sete.jpg",
+        },
+        large: {
+          height: 367,
+          width: 550,
+          url: "https://media-cdn.tripadvisor.com/media/photo-s/1b/15/a3/a1/c-emeric-livinec-sete.jpg",
+        },
+        original: {
+          height: 853,
+          width: 1280,
+          url: "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/15/a3/a1/c-emeric-livinec-sete.jpg",
+        },
+      },
+      album: "Other",
+      source: {
+        name: "Management",
+        localized_name: "Management",
+      },
+      user: {
+        username: "Management",
+      },
+    },
+    {
+      id: 449869802,
+      is_blessed: false,
+      caption: "Tour Eiffel",
+      published_date: "2020-02-06T09:43:31.007Z",
+      images: {
+        thumbnail: {
+          height: 50,
+          width: 50,
+          url: "https://media-cdn.tripadvisor.com/media/photo-t/1a/d0/77/ea/tour-eiffel.jpg",
+        },
+        small: {
+          height: 150,
+          width: 150,
+          url: "https://media-cdn.tripadvisor.com/media/photo-l/1a/d0/77/ea/tour-eiffel.jpg",
+        },
+        medium: {
+          height: 167,
+          width: 250,
+          url: "https://media-cdn.tripadvisor.com/media/photo-f/1a/d0/77/ea/tour-eiffel.jpg",
+        },
+        large: {
+          height: 367,
+          width: 550,
+          url: "https://media-cdn.tripadvisor.com/media/photo-s/1a/d0/77/ea/tour-eiffel.jpg",
+        },
+        original: {
+          height: 800,
+          width: 1200,
+          url: "https://media-cdn.tripadvisor.com/media/photo-o/1a/d0/77/ea/tour-eiffel.jpg",
+        },
+      },
+      album: "Other",
+      source: {
+        name: "Management",
+        localized_name: "Management",
+      },
+      user: {
+        username: "Management",
+      },
+    },
+    {
+      id: 454403032,
+      is_blessed: false,
+
+      published_date: "2020-03-05T13:36:32.061Z",
+      images: {
+        thumbnail: {
+          height: 50,
+          width: 50,
+          url: "https://media-cdn.tripadvisor.com/media/photo-t/1b/15/a3/d8/c-sete.jpg",
+        },
+        medium: {
+          height: 200,
+          width: 180,
+          url: "https://media-cdn.tripadvisor.com/media/photo-i/1b/15/a3/d8/c-sete.jpg",
+        },
+        small: {
+          height: 150,
+          width: 150,
+          url: "https://media-cdn.tripadvisor.com/media/photo-l/1b/15/a3/d8/c-sete.jpg",
+        },
+        large: {
+          height: 492,
+          width: 328,
+          url: "https://media-cdn.tripadvisor.com/media/photo-o/1b/15/a3/d8/c-sete.jpg",
+        },
+      },
+      album: "Other",
+      source: {
+        name: "Management",
+        localized_name: "Management",
+      },
+      user: {
+        username: "Management",
+      },
+    },
+  ],
+};
 
 // async function page({ params }: any) {
 //   //   const { locationid } = params;
@@ -575,76 +582,45 @@ const svgIcons = {
     </svg>
   ),
 };
+
 export default function LocationDetailsCard() {
   return (
     <>
-      <MaxLimitWrapper className="h-[700px] mt-24">
-        <MaxLimitWrapper className="ml-[10px]">
-          <CardTitle>{LocationDetails[0].title}</CardTitle>
-          <div className="flex gap-2">
-            <div className="flex flex-row gap-1 mt-2 ">
-              {svgIcons.star}
-              {svgIcons.star}
-              {svgIcons.star}
-              {svgIcons.star}
-              {svgIcons.halfstar}
+      {/* ABOUT + IMG right */}
+
+      <LayoutHotel />
+      <MaxLimitWrapper className="grid grid-cols-1 lg:grid-cols-3 gap-4  lg:p-1">
+        <Card className="shadow-lg h-[410px] w-[294px] lg:col-start-1 lg:col-span-1">
+          <CardHeader>About</CardHeader>
+          <CardContent>
+            <p>{LocationDetails[0].categories}</p>
+            <p>{LocationDetails[0].about}</p>
+            <div className="flex gap-2 mt-2">
+              {svgIcons.time}
+              <p>Dauer: {LocationDetails[0].duration}</p>
             </div>
-            <span className="text-xs mt-1 ">{data.num_reviews} reviews</span>
-            {data.groups.map((group, groupIndex) =>
-              group.categories.map((category, categoryIndex) => (
-                <span
-                  key={`${groupIndex}-${categoryIndex}`}
-                  className="text-xs mt-1"
-                >
-                  {category.name}
-                </span>
-              ))
-            )}
-          </div>
-
-          <CardContent className=" flex gap-2 mt-1 ">
-            <p>{LocationDetails[0].hours}</p>
-            <p>Write a review</p>
           </CardContent>
-        </MaxLimitWrapper>
 
-        {/* ABOUT + IMG right */}
-        <Card className="absolute top-[330px] left-[240px] shadow-lg  h-[410px] w-[294px] ">
-          <MaxLimitWrapper>
-            <CardHeader>About</CardHeader>
-            <CardContent>
-              <p>{LocationDetails[0].categories}</p>
-              <p>{LocationDetails[0].about}</p>
+          <div className="flex gap-2">
+            <div className="flex ml-6 gap-2">
+              {" "}
+              <Link href="">
+                <div>{svgIcons.heart}</div>
+              </Link>
+              <Link href="">
+                <div>{svgIcons.link}</div>
+              </Link>
+              <Link href="">
+                <div>{svgIcons.travelbag}</div>
+              </Link>
+            </div>
 
-              <div className="flex gap-2 mt-2">
-                {svgIcons.time}
-                <p>Dauer: {LocationDetails[0].duration}</p>
-              </div>
-            </CardContent>
-
-            <CardFooter>
-              <div className="icons grid grid-cols-4  gap-4  ">
-                <Link href={""}>
-                  <div>{svgIcons.heart}</div>
-                </Link>
-                <Link href={""}>
-                  <div>{svgIcons.link}</div>
-                </Link>
-                <Link href={""}>
-                  <div>{svgIcons.travelbag}</div>
-                </Link>
-                <div className="col-start-10">
-                  <Link href={""}>
-                    <div>{svgIcons.map}</div>
-                  </Link>
-                </div>
-              </div>
-            </CardFooter>
-          </MaxLimitWrapper>
+            <Link className="ml-24" href="">
+              <div>{svgIcons.map}</div>
+            </Link>
+          </div>
         </Card>
-        {/* ENDE */}
-
-        <div className="absolute top-[330px] left-[570px] w-[615px] h-[500px]  ">
+        <div className="w-[615px] h-[500px]">
           <Image
             style={{
               borderRadius: "2%",
@@ -653,47 +629,27 @@ export default function LocationDetailsCard() {
             alt="Eiffelturm"
             width={615}
             height={500}
-            className="object-cover"
           />
         </div>
       </MaxLimitWrapper>
 
-      <MaxLimitWrapper className="h-[700px] mt-14">
-        {/* Map Section  */}
-        <div className="grid grid-cols-4 ">
-          <MaxLimitWrapper className="w-[800px] p-4">
-            <h3 className="font-bold text-[16px]">The Area</h3>
-            <p className="mt-3 text-[16px]">
-              <a href="https://maps.google.com/?q=5 Avenue, 75007 Paris France">
-                5 Avenue, 75007 Paris France
-              </a>
-            </p>
-            <p className="font-bold text-[16px] ">Neighborhood: Gros-Caillou</p>
-            <div className="text-[16px]">
-              <h4 className="mt-3 font-semibold">How to get there</h4>
-              <p>Champ de Mars - Tour Eiffel, 7 min walk</p>
-              <p>Bir-Hakeim, 8 min walk</p>
-              <h4 className="mt-3 font-semibold">Reach out directly</h4>
-              <a href="https://example.com">Visit website</a> <span>|</span>{" "}
-              <a href="tel:+123456789">Call</a>
-              <h4 className="mt-3 font-semibold">Best nearby</h4>
-              <p>Restaurants: 10,000 within 3 miles</p>
-              <p>Attractions: 4,022 within 6 miles</p>
-            </div>
-          </MaxLimitWrapper>
+      <Layout />
 
-          <div className="w-[367px] h-[495px] ml-[260px]">
-            <Image
-              src={mapData.mapImage}
-              alt="Map of Eiffel Tower Area"
-              width={367}
-              height={495}
-              className="w-full h-full object-cover"
+      <MaxLimitWrapper className="grid md:grid-cols-4 gap-8 my-4">
+        {getLocationDetailsByIds([188151, 188757, 188679, 188709]).map(
+          async (location: LocationDetails) => (
+            <Layout2
+              key={location.getLocationId()}
+              image={(await location.getPhotos())[0].getLarge().url}
+              ctaText={location.getName()}
+              rating={location.getRatingImageUrl()}
+              ctaLink="#"
             />
-          </div>
-        </div>
+          )
+        )}
       </MaxLimitWrapper>
-      {/* ENDE */}
+
+      <Map />
     </>
   );
 }
