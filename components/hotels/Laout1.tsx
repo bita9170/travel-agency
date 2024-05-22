@@ -569,7 +569,7 @@ export default function Laout1() {
           <div className="flex flex-row gap-1 ">
             <img src={data.rating_image_url} alt="Rating" />
           </div>
-          <span className="text-xs mt-1 ">{data.num_reviews} reviews</span>
+          {/* <span className="text-xs mt-1 ">{data.num_reviews} reviews</span> */}
           {data.groups.map((group, groupIndex) =>
             group.categories.map((category, categoryIndex) => (
               <span
@@ -582,10 +582,10 @@ export default function Laout1() {
           )}
         </div>
 
-        <CardContent className=" flex gap-2 mt-1 text-left">
+        <div className=" flex gap-5 mt-4">
           <p className="text-[16px]">{LocationDetails[0].hours}</p>
           <p className="text-[16px]">Write a review</p>
-        </CardContent>
+        </div>
       </MaxLimitWrapper>
     </>
   );

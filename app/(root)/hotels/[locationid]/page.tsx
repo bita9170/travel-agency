@@ -2,25 +2,18 @@ import React from "react";
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 // import { getLocationDetails } from "@/controllers/tripadvisorController";
 // import { LocationDetails } from "@/lib/class/location";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 
 import Layout2 from "@/components/tiles/Layout2";
-import { LocationDetails } from "@/lib/class/location";
+import { LocationDetails } from "@/lib/class/location/LocationDetails";
 import { getLocationDetailsByIds } from "@/lib/data/location";
 import LayoutHotel from "@/components/hotels/Laout1";
 import Layout from "@/components/hotels/Layout2";
 import Map from "@/components/hotels/Map";
 
-const LocationDetails = [
+const LocationDetail = [
   //static Data
 
   {
@@ -589,15 +582,15 @@ export default function LocationDetailsCard() {
       {/* ABOUT + IMG right */}
 
       <LayoutHotel />
-      <MaxLimitWrapper className="grid grid-cols-1 lg:grid-cols-3 gap-4  lg:p-1">
-        <Card className="shadow-lg h-[410px] w-[294px] lg:col-start-1 lg:col-span-1">
+      <MaxLimitWrapper className="grid grid-cols-1 md:grid-cols-3  lg:grid-cols-3 gap-4  lg:p-1 ">
+        <Card className="shadow-lg h-[410px] w-[294px] lg:col-start-1 lg:col-span-1 ">
           <CardHeader>About</CardHeader>
           <CardContent>
-            <p>{LocationDetails[0].categories}</p>
-            <p>{LocationDetails[0].about}</p>
+            <p>{LocationDetail[0].categories}</p>
+            <p>{LocationDetail[0].about}</p>
             <div className="flex gap-2 mt-2">
               {svgIcons.time}
-              <p>Dauer: {LocationDetails[0].duration}</p>
+              <p>Dauer: {LocationDetail[0].duration}</p>
             </div>
           </CardContent>
 
@@ -620,12 +613,14 @@ export default function LocationDetailsCard() {
             </Link>
           </div>
         </Card>
-        <div className="w-[615px] h-[500px]">
+        <div className="w-[615px] h-[500px] sm:m-auto ">
           <Image
             style={{
               borderRadius: "2%",
+              bjectFit: "cover",
+              objectPosition: "center top",
             }}
-            src={LocationDetails[0].image}
+            src={LocationDetail[0].image}
             alt="Eiffelturm"
             width={615}
             height={500}
