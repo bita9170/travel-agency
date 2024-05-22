@@ -46,11 +46,17 @@ async function Header() {
               EUR
             </span>
 
-            {isLogged ? (
+            {isLogged &&
+            user?.picture &&
+            user?.given_name &&
+            user.family_name ? (
               <Avatar
                 src={user?.picture}
                 alt={user?.given_name}
-                fallBack="BS"
+                fallBack={
+                  user?.given_name[0].toUpperCase() +
+                  user?.family_name[0].toUpperCase()
+                }
               />
             ) : (
               <Button className="text-black bg-[#34e0a1]">

@@ -16,21 +16,24 @@ import { Separator } from "@/components/ui/separator";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 interface AvatarProps {
   src?: string | null;
   alt?: string | null;
-  fallBack: string;
+  fallBack?: string | null;
 }
 
-function Avatar({ src, alt, fallBack }: AvatarProps) {
+async function Avatar({ src, alt, fallBack }: AvatarProps) {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
   return (
     <>
       <Sheet>
         <SheetTrigger asChild>
           <AvatarShadCn className="h-12 w-12">
             {src && alt && <AvatarImage src={src} alt={alt} />}
-            <AvatarFallback>{fallBack}</AvatarFallback>
+            {fallBack && <AvatarFallback>{fallBack}</AvatarFallback>}
           </AvatarShadCn>
         </SheetTrigger>
         <SheetContent className="w-full">
@@ -38,12 +41,25 @@ function Avatar({ src, alt, fallBack }: AvatarProps) {
             <SheetTitle className="flex gap-2 items-center">
               <AvatarShadCn>
                 {src && alt && <AvatarImage src={src} alt={alt} />}
-                <AvatarFallback>{fallBack}</AvatarFallback>
+                {fallBack && <AvatarFallback>{fallBack}</AvatarFallback>}
               </AvatarShadCn>
-              <Label>John Doe</Label>
+              <Label>
+                {user?.given_name} {user?.family_name}
+              </Label>
             </SheetTitle>
           </SheetHeader>
           <div className="grid gap-1 mt-4">
+            <div className="flex items-center">
+              <Button asChild variant={"link"} className="text-black px-0">
+                <Link href="/dashboard">
+                  <svg className="h-6 w-6 mr-2" viewBox="0 0 24 24">
+                    <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"></path>
+                  </svg>
+                  Dashboard
+                </Link>
+              </Button>
+            </div>
+
             <div className="flex items-center gap-2">
               <svg className="h-6 w-6" viewBox="0 0 24 24">
                 <path d="M9.5 18H8V9h1.5v9zm3.25 0h-1.5V9h1.5v9zM16 18h-1.5V9H16v9zm1-12h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2 0 .55.45 1 1 1s1-.45 1-1h6c0 .55.45 1 1 1s1-.45 1-1c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6.5-2.5h3V6h-3V3.5zM17 19H7V8h10v11z"></path>
