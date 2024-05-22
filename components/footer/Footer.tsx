@@ -4,7 +4,7 @@ import Logo from "../elements/Logo";
 import { Button } from "../ui/button";
 import MaxLimitWrapper from "../elements/MaxLimitWrapper";
 
-function Footer() {
+function Footer({ footerTop = true }: { footerTop?: boolean }) {
   const [openSection, setOpenSection] = useState<number | null>(null);
 
   const toggleSection = (index: any) => {
@@ -69,48 +69,49 @@ function Footer() {
   return (
     <div className="footer-container mt-10 bg-[#faf1ed] py-8 px-4 xl:px-0">
       <MaxLimitWrapper>
-        <div className="sm:flex h-custom-height mt-10">
-          <div
-            className="hidden sm:hidden md:grid grid-cols-4 w-full"
-            style={{ fontSize: "10px" }}
-          >
-            {sections.map((section, index) => (
-              <div key={index}>
-                <h3 className="text-lg leading-5">{section.title}</h3>
-                {section.links.map((link, linkIndex) => (
-                  <p key={linkIndex}>{link}</p>
-                ))}
-              </div>
-            ))}
-          </div>
-
-          {/* Dropdown for mobile - shown only on small screens */}
-          <div className="md:hidden m-auto max-w-screen-xl">
-            <div className="footer-top grid sm:grid-cols-4">
+        {footerTop && (
+          <div className="sm:flex h-custom-height mt-10">
+            <div
+              className="hidden sm:hidden md:grid grid-cols-4 w-full"
+              style={{ fontSize: "10px" }}
+            >
               {sections.map((section, index) => (
-                <div key={index} className="section">
-                  <button
-                    onClick={() => toggleSection(index)}
-                    className="text-left w-full py-2 flex items-center"
-                  >
-                    <span style={{ padding: "5px" }}>
-                      {openSection === index ? "-" : "+"}
-                    </span>
-                    <span style={{ padding: "5px" }}>{section.title}</span>
-                  </button>
-                  {openSection === index && (
-                    <ul>
-                      {section.links.map((link, linkIndex) => (
-                        <li key={linkIndex}>{link}</li>
-                      ))}
-                    </ul>
-                  )}
+                <div key={index}>
+                  <h3 className="text-lg leading-5">{section.title}</h3>
+                  {section.links.map((link, linkIndex) => (
+                    <p key={linkIndex}>{link}</p>
+                  ))}
                 </div>
               ))}
             </div>
-          </div>
-        </div>
 
+            {/* Dropdown for mobile - shown only on small screens */}
+            <div className="md:hidden m-auto max-w-screen-xl">
+              <div className="footer-top grid sm:grid-cols-4">
+                {sections.map((section, index) => (
+                  <div key={index} className="section">
+                    <button
+                      onClick={() => toggleSection(index)}
+                      className="text-left w-full py-2 flex items-center"
+                    >
+                      <span style={{ padding: "5px" }}>
+                        {openSection === index ? "-" : "+"}
+                      </span>
+                      <span style={{ padding: "5px" }}>{section.title}</span>
+                    </button>
+                    {openSection === index && (
+                      <ul>
+                        {section.links.map((link, linkIndex) => (
+                          <li key={linkIndex}>{link}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
         {/* Logo & Icons section */}
         <div className=" footer-bottom flex flex-col-reverse md:flex-row justify-between items-center gap-4 mt-6 m-auto max-w-screen-xl">
           <div className="flex space-x-6 items-center justify-start w-full">

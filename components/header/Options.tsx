@@ -39,7 +39,7 @@ function Options() {
           </Button>
 
           <Button variant={"link"} asChild className="text-black">
-            <Link href="#">
+            <Link href="restaurants">
               <RestaurantsIcon className="mr-1" />
               Restaurants
             </Link>

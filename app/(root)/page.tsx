@@ -164,17 +164,3 @@ export default async function Home() {
     </>
   );
 }
-
-{
-  /* <div className="grid md:grid-cols-4 gap-8 my-4">
-  {images.map((item, index) => (
-    <Layout2
-      key={index}
-      image={item.image}
-      ctaText={item.ctaText}
-      ctaLink={item.ctaLink}
-      rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
-    />
-  ))}
-</div>; */
-}
