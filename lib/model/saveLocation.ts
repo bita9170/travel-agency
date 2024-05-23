@@ -1,5 +1,5 @@
 // lib/model/saveLocation.ts
-import mongoose, { Schema, model, models } from "mongoose";
+import { Schema, model, models } from "mongoose";
 
 const SaveLocationSchema: Schema = new Schema(
   {

@@ -1,8 +1,17 @@
-// lib / controllers / saveLocationController.ts
+// lib/controllers/saveLocationController.ts
 import { NextRequest, NextResponse } from "next/server";
 import SaveLocation from "@/lib/model/saveLocation";
 import connectMongoDB from "@/lib/mongodb";
 import { getLocationDetailsById } from "@/lib/data/location/index";
+
+// Helper function for error handling
+const handleError = (error: unknown, message: string) => {
+  console.error(message, error);
+  return NextResponse.json(
+    { error: message, details: (error as Error).message },
+    { status: 500 }
+  );
+};
 
 // This function creates a new "Save Location".
 // It takes the data from the request (userId, locationId, type),
@@ -15,7 +24,6 @@ export async function createSaveLocation(req: NextRequest) {
     const { userId, locationId, type } = await req.json();
     console.log("Request body:", { userId, locationId, type });
 
-    // proof if location exist
     const locationDetails = getLocationDetailsById(Number(locationId));
     if (!locationDetails) {
       console.error("Location not found");
@@ -30,12 +38,8 @@ export async function createSaveLocation(req: NextRequest) {
     await newSaveLocation.save();
     console.log("Save location saved to database");
     return NextResponse.json(newSaveLocation, { status: 201 });
-  } catch (error: any) {
-    console.error("Error creating save location:", error.message);
-    return NextResponse.json(
-      { error: "Unable to create save location", message: error.message },
-      { status: 500 }
-    );
+  } catch (error) {
+    return handleError(error, "Error creating save location");
   }
 }
 
@@ -61,14 +65,11 @@ export async function getSaveLocations(req: NextRequest) {
     });
 
     return NextResponse.json(detailedSaveLocations, { status: 200 });
-  } catch (error: any) {
-    console.error("Error retrieving save locations:", error.message);
-    return NextResponse.json(
-      { error: "Unable to retrieve save locations", message: error.message },
-      { status: 500 }
-    );
+  } catch (error) {
+    return handleError(error, "Error retrieving save locations");
   }
 }
+
 // This function retrieves a saved location by its ID.
 // It connects to the database, fetches the saved location, and adds the location details.
 export async function getSaveLocationById(req: NextRequest) {
@@ -107,15 +108,12 @@ export async function getSaveLocationById(req: NextRequest) {
 
     console.log("Save location retrieved:", detailedSaveLocation);
     return NextResponse.json(detailedSaveLocation, { status: 200 });
-  } catch (error: any) {
-    console.error("Error retrieving save location:", error.message);
-    return NextResponse.json(
-      { error: "Unable to retrieve save location", message: error.message },
-      { status: 500 }
-    );
+  } catch (error) {
+    return handleError(error, "Error retrieving save location");
   }
 }
-/// This function retrieves all saved locations for a specific user.
+
+// This function retrieves all saved locations for a specific user.
 // It connects to the database, fetches the user's saved locations, and adds the location details.
 export async function getSaveLocationsByUserId(req: NextRequest) {
   console.log("getSaveLocationsByUserId function called");
@@ -147,15 +145,8 @@ export async function getSaveLocationsByUserId(req: NextRequest) {
     });
 
     return NextResponse.json(detailedSaveLocations, { status: 200 });
-  } catch (error: any) {
-    console.error("Error retrieving save locations for user:", error.message);
-    return NextResponse.json(
-      {
-        error: "Unable to retrieve save locations for user",
-        message: error.message,
-      },
-      { status: 500 }
-    );
+  } catch (error) {
+    return handleError(error, "Error retrieving save locations for user");
   }
 }
 
@@ -177,7 +168,6 @@ export async function updateSaveLocation(req: NextRequest) {
     const { userId, locationId, type } = await req.json();
     console.log("Request body:", { userId, locationId, type });
 
-    // proof if location exist and GET
     const locationDetails = getLocationDetailsById(Number(locationId));
 
     if (!locationDetails) {
@@ -191,7 +181,6 @@ export async function updateSaveLocation(req: NextRequest) {
     await connectMongoDB();
     console.log("Connected to MongoDB");
 
-    // UPDATE
     const updatedSaveLocation = await SaveLocation.findByIdAndUpdate(
       saveLocationId,
       { userId, locationId, type },
@@ -208,18 +197,13 @@ export async function updateSaveLocation(req: NextRequest) {
 
     console.log("Save location updated:", updatedSaveLocation);
     return NextResponse.json(updatedSaveLocation, { status: 200 });
-  } catch (error: any) {
-    console.error("Error updating save location:", error.message);
-    return NextResponse.json(
-      { error: "Unable to update save location", message: error.message },
-      { status: 500 }
-    );
+  } catch (error) {
+    return handleError(error, "Error updating save location");
   }
 }
 
 // This function deletes a saved location by its ID.
 // It connects to the database and deletes the saved location.
-//DELETE
 export async function deleteSaveLocation(req: NextRequest) {
   console.log("deleteSaveLocation function called");
   try {
@@ -255,12 +239,7 @@ export async function deleteSaveLocation(req: NextRequest) {
       { message: "Save location deleted successfully" },
       { status: 200 }
     );
-  } catch (error: any) {
-    console.error("Error deleting save location:", error.message);
-
-    return NextResponse.json(
-      { error: "Unable to delete save location", message: error.message },
-      { status: 500 }
-    );
+  } catch (error) {
+    return handleError(error, "Error deleting save location");
   }
 }
