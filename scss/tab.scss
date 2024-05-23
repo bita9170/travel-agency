@@ -12,6 +12,10 @@ body {
           @apply underline;
         }
       }
+
+      &::after {
+        @apply content-[''] absolute top-0 right-0 w-[50px] h-full bg-gradient-to-r from-transparent to-white;
+      }
     }
   }
 }
