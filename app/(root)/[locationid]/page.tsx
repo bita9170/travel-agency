@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import {
   Card,
@@ -8,11 +9,13 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  getLocationDetailsById
-} from "@/lib/data/location";
+import { getLocationDetailsById } from "@/lib/data/location";
 import Tab, { TabProps } from "@/components/tabsection/Tab";
-import { RecommendedElement, RecommendedElement2 } from "@/components/tab/content";
+import {
+  RecommendedElement,
+  RecommendedElement2,
+} from "@/components/tab/content";
+import Map from "@/components/Map";
 
 const svgIcons = {
   star: (
@@ -200,11 +203,18 @@ export default function page({ params }: any) {
 
         <div className="lg:col-span-1 flex justify-center items-center">
           <div className="w-full h-[300px] relative">
-            <Image
-              src="/map.png"
-              alt="Map of Eiffel Tower Area"
-              fill
-              className="object-cover"
+            <Map
+              center={[
+                parseFloat(location.getLatitude()),
+                parseFloat(location.getLongitude()),
+              ]}
+              zoom={13}
+              markers={[
+                [
+                  parseFloat(location.getLatitude()),
+                  parseFloat(location.getLongitude()),
+                ],
+              ]}
             />
           </div>
         </div>
@@ -212,5 +222,3 @@ export default function page({ params }: any) {
     </MaxLimitWrapper>
   );
 }
-
-
