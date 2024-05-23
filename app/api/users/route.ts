@@ -25,8 +25,7 @@ export async function POST(req: NextRequest) {
       await req.json();
     await connectMongoDB();
 
-    const saltRounds = 10; //Salting: Beim Salting wird ein zusätzlicher, zufälliger Datenstring an das ursprüngliche Passwort angehängt, bevor dieses gehasht wird. Dieser zusätzliche String wird als "Salt" bezeichnet. Salting hilft, gegen Rainbow-Table-Angriffe zu schützen, bei denen Angreifer vorberechnete Hashes verwenden, um Passwörter schnell zu entschlüsseln.
-
+    const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     const newUser = await User.create({
@@ -38,11 +37,13 @@ export async function POST(req: NextRequest) {
       avatar,
       birthday,
     });
+
     return NextResponse.json(
       { message: "User Created", newUser },
       { status: 201 }
     );
   } catch (error: any) {
+    console.error("POST request error:", error);
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
 }

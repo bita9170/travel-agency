@@ -1,4 +1,9 @@
 import React from "react";
+import Layout2 from "@/components/tiles/Layout2";
+import { LocationDetails } from "@/lib/class/location/LocationDetails";
+import {
+  getLocationDetailsByIds,
+} from "@/lib/data/location";
 
 export const SpringContent = () => {
   return (
@@ -30,6 +35,42 @@ export const SommerContent = () => {
             <li>Washington DC</li>
           </ul>
         ))}
+    </div>
+  );
+};
+
+export const RecommendedElement = ():JSX.Element => {
+  return (
+    <div className="grid md:grid-cols-4 gap-4">
+      {getLocationDetailsByIds([188151, 188757, 188679, 188709]).map(
+        (location: LocationDetails) => (
+          <Layout2
+            key={location.getLocationId()}
+            image={location.getPhotos()[0].getLarge().url}
+            ctaText={location.getName()}
+            rating={location.getRatingImageUrl()}
+            ctaLink="#"
+          />
+        )
+      )}
+    </div>
+  );
+};
+
+export const RecommendedElement2 = ():JSX.Element => {
+  return (
+    <div className="grid md:grid-cols-4 gap-4">
+      {getLocationDetailsByIds([188679, 188757]).map(
+        (location: LocationDetails) => (
+          <Layout2
+            key={location.getLocationId()}
+            image={location.getPhotos()[0].getLarge().url}
+            ctaText={location.getName()}
+            rating={location.getRatingImageUrl()}
+            ctaLink="#"
+          />
+        )
+      )}
     </div>
   );
 };
