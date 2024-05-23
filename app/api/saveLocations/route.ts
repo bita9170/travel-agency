@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 import {
   createSaveLocation,
   getSaveLocations,
-} from "@/lib/controllers/saveLocationController";
+} from "@/controllers/saveLocationController";
 
 export async function POST(req: NextRequest) {
   console.log("POST /api/saveLocations");

@@ -4,7 +4,7 @@ import {
   getSaveLocationById,
   updateSaveLocation,
   deleteSaveLocation,
-} from "@/lib/controllers/saveLocationController";
+} from "@/controllers/saveLocationController";
 
 export async function GET(req: NextRequest) {
   console.log("GET / api/saveLocations/[id]called");

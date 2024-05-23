@@ -10,8 +10,6 @@ const SaveLocationSchema: Schema = new Schema(
       enum: ["favorite", "plans", "place"],
       required: true,
     },
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
   },
   {
     timestamps: true,

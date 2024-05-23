@@ -8,11 +8,23 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  getLocationDetailsById
-} from "@/lib/data/location";
+import { getLocationDetailsById } from "@/lib/data/location";
 import Tab, { TabProps } from "@/components/tabsection/Tab";
-import { RecommendedElement, RecommendedElement2 } from "@/components/tab/content";
+import {
+  RecommendedElement,
+  RecommendedElement2,
+} from "@/components/tab/content";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import {
+  createSaveLocation,
+  getSaveLocations,
+  getSaveLocationById,
+  getSaveLocationsByUserId,
+  updateSaveLocation,
+  deleteSaveLocation,
+} from "@/controllers/saveLocationController";
+import { createContext, useContext } from "react";
+import { useEffect, useState } from "react";
 
 const svgIcons = {
   star: (
@@ -69,6 +81,24 @@ const svgIcons = {
     </svg>
   ),
 };
+
+const {
+  getAccessToken,
+  getBooleanFlag,
+  getFlag,
+  getIdToken,
+  getIntegerFlag,
+  getOrganization,
+  getPermission,
+  getPermissions,
+  getRoles,
+  getStringFlag,
+  getUser,
+  getUserOrganizations,
+  isAuthenticated,
+} = getKindeServerSession();
+const isLogged = await isAuthenticated();
+const user = await getUser();
 
 export default function page({ params }: any) {
   const { locationid } = params;
@@ -132,25 +162,61 @@ export default function page({ params }: any) {
           <CardContent className="flex-1">
             {location.getDescription()}
           </CardContent>
-          <CardFooter className="text-left">
-            <div className="flex justify-between w-full">
-              <div className="flex space-x-2">
-                <Link href="">
-                  <div>{svgIcons.heart}</div>
-                </Link>
-                <Link href="">
-                  <div>{svgIcons.link}</div>
-                </Link>
-                <Link href="">
-                  <div>{svgIcons.travelbag}</div>
+
+          {isLogged && user?.id && (
+            <CardFooter className="text-left">
+              <div className="flex justify-between w-full">
+                <div className="flex space-x-2">
+                  <Link href="#">
+                    <div
+                      onClick={async () => {
+                        if (user) {
+                          await createSaveLocation({
+                            userId: user.id,
+                            locationId: locationid,
+                            type: "favorite",
+                          });
+                        }
+                      }}
+                    >
+                      {svgIcons.heart}
+                    </div>
+                  </Link>
+                  <Link href="#">
+                    <div
+                      onClick={() =>
+                        createSaveLocation({
+                          userId: user.id,
+                          locationId: locationid,
+                          type: "place",
+                        })
+                      }
+                    >
+                      {svgIcons.link}
+                    </div>
+                  </Link>
+                  <Link href="#">
+                    <div
+                      onClick={async () => {
+                        if (user) {
+                          await createSaveLocation({
+                            userId: user.id,
+                            locationId: locationid,
+                            type: "travel",
+                          });
+                        }
+                      }}
+                    >
+                      {svgIcons.travelbag}
+                    </div>
+                  </Link>
+                </div>
+                <Link href="#">
+                  <div>{svgIcons.map}</div>
                 </Link>
               </div>
-
-              <Link href="">
-                <div>{svgIcons.map}</div>
-              </Link>
-            </div>
-          </CardFooter>
+            </CardFooter>
+          )}
         </Card>
 
         <div className="h-[500px] w-full border-2 sm:m-auto relative rounded-xl overflow-hidden col-span-2">
@@ -212,5 +278,3 @@ export default function page({ params }: any) {
     </MaxLimitWrapper>
   );
 }
-
-
