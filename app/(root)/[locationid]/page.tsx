@@ -202,22 +202,22 @@ export default function page({ params }: any) {
         </div>
 
         <div className="lg:col-span-1 flex justify-center items-center">
-          <div className="w-full h-[300px] relative">
-            <Map
-              center={[
+        <div className="w-full h-[300px] relative rounded-xl overflow-hidden shadow-shadowSmall">
+          <Map
+            center={[
+              parseFloat(location.getLatitude()),
+              parseFloat(location.getLongitude()),
+            ]}
+            zoom={13}
+            markers={[
+              [
                 parseFloat(location.getLatitude()),
                 parseFloat(location.getLongitude()),
-              ]}
-              zoom={13}
-              markers={[
-                [
-                  parseFloat(location.getLatitude()),
-                  parseFloat(location.getLongitude()),
-                ],
-              ]}
-            />
-          </div>
+              ],
+            ]}
+          />
         </div>
+      </div>
       </div>
     </MaxLimitWrapper>
   );
