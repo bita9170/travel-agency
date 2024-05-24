@@ -10,10 +10,14 @@ import {
 import { Button } from "../ui/button";
 import Link from "next/link";
 
-function Options() {
+interface OptionsProps {
+  showTitle?: boolean;
+}
+const Options: React.FC<OptionsProps> = ({ showTitle = true }) => {
+
   return (
     <div className="header-bottom space-y-2">
-      <h1 className="hidden sm:block">Where to?</h1>
+       {showTitle && <h1 className="hidden sm:block">Where to?</h1>}
 
       <div className="search-navigation">
         <div className="navigation text-center">
