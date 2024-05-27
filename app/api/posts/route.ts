@@ -1,11 +1,19 @@
-// app/api/posts/route.ts
-import { NextRequest } from "next/server";
-import { createPost, getPosts } from "@/lib/controllers/postController";
-
-export async function POST(req: NextRequest) {
-  return createPost(req);
-}
+// app/api/posts/[id]/route.ts
+import { NextRequest, NextResponse } from "next/server";
+import {
+  getPostById,
+  updatePost,
+  deletePost,
+} from "@/controllers/postController";
 
 export async function GET(req: NextRequest) {
-  return getPosts(req);
+  return getPostById(req);
+}
+
+export async function PUT(req: NextRequest) {
+  return updatePost(req);
+}
+
+export async function DELETE(req: NextRequest) {
+  return deletePost(req);
 }
