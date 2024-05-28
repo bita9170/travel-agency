@@ -5,6 +5,17 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import { Separator } from "@/components/ui/separator";
+import {
+  MyFavoritesIcon,
+  MyPlanIcon,
+  MyPlacesIcon,
+  MyReviewsIcon,
+  NewPostIcon,
+  ShowReviewsIcon,
+  SocialNetworksIcon,
+  PagesLayoutIcon,
+  EditProfileIcon,
+} from "./icons";
 
 export const metadata: Metadata = {
   title: "Dashboard | BiHamTha Travel Agency",
@@ -24,7 +35,66 @@ export default async function RootLayout({
     <>
       <Header />
       <Separator />
-      <MaxLimitWrapper>{children}</MaxLimitWrapper>
+      <MaxLimitWrapper className="py-6">
+        <div className="dashboard-section flex gap-4">
+          <div className="flex flex-col side-menu">
+            <h5 className="font-bold">User Menu</h5>
+            <ul>
+              <li>
+                <EditProfileIcon />
+                Edit Profile
+              </li>
+
+              <li>
+                <MyPlanIcon />
+                My Plan
+              </li>
+
+              <li>
+                <MyFavoritesIcon />
+                My Favorites
+              </li>
+
+              <li>
+                <MyPlacesIcon />
+                My Places
+              </li>
+
+              <li>
+                <MyReviewsIcon />
+                My Reviews
+              </li>
+            </ul>
+
+            <div className="mt-12">
+              <h3>Admin Menu</h3>
+              <ul>
+                <li>
+                  <NewPostIcon />
+                  New Post
+                </li>
+
+                <li>
+                  <ShowReviewsIcon />
+                  Show Reviews
+                </li>
+
+                <li>
+                  <SocialNetworksIcon />
+                  Socila Networks
+                </li>
+
+                <li>
+                  <PagesLayoutIcon />
+                  Pages Layout
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="main w-full flex-1">{children}</div>
+        </div>
+      </MaxLimitWrapper>
       <Footer footerTop={false} />
     </>
   );

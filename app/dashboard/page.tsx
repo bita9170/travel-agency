@@ -1,79 +1,65 @@
+import Avatar from "@/components/elements/Avatar";
+import Image from "next/image";
 import React from "react";
-import { Button } from "@/components/ui/button";
-import {
-  MyFavoritesIcon,
-  MyPlanIcon,
-  MyPlacesIcon,
-  MyReviewsIcon,
-  NewPostIcon,
-  ShowReviewsIcon,
-  SocialNetworksIcon,
-  PagesLayoutIcon,
-  EditProfileIcon,
-} from "./icons";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Heart_f, Star_f, Travelbag_f } from "./icons";
 
-function page() {
+async function page() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
   return (
-    <div className="dashboard-section flex py-10">
-      <div className="ml-5 flex flex-col">
-        <h5 className="font-bold">User Menu</h5>
-        <ul>
-          <li>
-            {" "}
-            <MyFavoritesIcon />
-            Edit Profile
-          </li>
-
-          <li>
-            <MyPlanIcon />
-            My Plan
-          </li>
-
-          <li>
-            <MyFavoritesIcon />
-            My Favorites
-          </li>
-
-          <li>
-            <MyPlacesIcon />
-            My Places
-          </li>
-
-          <li>
-            <MyReviewsIcon />
-            My Reviews
-          </li>
-        </ul>
-
-        <div className="mt-12">
-          <h3>Admin Menu</h3>
-          <ul>
-            <li>
-              <NewPostIcon />
-              New Post
-            </li>
-
-            <li>
-              <ShowReviewsIcon />
-              Show Reviews
-            </li>
-
-            <li>
-              <SocialNetworksIcon />
-              Socila Networks
-            </li>
-
-            <li>
-              <PagesLayoutIcon />
-              Pages Layout
-            </li>
-          </ul>
-        </div>
+    <div>
+      <div className="relative h-[200px]">
+        <Image
+          src={"/hero.jpeg"}
+          alt=""
+          fill
+          className="object-cover rounded-xl"
+        />
       </div>
+      <div>
+        {user?.picture && user?.given_name && user.family_name && (
+          <div className="w-full -mt-16 text-center flex flex-col items-center space-y-2">
+            <Avatar
+              src={user?.picture}
+              alt={user?.given_name}
+              fallBack={
+                user?.given_name[0].toUpperCase() +
+                user?.family_name[0].toUpperCase()
+              }
+              className="w-32 h-32"
+            />
+            <h3>
+              {user?.given_name} {user.family_name}
+            </h3>
+            <p className="text-base">{user?.email}</p>
+          </div>
+        )}
+      </div>
+      <div className="grid md:grid-cols-3 items-center text-center mt-6 gap-6">
+        <div className="rounded-xl shadow-shadowSmall border-2 min-h-[100px] py-4 px-6">
+          <div className="flex items-center">
+            <Heart_f className="w-10 h-10" />
+            <p className="font-bold text-lg ml-2">Favorite Locations</p>
 
-      <div className="menu">
-        <div>
-          <h3 className="font-bold">All Posts</h3>
+            <h1 className="flex-1 text-right">5</h1>
+          </div>
+        </div>
+        <div className="rounded-xl shadow-shadowSmall border-2 min-h-[100px] py-4 px-6">
+          <div className="flex items-center">
+            <Star_f className="w-10 h-10" />
+            <p className="font-bold text-lg ml-2">Places</p>
+
+            <h1 className="flex-1 text-right">8</h1>
+          </div>
+        </div>
+        <div className="rounded-xl shadow-shadowSmall border-2 min-h-[100px] py-4 px-6">
+          <div className="flex items-center">
+            <Travelbag_f className="w-10 h-10" />
+            <p className="font-bold text-lg ml-2">Planned Trip</p>
+
+            <h1 className="flex-1 text-right">3</h1>
+          </div>
         </div>
       </div>
     </div>
