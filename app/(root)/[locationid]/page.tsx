@@ -7,7 +7,6 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import Image from "next/image";
-import Link from "next/link";
 import { getLocationDetailsById } from "@/lib/data/location";
 import Tab, { TabProps } from "@/components/tabsection/Tab";
 import {
@@ -15,92 +14,13 @@ import {
   RecommendedElement2,
 } from "@/components/tab/content";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import {
-  createSaveLocation,
-  getSaveLocations,
-  getSaveLocationById,
-  getSaveLocationsByUserId,
-  updateSaveLocation,
-  deleteSaveLocation,
-} from "@/controllers/saveLocationController";
-import { createContext, useContext } from "react";
-import { useEffect, useState } from "react";
+import SaveLocation from "@/components/elements/SaveLocation";
 
-const svgIcons = {
-  star: (
-    <svg
-      style={{ width: "14px", height: "14px", fill: "var(--green-30)" }}
-      viewBox="0 0 24 24"
-    >
-      <path d="M0 0h24v24H0V0z" fill="none"></path>
-      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"></path>
-    </svg>
-  ),
-  halfstar: (
-    <svg style={{ width: "14px", height: "14px" }} viewBox="0 0 24 24">
-      <defs>
-        <linearGradient id="halfGradient">
-          <stop offset="50%" stopColor="var(--green-30)" />
-          <stop offset="50%" stopColor="white" />
-        </linearGradient>
-      </defs>
-      <path d="M0 0h24v24H0V0z" fill="none"></path>
-      <path
-        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"
-        fill="url(#halfGradient)"
-      ></path>
-    </svg>
-  ),
-  heart: (
-    <svg style={{ width: "24px", height: "24px" }} viewBox="0 0 24 24">
-      <path d="M0 0h24v24H0V0z" fill="none"></path>
-      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
-    </svg>
-  ),
-  map: (
-    <svg style={{ width: "24px" }} viewBox="0 0 576 512">
-      <path d="M384 476.1L192 421.2V35.93L384 90.79V476.1zM416 88.37L543.1 37.53C558.9 31.23 576 42.84 576 59.82V394.6C576 404.4 570 413.2 560.9 416.9L416 474.8V88.37zM15.09 95.13L160 37.17V423.6L32.91 474.5C17.15 480.8 0 469.2 0 452.2V117.4C0 107.6 5.975 98.78 15.09 95.13V95.13z"></path>
-    </svg>
-  ),
-  link: (
-    <svg style={{ width: "24px" }} viewBox="0 0 24 24">
-      <path d="M0 0h24v24H0V0z" fill="none"></path>
-      <path d="m16 5-1.42 1.42-1.59-1.59V16h-1.98V4.83L9.42 6.42 8 5l4-4 4 4zm4 5v11c0 1.1-.9 2-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h3v2H6v11h12V10h-3V8h3a2 2 0 0 1 2 2z"></path>
-    </svg>
-  ),
-  time: (
-    <svg style={{ width: "24px" }} viewBox="0 0 24 24">
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M12 4C7.03 4 3 8.03 3 13s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm1-13h-2v6l5.25 3.15.75-1.23-4.5-2.67V7z"></path>
-    </svg>
-  ),
-  travelbag: (
-    <svg style={{ width: "24px" }} viewBox="0 0 24 24">
-      <path fill="none" d="M0 0h24v24H0z"></path>
-      <path d="M9.5 18H8V9h1.5v9zm3.25 0h-1.5V9h1.5v9zM16 18h-1.5V9H16v9zm1-12h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2 0 .55.45 1 1 1s1-.45 1-1h6c0 .55.45 1 1 1s1-.45 1-1c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6.5-2.5h3V6h-3V3.5zM17 19H7V8h10v11z"></path>
-    </svg>
-  ),
-};
+export default async function page({ params }: any) {
+  const { getUser, isAuthenticated } = getKindeServerSession();
+  const isLogged = await isAuthenticated();
+  const user = await getUser();
 
-const {
-  getAccessToken,
-  getBooleanFlag,
-  getFlag,
-  getIdToken,
-  getIntegerFlag,
-  getOrganization,
-  getPermission,
-  getPermissions,
-  getRoles,
-  getStringFlag,
-  getUser,
-  getUserOrganizations,
-  isAuthenticated,
-} = getKindeServerSession();
-const isLogged = await isAuthenticated();
-const user = await getUser();
-
-export default function page({ params }: any) {
   const { locationid } = params;
   const location = getLocationDetailsById(locationid);
 
@@ -163,58 +83,9 @@ export default function page({ params }: any) {
             {location.getDescription()}
           </CardContent>
 
-          {isLogged && user?.id && (
+          {isLogged && user && (
             <CardFooter className="text-left">
-              <div className="flex justify-between w-full">
-                <div className="flex space-x-2">
-                  <Link href="#">
-                    <div
-                      onClick={async () => {
-                        if (user) {
-                          await createSaveLocation({
-                            userId: user.id,
-                            locationId: locationid,
-                            type: "favorite",
-                          });
-                        }
-                      }}
-                    >
-                      {svgIcons.heart}
-                    </div>
-                  </Link>
-                  <Link href="#">
-                    <div
-                      onClick={() =>
-                        createSaveLocation({
-                          userId: user.id,
-                          locationId: locationid,
-                          type: "place",
-                        })
-                      }
-                    >
-                      {svgIcons.link}
-                    </div>
-                  </Link>
-                  <Link href="#">
-                    <div
-                      onClick={async () => {
-                        if (user) {
-                          await createSaveLocation({
-                            userId: user.id,
-                            locationId: locationid,
-                            type: "travel",
-                          });
-                        }
-                      }}
-                    >
-                      {svgIcons.travelbag}
-                    </div>
-                  </Link>
-                </div>
-                <Link href="#">
-                  <div>{svgIcons.map}</div>
-                </Link>
-              </div>
+              <SaveLocation userId={user.id} locationId={locationid} />
             </CardFooter>
           )}
         </Card>
