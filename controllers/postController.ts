@@ -1,97 +1,114 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import Post, { IPost } from "../lib/model/Posts";
+// lib/controllers/postController.ts
+import { NextRequest, NextResponse } from "next/server";
+import Post from "../lib/model/Posts";
 import dbConnect from "../lib/mongodb";
 import { getLocationDetailsById } from "@/lib/data/location";
+import axios from "axios";
 
-export const createPost = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
+export interface IPost {
+  title: string;
+  content: string;
+  author: string;
+  image: string;
+  locationId: string;
+  userId: string;
+}
+
+// Helper function for error handling
+const handleError = (error: unknown, message: string) => {
+  console.error(message, error);
+  return NextResponse.json(
+    { error: message, details: (error as Error).message },
+    { status: 500 }
+  );
+};
+
+export async function createPost(
+  userId: string,
+  title: string,
+  content: string,
+  author: string,
+  image: string,
+  locationId: string
+) {
   await dbConnect();
   try {
-    const { title, content, author, image, locationId } = req.body;
-
     if (locationId) {
-      const locationDetails = getLocationDetailsById(locationId);
-      if (!locationDetails) {
-        res.status(404).json({ message: "Location not found" });
-        return;
+      const locationDetails = await axios.get(`/api/locations/${locationId}`);
+      if (!locationDetails.data) {
+        console.error("Location not found");
+        return { message: "Location not found", value: "" };
       }
     }
 
-    const newPost = new Post({ title, content, author, image, locationId });
+    const newPost = new Post({
+      title,
+      content,
+      author,
+      image,
+      locationId,
+      userId,
+    });
     const savedPost = await newPost.save();
-    res.status(201).json(savedPost);
+    return { message: "Post created successfully", value: savedPost._id };
   } catch (error) {
-    res.status(500).json({ message: "Failed to create post", error });
+    return handleError(error, "Failed to create post");
   }
-};
+}
 
-export const getPosts = async (
-  _req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
+export async function getPosts() {
   await dbConnect();
   try {
     const posts = await Post.find();
-    res.status(200).json(posts);
+    return NextResponse.json(posts, { status: 200 });
   } catch (error) {
-    res.status(500).json({ message: "Failed to retrieve posts", error });
+    return handleError(error, "Failed to retrieve posts");
   }
-};
+}
 
-export const getPostById = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
+export async function getPostById(id: string) {
   await dbConnect();
   try {
-    const { id } = req.query;
     const post = await Post.findById(id);
     if (post) {
-      res.status(200).json(post);
+      return NextResponse.json(post, { status: 200 });
     } else {
-      res.status(404).json({ message: "Post not found" });
+      return NextResponse.json({ message: "Post not found" }, { status: 404 });
     }
   } catch (error) {
-    res.status(500).json({ message: "Failed to retrieve post", error });
+    return handleError(error, "Failed to retrieve post");
   }
-};
+}
 
-export const updatePost = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
+export async function updatePost(id: string, updatedData: Partial<IPost>) {
   await dbConnect();
   try {
-    const { id } = req.query;
-    const updatedPost = await Post.findByIdAndUpdate(id, req.body, {
+    const updatedPost = await Post.findByIdAndUpdate(id, updatedData, {
       new: true,
     });
     if (updatedPost) {
-      res.status(200).json(updatedPost);
+      return NextResponse.json(updatedPost, { status: 200 });
     } else {
-      res.status(404).json({ message: "Post not found" });
+      return NextResponse.json({ message: "Post not found" }, { status: 404 });
     }
   } catch (error) {
-    res.status(500).json({ message: "Failed to update post", error });
+    return handleError(error, "Failed to update post");
   }
-};
+}
 
-export const deletePost = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> => {
+export async function deletePost(id: string) {
   await dbConnect();
   try {
-    const { id } = req.query;
     const deletedPost = await Post.findByIdAndDelete(id);
     if (deletedPost) {
-      res.status(200).json({ message: "Post deleted successfully" });
+      return NextResponse.json(
+        { message: "Post deleted successfully" },
+        { status: 200 }
+      );
     } else {
-      res.status(404).json({ message: "Post not found" });
+      return NextResponse.json({ message: "Post not found" }, { status: 404 });
     }
   } catch (error) {
-    res.status(500).json({ message: "Failed to delete post", error });
+    return handleError(error, "Failed to delete post");
   }
-};
+}
