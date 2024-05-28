@@ -72,58 +72,8 @@ function page() {
       </div>
 
       <div className="menu">
-        <div className="flex flex-col gap-4">
-          <h3 className="font-bold">User Menus</h3>
-
-          <div className="flex gap-4">
-            <Button className="button">
-              <EditProfileIcon />
-              Edit Profile
-            </Button>
-
-            <Button className="button">
-              <MyPlanIcon />
-              My Plan
-            </Button>
-          </div>
-          <div className="flex gap-4">
-            <Button className="button">
-              <MyFavoritesIcon />
-              My Favorites
-            </Button>
-            <Button className="button">
-              <MyPlacesIcon />
-              My Places
-            </Button>
-          </div>
-          <div>
-            <Button className="button">
-              <MyReviewsIcon />
-              My Reviews
-            </Button>
-          </div>
-
-          <h3 className="font-bold">Admin Menus</h3>
-          <div className="flex gap-4">
-            <Button className="button">
-              <NewPostIcon />
-              New Post
-            </Button>
-            <Button className="button">
-              <ShowReviewsIcon />
-              Show Reviews
-            </Button>
-          </div>
-          <div className="flex gap-4">
-            <Button className="button">
-              <SocialNetworksIcon />
-              Social Networks
-            </Button>
-            <Button className="button">
-              <PagesLayoutIcon />
-              Pages Layout
-            </Button>
-          </div>
+        <div>
+          <h3 className="font-bold">All Posts</h3>
         </div>
       </div>
     </div>
