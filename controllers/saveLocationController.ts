@@ -9,6 +9,10 @@ export interface ISaveLocation {
   userId: string;
   locationId: string;
   type: "favorite" | "plans" | "place";
+  image?: string;
+  title?: string;
+  rating?: string;
+  link?: string;
 }
 // Helper function for error handling
 const handleError = (error: unknown, message: string) => {
