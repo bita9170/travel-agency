@@ -4,7 +4,7 @@ import React from "react";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Heart_f, Star_f, Travelbag_f } from "./icons";
 
-async function page() {
+async function Page() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   return (
@@ -62,52 +62,6 @@ async function page() {
           </div>
         </div>
       </div>
-
-      <Dialog open={openDialogId === "myFavorites"} onOpenChange={closeDialog}>
-        <DialogContent className="sm:max-w-[80%]">
-          <DialogHeader>
-            <DialogTitle>My Favorites</DialogTitle>
-            <DialogDescription>
-              Here you can see all your favorite posts
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <div className="grid gap-4 py-4">
-              {favorites.map((favorite) => (
-                <Layout2
-                  key={favorite._id}
-                  image={favorite.image || "/default.jpg"}
-                  ctaText={favorite.title || "Default Title"}
-                  rating={favorite.rating || "Default Rating"}
-                  ctaLink={favorite.link || "#"}
-                />
-              ))}
-            </div>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
-      <Dialog open={openDialogId === "myPlan"} onOpenChange={closeDialog}>
-        <DialogContent className="sm:max-w-[80%]">
-          <DialogHeader>
-            <DialogTitle>My Plan</DialogTitle>
-            <DialogDescription>Here you can see your plan</DialogDescription>
-          </DialogHeader>
-          {/* Add content for My Plan here */}
-        </DialogContent>
-      </Dialog>
-
-      <Dialog open={openDialogId === "myPlaces"} onOpenChange={closeDialog}>
-        <DialogContent className="sm:max-w-[80%]">
-          <DialogHeader>
-            <DialogTitle>My Places</DialogTitle>
-            <DialogDescription>
-              Here you can see your saved places
-            </DialogDescription>
-          </DialogHeader>
-          {/* Add content for My Places here */}
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }
