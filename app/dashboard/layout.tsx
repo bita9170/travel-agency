@@ -16,7 +16,7 @@ import {
   PagesLayoutIcon,
   EditProfileIcon,
 } from "./icons";
-import { DialogSaveLocations as Dialog } from "@/components/elements/DialogSaveLocations";
+import { DialogSaveLocations as Dialog } from "@/components/elements/dialogs/DialogSaveLocations";
 
 export const metadata: Metadata = {
   title: "Dashboard | BiHamTha Travel Agency",
