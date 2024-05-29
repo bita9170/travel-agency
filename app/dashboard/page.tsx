@@ -1,104 +1,68 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import {
-  MyFavoritesIcon,
-  MyPlanIcon,
-  MyPlacesIcon,
-  MyReviewsIcon,
-  NewPostIcon,
-  ShowReviewsIcon,
-  SocialNetworksIcon,
-  PagesLayoutIcon,
-  EditProfileIcon,
-} from "./icons";
+import Avatar from "@/components/elements/Avatar";
+import Image from "next/image";
+import React from "react";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Heart_f, Star_f, Travelbag_f } from "./icons";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import Layout2 from "@/components/tiles/Layout2";
-import { getSaveLocationsByUserId, ISaveLocation } from "@/controllers/saveLocationController";
-
-function Page() {
-  const [openDialogId, setOpenDialogId] = useState<string | null>(null);
-  const [favorites, setFavorites] = useState<ISaveLocation[]>([]);
-
-  const userId = "user-id";
-
-  useEffect(() => {
-    const fetchFavorites = async () => {
-      const saveLocations: ISaveLocation[] = await getSaveLocationsByUserId(userId);
-      const favorites = saveLocations.filter(location => location.type === "favorite");
-      setFavorites(favorites);
-    };
-
-    fetchFavorites().catch(console.error);
-  }, [userId]);
-
-  const openDialog = (id: string) => setOpenDialogId(id);
-  const closeDialog = () => setOpenDialogId(null);
-
+async function page() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
   return (
-    <div className="dashboard-section flex py-10">
-      <div className="ml-5 flex flex-col">
-        <h5 className="font-bold">User Menu</h5>
-        <ul>
-          <li className="flex items-center">
-            <EditProfileIcon />
-            <span>Edit Profile</span>
-          </li>
-          <li onClick={() => openDialog("myPlan")} className="cursor-pointer flex items-center">
-            <MyPlanIcon />
-            <span>My Plan</span>
-          </li>
-          <li onClick={() => openDialog("myFavorites")} className="cursor-pointer flex items-center">
-            <MyFavoritesIcon />
-            <span>My Favorites</span>
-          </li>
-          <li onClick={() => openDialog("myPlaces")} className="cursor-pointer flex items-center">
-            <MyPlacesIcon />
-            <span>My Places</span>
-          </li>
-          <li className="flex items-center">
-            <MyReviewsIcon />
-            <span>My Reviews</span>
-          </li>
-        </ul>
+    <div>
+      <div className="relative h-[200px]">
+        <Image
+          src={"/hero.jpeg"}
+          alt=""
+          fill
+          className="object-cover rounded-xl"
+        />
+      </div>
+      <div>
+        {user?.picture && user?.given_name && user.family_name && (
+          <div className="w-full -mt-16 text-center flex flex-col items-center space-y-2">
+            <Avatar
+              src={user?.picture}
+              alt={user?.given_name}
+              fallBack={
+                user?.given_name[0].toUpperCase() +
+                user?.family_name[0].toUpperCase()
+              }
+              className="w-32 h-32"
+            />
+            <h3>
+              {user?.given_name} {user.family_name}
+            </h3>
+            <p className="text-base">{user?.email}</p>
+          </div>
+        )}
+      </div>
+      <div className="grid md:grid-cols-3 items-center text-center mt-6 gap-6">
+        <div className="rounded-xl shadow-shadowSmall border-2 min-h-[100px] py-4 px-6">
+          <div className="flex items-center">
+            <Heart_f className="w-10 h-10" />
+            <p className="font-bold text-lg ml-2">Favorite Locations</p>
 
-        <div className="mt-12">
-          <h3>Admin Menu</h3>
-          <ul>
-            <li className="flex items-center">
-              <NewPostIcon />
-              <span>New Post</span>
-            </li>
-            <li className="flex items-center">
-              <ShowReviewsIcon />
-              <span>Show Reviews</span>
-            </li>
-            <li className="flex items-center">
-              <SocialNetworksIcon />
-              <span>Social Networks</span>
-            </li>
-            <li className="flex items-center">
-              <PagesLayoutIcon />
-              <span>Pages Layout</span>
-            </li>
-          </ul>
+            <h1 className="flex-1 text-right">5</h1>
+          </div>
+        </div>
+        <div className="rounded-xl shadow-shadowSmall border-2 min-h-[100px] py-4 px-6">
+          <div className="flex items-center">
+            <Star_f className="w-10 h-10" />
+            <p className="font-bold text-lg ml-2">Places</p>
+
+            <h1 className="flex-1 text-right">8</h1>
+          </div>
+        </div>
+        <div className="rounded-xl shadow-shadowSmall border-2 min-h-[100px] py-4 px-6">
+          <div className="flex items-center">
+            <Travelbag_f className="w-10 h-10" />
+            <p className="font-bold text-lg ml-2">Planned Trip</p>
+
+            <h1 className="flex-1 text-right">3</h1>
+          </div>
         </div>
       </div>
 
-      <div className="menu">
-        <div>
-          <h3 className="font-bold">All Posts</h3>
-        </div>
-      </div>
-
-    
       <Dialog open={openDialogId === "myFavorites"} onOpenChange={closeDialog}>
         <DialogContent className="sm:max-w-[80%]">
           <DialogHeader>
@@ -127,9 +91,7 @@ function Page() {
         <DialogContent className="sm:max-w-[80%]">
           <DialogHeader>
             <DialogTitle>My Plan</DialogTitle>
-            <DialogDescription>
-              Here you can see your plan
-            </DialogDescription>
+            <DialogDescription>Here you can see your plan</DialogDescription>
           </DialogHeader>
           {/* Add content for My Plan here */}
         </DialogContent>
