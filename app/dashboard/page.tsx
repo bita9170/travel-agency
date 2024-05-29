@@ -54,12 +54,6 @@ async function page() {
           </div>
         </div>
       </div>
-      {/* 
-      <div className="menu">
-        <div>
-          <h3 className="font-bold">All Posts</h3>
-        </div>
-      </div> */}
     </div>
   );
 }

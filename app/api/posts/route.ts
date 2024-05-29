@@ -1,3 +1,4 @@
+// app/api/posts/route.ts
 import Post from "@/lib/model/Posts";
 import connectMongoDB from "@/lib/mongodb";
 import { NextRequest, NextResponse } from "next/server";
@@ -92,8 +93,8 @@ export async function DELETE(req: NextRequest) {
   try {
     await connectMongoDB();
 
-    const postId = req.nextUrl.searchParams.get("postId");
-
+    // const postId = req.nextUrl.searchParams.get("postId");
+    const postId = req.nextUrl.pathname.split("/").pop();
     if (!postId) {
       return NextResponse.json(
         { message: "Post ID is required" },
