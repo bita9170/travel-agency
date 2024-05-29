@@ -53,15 +53,13 @@ async function page() {
             <h1 className="flex-1 text-right">8</h1>
           </div>
         </div>
-        <div className="rounded-xl shadow-shadowSmall border-2 min-h-[100px] py-4 px-6">
-          <div className="flex items-center">
-            <Travelbag_f className="w-10 h-10" />
-            <p className="font-bold text-lg ml-2">Planned Trip</p>
-
-            <h1 className="flex-1 text-right">3</h1>
-          </div>
-        </div>
       </div>
+      {/* 
+      <div className="menu">
+        <div>
+          <h3 className="font-bold">All Posts</h3>
+        </div>
+      </div> */}
     </div>
   );
 }
