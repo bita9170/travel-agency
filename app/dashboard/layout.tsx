@@ -16,6 +16,7 @@ import {
   PagesLayoutIcon,
   EditProfileIcon,
 } from "./icons";
+import { DialogSaveLocations as Dialog } from "@/components/elements/dialogs/DialogSaveLocations";
 
 export const metadata: Metadata = {
   title: "Dashboard | BiHamTha Travel Agency",
@@ -27,8 +28,14 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { isAuthenticated } = getKindeServerSession();
+  const { isAuthenticated, getUser } = getKindeServerSession();
   if (!(await isAuthenticated())) {
+    redirect("/api/auth/login?post_login_redirect_url=/dashboard");
+  }
+
+  const user = await getUser();
+
+  if (!user) {
     redirect("/api/auth/login?post_login_redirect_url=/dashboard");
   }
   return (
@@ -44,21 +51,24 @@ export default async function RootLayout({
                 <EditProfileIcon />
                 Edit Profile
               </li>
-
-              <li>
-                <MyPlanIcon />
-                My Plan
-              </li>
-
-              <li>
-                <MyFavoritesIcon />
-                My Favorites
-              </li>
-
-              <li>
-                <MyPlacesIcon />
-                My Places
-              </li>
+              <Dialog userId={user.id} type="plans">
+                <li>
+                  <MyPlanIcon />
+                  My Plan
+                </li>
+              </Dialog>
+              <Dialog userId={user.id} type="favorite">
+                <li>
+                  <MyFavoritesIcon />
+                  My Favorites
+                </li>
+              </Dialog>
+              <Dialog userId={user.id} type="place">
+                <li>
+                  <MyPlacesIcon />
+                  My Places
+                </li>
+              </Dialog>
 
               <li>
                 <MyReviewsIcon />
