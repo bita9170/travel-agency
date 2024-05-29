@@ -8,6 +8,7 @@ import {
 } from "@/controllers/saveLocationController";
 import { toast } from "sonner";
 import { ISaveLocation } from "@/controllers/saveLocationController";
+import { Heart_f, Location_f, Travelbag_f } from "@/app/dashboard/icons";
 
 export interface IResult {
   message: string;
@@ -84,7 +85,7 @@ function SaveLocation(props: any) {
             toast(result.message, { position: "top-left" });
           }}
         >
-          {place ? svgIcons.star_f : svgIcons.star}
+          {place ? svgIcons.location_f : svgIcons.location}
         </div>
 
         <div
@@ -118,14 +119,15 @@ function SaveLocation(props: any) {
 export default SaveLocation;
 
 const svgIcons = {
-  star_f: (
+  location_f: (
     <svg className="fill-yellow-600 h-6 w-6" viewBox="0 0 24 24">
-      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"></path>
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z" />
     </svg>
   ),
-  star: (
+  location: (
     <svg className="h-6 w-6" viewBox="0 0 24 24">
-      <path d="m22 9.24-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"></path>
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z" />
+      <path d="M12 6.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 1 0 0-5z" />
     </svg>
   ),
   heart_f: (
@@ -164,3 +166,61 @@ const svgIcons = {
     </svg>
   ),
 };
+
+export function SaveLocationsCount({ userId }: any) {
+  const [counts, setCounts] = useState<Record<string, number>>();
+  useEffect(() => {
+    const fetchData = async () => {
+      const saveLocations: ISaveLocation[] = await getSaveLocationsByUserId(
+        userId
+      );
+
+      const count = saveLocations.reduce((acc, item) => {
+        const type = item.type.toLowerCase(); // Normalizing the case for consistent counting
+        acc[type] = (acc[type] || 0) + 1;
+        return acc;
+      }, {} as Record<string, number>);
+
+      setCounts(count);
+    };
+
+    // call the function
+    fetchData()
+      // make sure to catch any error
+      .catch(console.error);
+  }, []);
+  return (
+    <div className="grid md:grid-cols-3 items-center text-center mt-6 gap-6">
+      <div className="rounded-xl shadow-shadowSmall border-2 min-h-[100px] py-4 px-6">
+        <div className="flex items-center">
+          <Heart_f className="w-10 h-10" />
+          <p className="font-bold text-lg ml-2">Favorite Locations</p>
+
+          <h1 className="flex-1 text-right">
+            {counts?.favorite ? counts?.favorite : 0}
+          </h1>
+        </div>
+      </div>
+      <div className="rounded-xl shadow-shadowSmall border-2 min-h-[100px] py-4 px-6">
+        <div className="flex items-center">
+          <Location_f className="w-10 h-10" />
+          <p className="font-bold text-lg ml-2">Places</p>
+
+          <h1 className="flex-1 text-right">
+            {counts?.place ? counts?.place : 0}
+          </h1>
+        </div>
+      </div>
+      <div className="rounded-xl shadow-shadowSmall border-2 min-h-[100px] py-4 px-6">
+        <div className="flex items-center">
+          <Travelbag_f className="w-10 h-10" />
+          <p className="font-bold text-lg ml-2">Planned Trip</p>
+
+          <h1 className="flex-1 text-right">
+            {counts?.plans ? counts?.plans : 0}
+          </h1>
+        </div>
+      </div>
+    </div>
+  );
+}

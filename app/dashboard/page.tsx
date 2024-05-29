@@ -2,9 +2,9 @@ import Avatar from "@/components/elements/Avatar";
 import Image from "next/image";
 import React from "react";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { Heart_f, Star_f, Travelbag_f } from "./icons";
+import { SaveLocationsCount } from "@/components/elements/SaveLocation";
 
-async function page() {
+async function Page() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   return (
@@ -36,26 +36,9 @@ async function page() {
           </div>
         )}
       </div>
-      <div className="grid md:grid-cols-3 items-center text-center mt-6 gap-6">
-        <div className="rounded-xl shadow-shadowSmall border-2 min-h-[100px] py-4 px-6">
-          <div className="flex items-center">
-            <Heart_f className="w-10 h-10" />
-            <p className="font-bold text-lg ml-2">Favorite Locations</p>
-
-            <h1 className="flex-1 text-right">5</h1>
-          </div>
-        </div>
-        <div className="rounded-xl shadow-shadowSmall border-2 min-h-[100px] py-4 px-6">
-          <div className="flex items-center">
-            <Star_f className="w-10 h-10" />
-            <p className="font-bold text-lg ml-2">Places</p>
-
-            <h1 className="flex-1 text-right">8</h1>
-          </div>
-        </div>
-      </div>
+      <SaveLocationsCount userId={user?.id} />
     </div>
   );
 }
 
-export default page;
+export default Page;

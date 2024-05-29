@@ -1,7 +1,7 @@
 .dashboard-section {
   .side-menu {
     li {
-      @apply flex items-center mt-4;
+      @apply flex items-center mt-4 cursor-pointer;
     }
     svg {
       @apply w-[22px] mr-2;
