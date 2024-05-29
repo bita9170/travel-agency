@@ -1,7 +1,6 @@
 // components/dashboard/TablePosts.tsx
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
 import {
   Table,
   TableBody,
@@ -10,6 +9,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "../ui/button";
+import Link from "next/link";
+import { DialogPost } from "../elements/dialogs/DialogPost";
 
 interface Post {
   id: string;
@@ -20,29 +22,13 @@ interface Post {
 
 interface TablePostsProps {
   posts: Post[];
-  onEdit: (id: string) => void;
-  onDelete: (id: string) => void;
-  onView: (id: string) => void;
-  onNextPage: () => void;
-  onPreviousPage: () => void;
 }
 
-const TablePosts: React.FC<TablePostsProps> = ({
-  posts,
-  onEdit,
-  onDelete,
-  onView,
-  onNextPage,
-  onPreviousPage,
-}) => {
-  const router = useRouter();
-
-  const handleEdit = (id: string) => {
-    router.push(`/dashboard/posts/${id}`);
-  };
-
+const TablePosts: React.FC<TablePostsProps> = ({ posts }) => {
   return (
     <div className="container">
+      {/* TODO: You can use  Data-Table component instead of  Table component */}
+      {/* https://ui.shadcn.com/docs/components/data-table */}
       <Table>
         <TableHeader className="text-bold">
           <TableRow>
@@ -53,67 +39,35 @@ const TablePosts: React.FC<TablePostsProps> = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {posts.map((posts) => (
-            <TableRow key={posts.id}>
-              <TableCell>{posts.title}</TableCell>
-              <TableCell>{posts.author}</TableCell>
+          {posts.map((post) => (
+            <TableRow key={post.id}>
+              <TableCell>{post.title}</TableCell>
+              <TableCell>{post.author}</TableCell>
               <TableCell>
-                {new Date(posts.publicationDate).toLocaleDateString()}
+                {new Date(post.publicationDate).toLocaleDateString()}
               </TableCell>
               <TableCell>
                 <div className="flex space-x-2 w-10">
-                  <button
-                    style={{ backgroundColor: "#34e0a1" }}
-                    onClick={() => handleEdit(posts.id)}
-                    className="text-white px-2 py-1 rounded"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    style={{ backgroundColor: "#34e0a1" }}
-                    onClick={() => onDelete(posts.id)}
-                    className="text-white px-2 py-1 rounded"
-                  >
+                  {/* TODO: You can hier using Dialog for Edit confirmation  */}
+                  {/* TODO: With postId props = Edit Post --- without postId props = Add new Post */}
+                  <DialogPost postId={post.id}>
+                    <Button variant={"secondary"}>Edit</Button>
+                  </DialogPost>
+                  <Button variant={"destructive"}>
+                    {/* TODO: You can hier using Dialog for delete confirmation  */}
                     Delete
-                  </button>
-                  <button
-                    style={{ backgroundColor: "#34e0a1" }}
-                    onClick={() => onView(posts.id)}
-                    className="text-white px-2 py-1 rounded"
-                  >
-                    View
-                  </button>
+                  </Button>
+                  <Button variant={"orange"} asChild>
+                    <Link href={`/blog/${post.id}`} target="_blank">
+                      View
+                    </Link>
+                  </Button>
                 </div>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-
-      <div className="flex justify-evenly items-center py-4">
-        <button
-          style={{
-            width: "150px",
-            backgroundColor: "#34e0a1",
-            cursor: "pointer",
-          }}
-          onClick={onPreviousPage}
-          className="px-4 py-2 rounded"
-        >
-          Previous
-        </button>
-        <button
-          style={{
-            width: "100px",
-            backgroundColor: "#34e0a1",
-            cursor: "pointer",
-          }}
-          onClick={onNextPage}
-          className="text-white px-4 py-2 rounded"
-        >
-          Next
-        </button>
-      </div>
     </div>
   );
 };
