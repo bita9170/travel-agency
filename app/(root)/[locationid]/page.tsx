@@ -1,5 +1,4 @@
-"use client";
-import React, { useEffect } from "react";
+import React from "react";
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import {
   Card,
@@ -9,11 +8,15 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  getLocationDetailsById
-} from "@/lib/data/location";
+import { getLocationDetailsById } from "@/lib/data/location";
 import Tab, { TabProps } from "@/components/tabsection/Tab";
-import { RecommendedElement, RecommendedElement2 } from "@/components/tab/content";
+import {
+  RecommendedElement,
+  RecommendedElement2,
+} from "@/components/tab/content";
+import SaveLocation from "@/components/elements/SaveLocation";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { notFound } from "next/navigation";
 
 export default async function page({ params }: any) {
   const { getUser, isAuthenticated } = getKindeServerSession();
@@ -139,22 +142,22 @@ export default async function page({ params }: any) {
         </div>
 
         <div className="lg:col-span-1 flex justify-center items-center">
-        <div className="w-full h-[300px] relative rounded-xl overflow-hidden shadow-shadowSmall">
-          <Map
-            center={[
-              parseFloat(location.getLatitude()),
-              parseFloat(location.getLongitude()),
-            ]}
-            zoom={13}
-            markers={[
-              [
+          <div className="w-full h-[300px] relative rounded-xl overflow-hidden shadow-shadowSmall">
+            {/* <Map
+              center={[
                 parseFloat(location.getLatitude()),
                 parseFloat(location.getLongitude()),
-              ],
-            ]}
-          />
+              ]}
+              zoom={13}
+              markers={[
+                [
+                  parseFloat(location.getLatitude()),
+                  parseFloat(location.getLongitude()),
+                ],
+              ]}
+            /> */}
+          </div>
         </div>
-      </div>
       </div>
     </MaxLimitWrapper>
   );
