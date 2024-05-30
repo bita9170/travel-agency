@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 
 export const EditProfileIcon = () => (
@@ -51,5 +52,23 @@ export const SocialNetworksIcon = () => (
 export const PagesLayoutIcon = () => (
   <svg className="w-5 h-5 mr-2 ml-1" viewBox="0 0 512 512">
     <path d="M448 32C483.3 32 512 60.65 512 96V416C512 451.3 483.3 480 448 480H64C28.65 480 0 451.3 0 416V96C0 60.65 28.65 32 64 32H448zM448 96H288V224H448V96zM448 288H288V416H448V288zM224 224V96H64V224H224zM64 416H224V288H64V416z"></path>
+  </svg>
+);
+
+export const Location_f = ({ className }: { className?: string }) => (
+  <svg className={cn("fill-yellow-600 h-6 w-6", className)} viewBox="0 0 24 24">
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z" />
+  </svg>
+);
+
+export const Heart_f = ({ className }: { className?: string }) => (
+  <svg className={cn("h-6 w-6 fill-red-600", className)} viewBox="0 0 24 24">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+  </svg>
+);
+
+export const Travelbag_f = ({ className }: { className?: string }) => (
+  <svg className={cn("w-6 fill-green-10", className)} viewBox="0 0 24 24">
+    <path d="M17 6h-2V3c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2 0 .55.45 1 1 1s1-.45 1-1h6c0 .55.45 1 1 1s1-.45 1-1c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM9.5 18H8V9h1.5v9zm3.25 0h-1.5V9h1.5v9zm.75-12h-3V3.5h3V6zM16 18h-1.5V9H16v9z" />
   </svg>
 );
