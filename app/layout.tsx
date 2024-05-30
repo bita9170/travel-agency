@@ -4,8 +4,8 @@ import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
-  title: "Travel Agency",
-  description: "",
+  title: "BiHamTha Travel Agency",
+  description: "BiHamTha Travel Agency",
 };
 
 export default function RootLayout({
