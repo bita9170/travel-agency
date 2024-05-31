@@ -15,6 +15,7 @@ import {
 } from "@/components/tab/content";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import SaveLocation from "@/components/elements/SaveLocation";
+import { notFound } from "next/navigation";
 
 export default async function page({ params }: any) {
   const { getUser, isAuthenticated } = getKindeServerSession();
@@ -23,6 +24,10 @@ export default async function page({ params }: any) {
 
   const { locationid } = params;
   const location = getLocationDetailsById(locationid);
+
+  if (location["data"] == undefined) {
+    notFound();
+  }
 
   const dataDrop: TabProps[] = [
     {

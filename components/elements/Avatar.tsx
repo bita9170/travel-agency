@@ -17,21 +17,23 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { cn } from "@/lib/utils";
 
 interface AvatarProps {
   src?: string | null;
   alt?: string | null;
   fallBack?: string | null;
+  className?: string;
 }
 
-async function Avatar({ src, alt, fallBack }: AvatarProps) {
+async function Avatar({ src, alt, fallBack, className }: AvatarProps) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   return (
     <>
       <Sheet>
         <SheetTrigger asChild>
-          <AvatarShadCn className="h-12 w-12">
+          <AvatarShadCn className={cn("h-12 w-12", className)}>
             {src && alt && <AvatarImage src={src} alt={alt} />}
             {fallBack && <AvatarFallback>{fallBack}</AvatarFallback>}
           </AvatarShadCn>
