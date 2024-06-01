@@ -26,10 +26,15 @@ async function fetchData(url: string) {
 
 export async function searchAllLocations(
   searchQuery: string,
-  language: string = "de"
+  language: string = "en"
 ) {
   const url = `${TRIPADVISOR_BASE_URL}/search?searchQuery=${searchQuery}&language=${language}&key=${TRIPADVISOR_API_KEY}`;
-  return fetchData(url);
+  const results = await fetchData(url);
+
+  // Extract location_id values
+  const locationIds = results.data.map((location: any) => location.location_id);
+
+  return await getLocationDetails(locationIds);
 }
 
 export async function searchHotels(

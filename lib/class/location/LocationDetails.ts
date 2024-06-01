@@ -190,10 +190,10 @@ export class LocationDetails {
     return this.data.awards;
   }
 
-  // async getPhotos(): Promise<LocationPhotos[]> {
-  //   const result = await getLocationPhotos(this.data.location_id);
-  //   return result.map((photo: any) => new LocationPhotos(photo.data));
-  // }
+  async getPhotosApi(): Promise<LocationPhotos[]> {
+    const result = await getLocationPhotos(this.data.location_id);
+    return result.map((photo: any) => new LocationPhotos(photo.data));
+  }
 
   getPhotos(): LocationPhotos[] {
     const photos = this.data.photos;
