@@ -1,9 +1,11 @@
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Options from "@/components/header/Options";
+import Layout2 from "@/components/tiles/Layout2";
 import { searchAllLocations } from "@/controllers/tripadvisorController";
 import { LocationDetails } from "@/lib/class/location";
+import React from 'react';
 
-async function SaerchPage({
+async function SearchPage({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -32,12 +34,18 @@ async function SaerchPage({
             <p>No results found for "{query}".</p>
           )}
           {query && locations && locations.length > 0 && (
-            // TODO: Add layout 2 or another layout that do you want
-            <ul>
+            <div className="grid md:grid-cols-4 gap-8 my-4">
               {locations.map((location: LocationDetails, index: number) => (
-                <li key={index}>{location.getName()}</li>
+                <Layout2
+                  key={index}
+                  image={location.getImage()}
+                  ctaText={location.getName()}
+                  rating={location.getRatingImageUrl()}
+                  category={location.getCategory().name}
+                  ctaLink="#"
+                />
               ))}
-            </ul>
+            </div>
           )}
         </div>
       </MaxLimitWrapper>
@@ -45,4 +53,4 @@ async function SaerchPage({
   );
 }
 
-export default SaerchPage;
+export default SearchPage;

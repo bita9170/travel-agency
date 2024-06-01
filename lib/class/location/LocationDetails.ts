@@ -196,7 +196,12 @@ export class LocationDetails {
   }
 
   getPhotos(): LocationPhotos[] {
-    const photos = this.data.photos;
+    const photos = this.data.photos || [];
     return photos.map((photo: any) => new LocationPhotos(photo));
+  }
+
+  getImage(): string {
+    const photos = this.getPhotos();
+    return photos.length > 0 ? photos[0].getLarge().url : "";
   }
 }
