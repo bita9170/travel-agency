@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import Autosuggest from 'react-autosuggest';
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -10,6 +11,12 @@ const Search = () => {
   const handleSubmit = () => {
     if (searchQuery.trim()) {
       router.push(`/search?query=${encodeURIComponent(searchQuery)}`);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
     }
   };
 
@@ -30,7 +37,9 @@ const Search = () => {
               onChange={(e) => {
                 setSearchQuery(e.target.value);
               }}
+              onKeyDown={handleKeyDown}
             />
+            
           </div>
           <Button
             variant={"green"}
