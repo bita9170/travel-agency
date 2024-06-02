@@ -36,7 +36,7 @@ const Options: React.FC<OptionsProps> = ({ showTitle = true }) => {
           </Button>
 
           <Button variant={"link"} asChild className="text-black">
-            <Link href="#">
+            <Link href="/blog">
               <ThingsToDoIcon className="mr-1" />
               Things to Do
             </Link>
