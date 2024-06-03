@@ -5,11 +5,14 @@ import { useRouter } from "next/navigation";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchType, setSearchType] = useState("all");
   const router = useRouter();
 
   const handleSubmit = () => {
     if (searchQuery.trim()) {
-      router.push(`/search?query=${encodeURIComponent(searchQuery)}`);
+      router.push(
+        `/search?query=${encodeURIComponent(searchQuery)}&type=${searchType}`
+      );
     }
   };
 

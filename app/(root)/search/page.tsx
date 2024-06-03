@@ -1,7 +1,11 @@
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Options from "@/components/header/Options";
 import Layout2 from "@/components/tiles/Layout2";
-import { searchAllLocations } from "@/controllers/tripadvisorController";
+import {
+  searchAllLocations,
+  searchHotels,
+  searchRestaurants,
+} from "@/controllers/tripadvisorController";
 import { LocationDetails } from "@/lib/class/location";
 import React from "react";
 
@@ -10,15 +14,24 @@ async function SearchPage({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const page =
-    typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
+  const type =
+    typeof searchParams.page === "string" ? searchParams.page : undefined;
 
   const query =
     typeof searchParams.query === "string" ? searchParams.query : undefined;
 
-  const locations: LocationDetails[] | undefined = query
-    ? await searchAllLocations(query)
-    : undefined;
+  let locations: LocationDetails[] | undefined = undefined;
+
+  switch (type) {
+    case "hotels":
+      locations = query ? await searchHotels(query) : undefined;
+      break;
+    case "restaurants":
+      locations = query ? await searchRestaurants(query) : undefined;
+      break;
+    default:
+      locations = query ? await searchAllLocations(query) : undefined;
+  }
 
   return (
     <>

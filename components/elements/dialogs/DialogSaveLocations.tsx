@@ -51,24 +51,25 @@ export function DialogSaveLocations({
           <DialogTitle>{type.toUpperCase()}</DialogTitle>
         </DialogHeader>
         <div className="grid md:grid-cols-3 gap-4">
-          {saveLocations.map(
-            (saveLocation: ISaveLocation) =>
-              saveLocation.type == type &&
-              locations
-                .filter(
-                  (location) =>
-                    location.getLocationId() === saveLocation.locationId
-                )
-                .map(async (item) => (
-                  <Layout1
-                    key={item.getLocationId()}
-                    image={await item.getImage()}
-                    ctaText={item.getName()}
-                    ctaLink={`/${item.getLocationId()}`}
-                    minHeight="min-h-[200px]"
-                  />
-                ))
-          )}
+          {saveLocations.length > 0 &&
+            saveLocations.map(
+              (saveLocation: ISaveLocation) =>
+                saveLocation.type == type &&
+                locations
+                  .filter(
+                    (location) =>
+                      location.getLocationId() === saveLocation.locationId
+                  )
+                  .map(async (item) => (
+                    <Layout1
+                      key={item.getLocationId()}
+                      image={await item.getImage()}
+                      ctaText={item.getName()}
+                      ctaLink={`/${item.getLocationId()}`}
+                      minHeight="min-h-[200px]"
+                    />
+                  ))
+            )}
           {!saveLocations && <h1>You do not have any {type} location(s)</h1>}
         </div>
       </DialogContent>
