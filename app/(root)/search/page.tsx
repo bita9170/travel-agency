@@ -35,16 +35,18 @@ async function SearchPage({
           )}
           {query && locations && locations.length > 0 && (
             <div className="grid md:grid-cols-4 gap-8 my-4">
-              {locations.map((location: LocationDetails, index: number) => (
-                <Layout2
-                  key={index}
-                  image={location.getImage()}
-                  ctaText={location.getName()}
-                  rating={location.getRatingImageUrl()}
-                  category={location.getCategory().name}
-                  ctaLink="#"
-                />
-              ))}
+              {locations.map(
+                async (location: LocationDetails, index: number) => (
+                  <Layout2
+                    key={index}
+                    image={await location.getImage()}
+                    ctaText={location.getName()}
+                    rating={location.getRatingImageUrl()}
+                    category={location.getCategory().name}
+                    ctaLink="#"
+                  />
+                )
+              )}
             </div>
           )}
         </div>
@@ -52,5 +54,4 @@ async function SearchPage({
     </>
   );
 }
-
 export default SearchPage;
