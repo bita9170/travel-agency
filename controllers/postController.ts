@@ -59,8 +59,9 @@ export async function createPost(
 export async function getPosts() {
   await dbConnect();
   try {
-    const posts = await Post.find();
-    return NextResponse.json(posts, { status: 200 });
+    const res = await Post.find();
+
+    return NextResponse.json(res, { status: 200 });
   } catch (error) {
     return handleError(error, "Failed to retrieve posts");
   }
