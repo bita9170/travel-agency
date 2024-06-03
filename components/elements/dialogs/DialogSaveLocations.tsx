@@ -59,12 +59,12 @@ export function DialogSaveLocations({
                   (location) =>
                     location.getLocationId() === saveLocation.locationId
                 )
-                .map((item) => (
+                .map(async (item) => (
                   <Layout1
                     key={item.getLocationId()}
-                    image={item.getPhotos()[0].getLarge().url}
+                    image={await item.getImage()}
                     ctaText={item.getName()}
-                    ctaLink={item.getWebsite()}
+                    ctaLink={`/${item.getLocationId()}`}
                     minHeight="min-h-[200px]"
                   />
                 ))

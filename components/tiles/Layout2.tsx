@@ -39,7 +39,8 @@ const Layout2: React.FC<Layout2Props> = ({
               <h3>{ctaText}</h3>
             </Link>
           )}
-          <img src={rating} alt="Rating" />
+          {rating && <img src={rating} alt="Rating" />}
+
           <p>{category}</p>
         </div>
       </div>
