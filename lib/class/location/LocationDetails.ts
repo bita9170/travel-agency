@@ -200,8 +200,12 @@ export class LocationDetails {
     return photos.map((photo: any) => new LocationPhotos(photo));
   }
 
-  getImage(): string {
-    const photos = this.getPhotos();
-    return photos.length > 0 ? photos[0].getLarge().url : "";
+  async getImage(): Promise<string> {
+    const arr: number[] = [57, 49, 28, 27, 74, 84, 122, 124, 142, 249];
+    const ind = Math.floor(Math.random() * arr.length);
+    const photos = await this.getPhotosApi();
+    return photos.length > 0
+      ? photos[0].getLarge().url
+      : `https://picsum.photos/id/${arr.splice(ind, 1)[0]}/4106/2806`;
   }
 }
