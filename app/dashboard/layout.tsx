@@ -38,6 +38,7 @@ export default async function RootLayout({
   if (!user) {
     redirect("/api/auth/login?post_login_redirect_url=/dashboard");
   }
+
   return (
     <>
       <Header />
@@ -45,7 +46,7 @@ export default async function RootLayout({
       <MaxLimitWrapper className="py-6">
         <div className="dashboard-section flex gap-4">
           <div className="flex flex-col side-menu">
-            <h5 className="font-bold">User Menu</h5>
+            <h3>User Menu</h3>
             <ul>
               <li>
                 <EditProfileIcon />
@@ -75,31 +76,32 @@ export default async function RootLayout({
                 My Reviews
               </li>
             </ul>
+            {user.email === process.env.ADMIN_EMAIL && (
+              <div className="mt-12">
+                <h3>Admin Menu</h3>
+                <ul>
+                  <li>
+                    <NewPostIcon />
+                    New Post
+                  </li>
 
-            <div className="mt-12">
-              <h3>Admin Menu</h3>
-              <ul>
-                <li>
-                  <NewPostIcon />
-                  New Post
-                </li>
+                  <li>
+                    <ShowReviewsIcon />
+                    Show Reviews
+                  </li>
 
-                <li>
-                  <ShowReviewsIcon />
-                  Show Reviews
-                </li>
+                  <li>
+                    <SocialNetworksIcon />
+                    Socila Networks
+                  </li>
 
-                <li>
-                  <SocialNetworksIcon />
-                  Socila Networks
-                </li>
-
-                <li>
-                  <PagesLayoutIcon />
-                  Pages Layout
-                </li>
-              </ul>
-            </div>
+                  <li>
+                    <PagesLayoutIcon />
+                    Pages Layout
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
 
           <div className="main w-full flex-1">{children}</div>
