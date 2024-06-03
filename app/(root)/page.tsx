@@ -1,58 +1,166 @@
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Options from "@/components/header/Options";
+import Hero from "@/components/hero/Hero";
+import Layout from "@/components/hero/Layout";
+import { SommerContent, SpringContent } from "@/components/tab/content";
+import Tab, { TabProps } from "@/components/tabsection/Tab";
+import Layout1 from "@/components/tiles/Layout1";
 import Layout2 from "@/components/tiles/Layout2";
-import { searchAllLocations } from "@/controllers/tripadvisorController";
+import Layout3 from "@/components/tiles/Layout3";
+// import { getLocationDetails } from "@/controllers/tripadvisorController";
 import { LocationDetails } from "@/lib/class/location";
-import React from "react";
+import { getLocationDetailsByIds } from "@/lib/data/location";
 
-async function SearchPage({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
-  const page =
-    typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
+export default async function Home() {
+  // const locationDetails: LocationDetails[] = await getLocationDetails([
+  //   188151, 188757, 188679, 188709,
+  // ]);
+  // const locationDetails: LocationDetails[] = getLocationDetailsByIds([
+  //   188151, 188757, 188679, 188709,
+  // ]);
 
-  const query =
-    typeof searchParams.query === "string" ? searchParams.query : undefined;
+  const images = [
+    {
+      image: "/image1.jpeg",
+      ctaText: "Top Hotels",
+      ctaLink: "#",
+    },
+    {
+      image: "/image2.jpeg",
+      ctaText: "All-Inclusive Hotels",
+      ctaLink: "#",
+    },
+    {
+      image: "/image3.jpeg",
+      ctaText: "Family-Friendly Hotels",
+      ctaLink: "#",
+    },
+    {
+      image: "/image4.jpeg",
+      ctaText: "Luxury Hotels",
+      ctaLink: "#",
+    },
+  ];
 
-  const locations: LocationDetails[] | undefined = query
-    ? await searchAllLocations(query)
-    : undefined;
+  const data: TabProps[] = [
+    {
+      title: "Spring Destinations",
+      content: <SpringContent />,
+    },
+    {
+      title: "Summer Destinations",
+      content: <SommerContent />,
+    },
+  ];
 
   return (
     <>
-      <Options />
+      <MaxLimitWrapper className="mx-2 md:mx-auto">
+        <Options />
+      </MaxLimitWrapper>
+
       <MaxLimitWrapper>
-        <div>
-          {!query && (
-            <h3 className="text-center my-10">
-              Please enter a search query to find locations.
-            </h3>
-          )}
-          {query && locations && locations.length === 0 && (
-            <p>No results found for "{query}".</p>
-          )}
-          {query && locations && locations.length > 0 && (
-            <div className="grid md:grid-cols-4 gap-8 my-4">
-              {locations.map(
-                async (location: LocationDetails, index: number) => (
-                  <Layout2
-                    key={index}
-                    image={await location.getImage()}
-                    ctaText={location.getName()}
-                    rating={location.getRatingImageUrl()}
-                    category={location.getCategory().name}
-                    ctaLink="#"
-                  />
-                )
-              )}
-            </div>
-          )}
-        </div>
+        <Hero
+          title="World's best hotels for 2024"
+          image="/hero.jpeg"
+          subtitle="See our Travelers' Choice Awards Best of the Best winners."
+          ctaText="See the list"
+          ctaLink="#"
+          className="mt-4"
+        />
+      </MaxLimitWrapper>
+
+      <MaxLimitWrapper>
+        <section className="py-10 mt-4 px-2 md:px-0">
+          <h3>Stay somewhere award winning</h3>
+          <p>2024 Travelers Choice Awards Best of the Best Hotels</p>
+          <div className="grid md:grid-cols-4 gap-8 my-4">
+            {images.map((item, index) => (
+              <Layout1
+                key={index}
+                image={item.image}
+                ctaText={item.ctaText}
+                ctaLink={item.ctaLink}
+              />
+            ))}
+          </div>
+        </section>
+      </MaxLimitWrapper>
+
+      <MaxLimitWrapper>
+        <section className="py-10 mt-4 px-2 md:px-0">
+          <h3>You might like these</h3>
+          <p>More things to do in Paris</p>
+
+          <div className="grid md:grid-cols-4 gap-8 my-4">
+            {getLocationDetailsByIds([188151, 188757, 188679, 188709]).map(
+              async (location: LocationDetails) => (
+                <Layout2
+                  key={location.getLocationId()}
+                  image={(await location.getPhotos())[0].getLarge().url}
+                  ctaText={location.getName()}
+                  rating={location.getRatingImageUrl()}
+                  ctaLink="#"
+                />
+              )
+            )}
+          </div>
+        </section>
+      </MaxLimitWrapper>
+
+      <section className="bg-[#faf1ed] py-10 mt-4 px-2 md:px-0">
+        <MaxLimitWrapper>
+          <h3>More to explore</h3>
+          <div className="grid md:grid-cols-3 gap-8 my-4">
+            <Layout3
+              image="/image (5).jpeg"
+              ctaText="7 New York City restaurants to try when
+        the top tables are booked"
+              rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
+              ctaLink="#"
+            />
+            <Layout3
+              image="/image (6).jpeg"
+              ctaText="10 best places to visit in May around
+        the world"
+              rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
+              ctaLink="#"
+            />
+            <Layout3
+              image="/image (7).jpeg"
+              ctaText="One perfect day in Milan"
+              rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
+              ctaLink="#"
+            />
+          </div>
+        </MaxLimitWrapper>
+      </section>
+
+      <MaxLimitWrapper>
+        <section className="py-10 mt-4 px-2 md:px-0">
+          <h3>Dream Your Next Trip</h3>
+          <p>2024 Travelers Choice Awards Best of the Best Hotels</p>
+          <div className="grid md:grid-cols-4 gap-8 my-4">
+            {images.map((item, index) => (
+              <Layout1
+                key={index}
+                image={item.image}
+                ctaText={item.ctaText}
+                ctaLink={item.ctaLink}
+              />
+            ))}
+          </div>
+        </section>
+      </MaxLimitWrapper>
+
+      <div className="bg-[#fff7e1]">
+        <MaxLimitWrapper className="px-2">
+          <Layout />
+        </MaxLimitWrapper>
+      </div>
+      <MaxLimitWrapper className="pt-8 mx-2 md:mx-auto">
+        <Tab data={data} tabsHeading="Trending in Travel" />
       </MaxLimitWrapper>
     </>
   );
 }
-
-export default SearchPage;

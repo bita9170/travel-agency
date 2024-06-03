@@ -3,7 +3,7 @@ import Options from "@/components/header/Options";
 import Layout2 from "@/components/tiles/Layout2";
 import { searchAllLocations } from "@/controllers/tripadvisorController";
 import { LocationDetails } from "@/lib/class/location";
-import React from 'react';
+import React from "react";
 
 async function SearchPage({
   searchParams,
@@ -43,7 +43,7 @@ async function SearchPage({
                     ctaText={location.getName()}
                     rating={location.getRatingImageUrl()}
                     category={location.getCategory().name}
-                    ctaLink="#"
+                    ctaLink={`/${location.getLocationId()}`}
                   />
                 )
               )}
