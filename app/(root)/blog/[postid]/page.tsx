@@ -1,19 +1,18 @@
 "use client";
 
-import styles from "@/app/dashboard/posts/singleUser.module.css";
 import Image from "next/image";
 
 const SingleUserPage = () => {
   return (
-    <div className={styles.container}>
-      <div className={styles.infoContainer}>
-        <div className={styles.imgContainer}>
+    <div>
+      <div>
+        <div>
           <Image src="/" alt="avatar" width={200} height={200} />
         </div>
         <div>John Doe</div>
       </div>
-      <div className={styles.formContainer}>
-        <form className={styles.form}>
+      <div>
+        <form>
           <label>Username</label>
           <input type="text" name="title" placeholder="some text here"></input>
           <label>Email</label>
