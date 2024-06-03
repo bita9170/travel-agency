@@ -26,15 +26,20 @@ async function fetchData(url: string) {
 
 export async function searchAllLocations(
   searchQuery: string,
-  language: string = "de"
+  language: string = "en"
 ) {
   const url = `${TRIPADVISOR_BASE_URL}/search?searchQuery=${searchQuery}&language=${language}&key=${TRIPADVISOR_API_KEY}`;
-  return fetchData(url);
+  const results = await fetchData(url);
+
+  // Extract location_id values
+  const locationIds = results.data.map((location: any) => location.location_id);
+
+  return await getLocationDetails(locationIds);
 }
 
 export async function searchHotels(
   searchQuery: string,
-  language: string = "de"
+  language: string = "en"
 ) {
   const url = `${TRIPADVISOR_BASE_URL}/search?searchQuery=${searchQuery}&category=hotels&language=${language}&key=${TRIPADVISOR_API_KEY}`;
   return fetchData(url);
@@ -42,7 +47,7 @@ export async function searchHotels(
 
 export async function searchAttractions(
   searchQuery: string,
-  language: string = "de"
+  language: string = "en"
 ) {
   const url = `${TRIPADVISOR_BASE_URL}/search?searchQuery=${searchQuery}&category=attractions&language=${language}&key=${TRIPADVISOR_API_KEY}`;
   return fetchData(url);
@@ -50,20 +55,20 @@ export async function searchAttractions(
 
 export async function searchRestaurants(
   searchQuery: string,
-  language: string = "de"
+  language: string = "en"
 ) {
   const url = `${TRIPADVISOR_BASE_URL}/search?searchQuery=${searchQuery}&category=restaurants&language=${language}&key=${TRIPADVISOR_API_KEY}`;
   return fetchData(url);
 }
 
-export async function searchGeos(searchQuery: string, language: string = "de") {
+export async function searchGeos(searchQuery: string, language: string = "en") {
   const url = `${TRIPADVISOR_BASE_URL}/search?searchQuery=${searchQuery}&category=geos&language=${language}&key=${TRIPADVISOR_API_KEY}`;
   return fetchData(url);
 }
 
 export async function getLocationDetails(
   locationId: number | number[],
-  language: string = "de"
+  language: string = "en"
 ): Promise<LocationDetails[]> {
   if (Array.isArray(locationId)) {
     const promises = locationId.map((id) => {
@@ -82,7 +87,7 @@ export async function getLocationDetails(
 
 export async function getLocationPhotos(
   locationIds: number,
-  language: string = "de"
+  language: string = "en"
 ): Promise<LocationPhotos[]> {
   const url = `${TRIPADVISOR_BASE_URL}/${locationIds}/photos?language=${language}&key=${TRIPADVISOR_API_KEY}`;
   const result = await fetchData(url);
@@ -95,7 +100,7 @@ export async function getLocationPhotos(
 
 export async function getLocationReviews(
   locationId: number | number[],
-  language: string = "de"
+  language: string = "en"
 ) {
   if (Array.isArray(locationId)) {
     const promises = locationId.map((id) => {
@@ -110,14 +115,14 @@ export async function getLocationReviews(
   }
 }
 
-export async function nearbySearch(latLong: string, language: string = "de") {
+export async function nearbySearch(latLong: string, language: string = "en") {
   const url = `${TRIPADVISOR_BASE_URL}/nearby_search?language=${language}&latLong=${latLong}&key=${TRIPADVISOR_API_KEY}&language=en`;
   return fetchData(url);
 }
 
 export async function nearbySearchHotels(
   latLong: string,
-  language: string = "de"
+  language: string = "en"
 ) {
   const url = `${TRIPADVISOR_BASE_URL}/nearby_search?language=${language}&latLong=${latLong}&category=hotels&key=${TRIPADVISOR_API_KEY}`;
   return fetchData(url);
@@ -125,7 +130,7 @@ export async function nearbySearchHotels(
 
 export async function nearbySearchAttractions(
   latLong: string,
-  language: string = "de"
+  language: string = "en"
 ) {
   const url = `${TRIPADVISOR_BASE_URL}/nearby_search?language=${language}&latLong=${latLong}&category=attractions&key=${TRIPADVISOR_API_KEY}`;
   return fetchData(url);
@@ -133,7 +138,7 @@ export async function nearbySearchAttractions(
 
 export async function nearbySearchRestaurants(
   latLong: string,
-  language: string = "de"
+  language: string = "en"
 ) {
   const url = `${TRIPADVISOR_BASE_URL}/nearby_search?language=${language}&latLong=${latLong}&category=restaurants&key=${TRIPADVISOR_API_KEY}`;
   return fetchData(url);
@@ -141,7 +146,7 @@ export async function nearbySearchRestaurants(
 
 export async function nearbySearchGeos(
   latLong: string,
-  language: string = "de"
+  language: string = "en"
 ) {
   const url = `${TRIPADVISOR_BASE_URL}/nearby_search?language=${language}&latLong=${latLong}&category=geos&key=${TRIPADVISOR_API_KEY}`;
   return fetchData(url);

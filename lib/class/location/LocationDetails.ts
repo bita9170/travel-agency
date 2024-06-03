@@ -190,13 +190,22 @@ export class LocationDetails {
     return this.data.awards;
   }
 
-  // async getPhotos(): Promise<LocationPhotos[]> {
+  // async getPhotosApi(): Promise<LocationPhotos[]> {
   //   const result = await getLocationPhotos(this.data.location_id);
   //   return result.map((photo: any) => new LocationPhotos(photo.data));
   // }
 
   getPhotos(): LocationPhotos[] {
-    const photos = this.data.photos;
+    const photos = this.data.photos || [];
     return photos.map((photo: any) => new LocationPhotos(photo));
+  }
+
+  async getImage(): Promise<string> {
+    const arr: number[] = [57, 49, 28, 27, 74, 84, 122, 124, 142, 249];
+    const ind = Math.floor(Math.random() * arr.length);
+    const photos = await this.getPhotos();
+    return photos.length > 0
+      ? photos[0].getLarge().url
+      : `https://picsum.photos/id/${arr.splice(ind, 1)[0]}/4106/2806`;
   }
 }
