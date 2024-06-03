@@ -53,13 +53,15 @@ export default async function page({ params }: any) {
     <>
       <Options />
       <MaxLimitWrapper className="px-4 md:px-0 my-4">
-        <div className="flex gap-1">
+        <div className="flex gap-1 items-center">
           <h2>{location[0].getName()}</h2>
           {location[0].getRatingImageUrl() && (
-            <img
+            <Image
               src={location[0].getRatingImageUrl()}
               alt="Rating"
-              className="h-6"
+              height={0}
+              width={0}
+              className="h-6 w-auto"
             />
           )}
         </div>

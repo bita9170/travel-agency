@@ -21,7 +21,7 @@ const TravelersChoice: React.FC = () => {
         <img
           src="/hero2.png"
           alt="Description of the image"
-          className="block  md:max-h-full w-full md:w-auto rounded-xl mr-4"
+          className="block md:max-h-full w-full md:w-auto rounded-xl mr-4"
         />
       </div>
     </div>

@@ -31,7 +31,7 @@ async function SearchPage({
             </h3>
           )}
           {query && locations && locations.length === 0 && (
-            <p>No results found for "{query}".</p>
+            <p>No results found for &quot;{query}&quot;.</p>
           )}
           {query && locations && locations.length > 0 && (
             <div className="grid md:grid-cols-4 gap-8 my-4">
