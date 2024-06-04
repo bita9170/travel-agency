@@ -17,6 +17,7 @@ import {
   EditProfileIcon,
 } from "./icons";
 import { DialogSaveLocations as Dialog } from "@/components/elements/dialogs/DialogSaveLocations";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Dashboard | BiHamTha Travel Agency",
@@ -92,10 +93,10 @@ export default async function RootLayout({
                     Show Reviews
                   </li> */}
 
-                  <li>
+                  {/* <li>
                     <SocialNetworksIcon />
-                    Socila Networks
-                  </li>
+                    <Link href="/dashboard/networks">Social Networks</Link>
+                  </li> */}
 
                   {/* <li>
                     <PagesLayoutIcon />
