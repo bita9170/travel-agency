@@ -39,6 +39,8 @@ export default async function RootLayout({
     redirect("/api/auth/login?post_login_redirect_url=/dashboard");
   }
 
+  const adminEmails = process.env.ADMIN_EMAIL?.split(",");
+
   return (
     <>
       <Header />
@@ -48,10 +50,10 @@ export default async function RootLayout({
           <div className="flex flex-col side-menu">
             <h3>User Menu</h3>
             <ul>
-              <li>
+              {/* <li>
                 <EditProfileIcon />
                 Edit Profile
-              </li>
+              </li> */}
               <Dialog userId={user.id} type="plans">
                 <li>
                   <MyPlanIcon />
@@ -71,12 +73,12 @@ export default async function RootLayout({
                 </li>
               </Dialog>
 
-              <li>
+              {/* <li>
                 <MyReviewsIcon />
                 My Reviews
-              </li>
+              </li> */}
             </ul>
-            {user.email === process.env.ADMIN_EMAIL && (
+            {user.email && adminEmails && adminEmails.includes(user.email) && (
               <div className="mt-12">
                 <h3>Admin Menu</h3>
                 <ul>
@@ -85,20 +87,20 @@ export default async function RootLayout({
                     New Post
                   </li>
 
-                  <li>
+                  {/* <li>
                     <ShowReviewsIcon />
                     Show Reviews
-                  </li>
+                  </li> */}
 
                   <li>
                     <SocialNetworksIcon />
                     Socila Networks
                   </li>
 
-                  <li>
+                  {/* <li>
                     <PagesLayoutIcon />
                     Pages Layout
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             )}
