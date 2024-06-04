@@ -1,30 +1,25 @@
-// app/(root)/blog/[postid]/page.tsx
+"use client";
 
-import React from "react";
-import Hero from "@/components/hero/Hero";
-import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
-import { Separator } from "@/components/ui/separator";
-import LocationSection from "@/components/blog/LocationSection";
+import { Post } from "@/app/dashboard/posts/page";
 import AttractionSection from "@/components/blog/AttractionSection";
-import { get } from "http";
-import { getPostById, getPosts } from "@/controllers/postController";
-import Image from "next/image";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import LocationSection from "@/components/blog/LocationSection";
+import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
+import Hero from "@/components/hero/Hero";
+import { Separator } from "@/components/ui/separator";
+import { getPostById } from "@/controllers/postController";
+import { useEffect, useState } from "react";
 
-const BlogPage = async ({ params }: any) => {
+const BlogPage = ({ params }: any) => {
   const { postid } = params;
-  const res = await getPostById(postid);
-  const post = await res.json();
-  const author = await post.author;
-  const image = await post.image;
-  const content = await post.content;
+  const [post, setPost] = useState<Post>();
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setPost(await getPostById(postid));
+    };
+
+    fetchPosts();
+  }, []);
 
   // const locations = [
   //   {
@@ -101,7 +96,7 @@ const BlogPage = async ({ params }: any) => {
   //     image: "/blog2.jpg",
   //     description:
   //       "Kansas City is known for its rich musical heritage, particularly jazz. Visit the American Jazz Museum, enjoy live music in the 18th & Vine Historic Jazz District, and indulge in the city's famous barbecue. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi placeat dolore autem natus. Nesciunt, eos excepturi! Minima libero esse molestiae dolor nam fugiat aliquam alias quas, officiis veniam aliquid corrupti?",
-  //     heroImage:
+  //       heroImage:
   //       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/ef/1a/db/caption.jpg?w=800&h=-1&s=1",
   //   },
 
@@ -129,28 +124,74 @@ const BlogPage = async ({ params }: any) => {
 
   return (
     <MaxLimitWrapper>
-      <Table>
-        <TableHead>
-          <TableRow className="block">
-            {/* <TableHead>{postid}</TableHead> */}
+      {post && (
+        <div className="blog py-20">
+          <h1>{post.title}</h1>
+          <h3 className="text-center">
+            From mountain gorilla treks to Baltic city getaways, early summer
+            travel rewards the adventurous.
+          </h3>
+          <Hero
+            image="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/ef/18/9e/caption.jpg?w=900&h=-1&s=1&cx=1920&cy=1080&chk=v1_403a8774d94d4732eae6"
+            className="mt-4 md:rounded-none"
+          />
+          <p className="my-4 mb-10">
+            A mountain gorilla in Volcanoes National Park, Rwanda Image:
+            guenterguni/Getty Images
+          </p>
+          <p className="text-[16px]">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt,
+            minima ab! Minima praesentium inventore at exercitationem aliquam,
+            incidunt error dolores cum delectus. Facilis magnam corporis rem
+            deserunt quis optio architecto. Maiores minus enim sunt
+            reprehenderit culpa repudiandae vitae voluptatibus id, explicabo qui
+            debitis dolor veniam earum unde corrupti temporibus est inventore
+            consequatur aperiam, velit ipsam eveniet, consequuntur ipsa?
+            Voluptates, quam. Molestiae eos voluptas vero perspiciatis neque!
+            Maxime nihil eum voluptatum aspernatur odio veritatis rerum
+            accusamus ipsa, facilis obcaecati. Alias animi consectetur numquam,
+            iste nobis quas veritatis quam! Eos, aliquid perspiciatis! Fuga quae
+            eius ducimus enim voluptatum tenetur accusamus numquam neque.
+            Soluta, magnam magni voluptates unde quae quia id porro corrupti
+            necessitatibus cupiditate nulla blanditiis deleniti totam facere.
+            Inventore, assumenda ipsum? Excepturi sed doloremque ab, illum
+            asperiores minima nihil hic sit consequuntur perferendis et enim,
+            suscipit, accusantium exercitationem maxime nemo illo incidunt neque
+            ratione architecto tempore ducimus non quibusdam consequatur!
+            Repudiandae. lorem*2
+          </p>
+          {/* <div className="location-grid">
+            <div className="location-container">
+              {locations.map((location, index) => (
+                <span
+                  key={index}
+                  className="location-item"
 
-            <TableHead>{post.title}</TableHead>
-
-            <TableHead>{post.author}</TableHead>
-
-            <TableHead>{post.content}</TableHead>
-
-            <TableHead>
-              <Image
-                src={post.image}
-                alt="Beschreibung des Bildes"
-                width={500}
-                height={300}
-              />
-            </TableHead>
-          </TableRow>
-        </TableHead>
-      </Table>
+                  //scroll to the location section
+                  // onClick={() => {
+                  //   const element = document.getElementById(location.title);
+                  //   if (element) {
+                  //     element.scrollIntoView({
+                  //       behavior: "smooth",
+                  //       block: "start",
+                  //     });
+                  //   }
+                  // }}
+                >
+                  {location.title}
+                </span>
+              ))}
+            </div>
+            <Separator className="mt-4" />
+          </div> */}
+          {/* {locations.map((location, index) => (
+            <div key={index}>
+              <LocationSection {...location} />
+              <AttractionSection title={location.title} />
+            </div>
+          ))} */}
+        </div>
+      )}
     </MaxLimitWrapper>
   );
 };

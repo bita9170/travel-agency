@@ -6,8 +6,8 @@ import TablePosts from "@/components/dashboard/TablePosts";
 import { DialogPost } from "@/components/elements/dialogs/DialogPost";
 import { Button } from "@/components/ui/button";
 
-interface Post {
-  id: string;
+export interface Post {
+  _id: string;
   title: string;
   author: string;
   publicationDate: string;

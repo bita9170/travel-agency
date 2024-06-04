@@ -1,7 +1,4 @@
-// components/dashboard/TablePosts.tsx
 "use client";
-import { useState } from "react";
-
 import {
   Table,
   TableBody,
@@ -25,28 +22,13 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { deletePost } from "@/controllers/postController";
+import { useEffect } from "react";
+import { Post } from "@/app/dashboard/posts/page";
 
-interface Post {
-  [x: string]: string | number | boolean;
-  _id: string;
-  title: string;
-  author: string;
-  publicationDate: string;
-}
-
-interface TablePostsProps {
-  posts: Post[];
-}
-
-const TablePosts: React.FC<TablePostsProps> = ({ posts }) => {
-  const [openDialogId, setOpenDialogId] = useState<string | null>(null);
-
-  const handleDelete = (postId: string) => {
-    // Call your delete method from controller here
-    console.log("Delete post with ID:", postId);
-    setOpenDialogId(null); // Close the dialog after action
-  };
-
+const TablePosts = (props: any) => {
+  const { posts } = props;
+  useEffect(() => {}, [posts]);
   return (
     <div className="container">
       {/* TODO: You can use  Data-Table component instead of  Table component */}
@@ -61,7 +43,7 @@ const TablePosts: React.FC<TablePostsProps> = ({ posts }) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {posts.map((post) => (
+          {posts.map((post: Post) => (
             <TableRow key={post._id}>
               <TableCell>{post.title}</TableCell>
               <TableCell>{post.author}</TableCell>
@@ -75,42 +57,31 @@ const TablePosts: React.FC<TablePostsProps> = ({ posts }) => {
                   <DialogPost postId={post._id}>
                     <Button variant={"secondary"}>Edit</Button>
                   </DialogPost>
-                  <Button
-                    variant="destructive"
-                    onClick={() => setOpenDialogId(post._id)}
-                  >
-                    Delete
-                  </Button>
-                  {openDialogId === post._id && (
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <Button hidden>Open</Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>
-                            Are you absolutely sure?
-                          </AlertDialogTitle>
-                          <AlertDialogDescription>
-                            This action cannot be undone. This will permanently
-                            delete the post.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel
-                            onClick={() => setOpenDialogId(null)}
-                          >
-                            Cancel
-                          </AlertDialogCancel>
-                          <AlertDialogAction
-                            onClick={() => handleDelete(post._id)}
-                          >
-                            Continue
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
-                  )}
+
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button variant={"destructive"}>Delete</Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>
+                          Are you absolutely sure?
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This action cannot be undone. This will permanently
+                          delete the post.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction
+                          onClick={async () => await deletePost(post._id)}
+                        >
+                          Continue
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
 
                   <Button variant={"orange"} asChild>
                     <Link href={`/blog/${post._id} `} target="_blank">
