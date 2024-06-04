@@ -39,6 +39,8 @@ export default async function RootLayout({
     redirect("/api/auth/login?post_login_redirect_url=/dashboard");
   }
 
+  const adminEmails = process.env.ADMIN_EMAIL?.split(",");
+
   return (
     <>
       <Header />
@@ -76,7 +78,7 @@ export default async function RootLayout({
                 My Reviews
               </li> */}
             </ul>
-            {user.email === process.env.ADMIN_EMAIL && (
+            {user.email && adminEmails && adminEmails.includes(user.email) && (
               <div className="mt-12">
                 <h3>Admin Menu</h3>
                 <ul>
