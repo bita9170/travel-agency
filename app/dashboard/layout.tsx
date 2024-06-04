@@ -86,22 +86,10 @@ export default async function RootLayout({
                     New Post
                   </li>
 
-<<<<<<< HEAD
-            <div className="mt-12">
-              <h3>Admin Menu</h3>
-              <ul>
-                <li>
-                  <Link href="/dashboard/posts" className="flex space-x-2">
-                    <NewPostIcon />
-                    Posts
-                  </Link>
-                </li>
-=======
                   <li>
                     <ShowReviewsIcon />
                     Show Reviews
                   </li>
->>>>>>> main
 
                   <li>
                     <SocialNetworksIcon />
