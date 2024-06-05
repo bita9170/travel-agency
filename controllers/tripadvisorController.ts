@@ -12,6 +12,7 @@ const TRIPADVISOR_BASE_URL =
 
 async function fetchData(url: string) {
   try {
+    console.log("fetchData");
     const options = { method: "GET", headers: { accept: "application/json" } };
     const response = await fetch(url, options);
     if (!response.ok) {
