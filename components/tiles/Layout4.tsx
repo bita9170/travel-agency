@@ -43,7 +43,7 @@ function Layout4({ image, ctaText, ctaLink, rating, about }: Layout4Props) {
       </div>
       <div className="mt-auto border-t-2 border-neutral-100 px-6 py-3 text-center text-surface/75 dark:border-white/10 dark:text-neutral-300">
         <Button variant={"orange"} className="w-full">
-          Show prices
+          Show details
         </Button>
       </div>
     </div>

@@ -5,36 +5,41 @@ import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Layout4 from "@/components/tiles/Layout4";
 import { getAllLocationDetails } from "@/lib/data/location";
 import { LocationDetails } from "@/lib/class/location";
+import Options from "@/components/header/Options";
 
 const HotelsPage = () => {
   const locations: LocationDetails[] = getAllLocationDetails();
   const images = [
     {
-      image: "/image1.jpeg",
-      ctaText: "Travelers' Choice",
+      image: "/Hotel-indoorpool.jpg",
+      ctaText: "Astra Opéra - Astotel",
       ctaLink: "#",
     },
     {
-      image: "/image2.jpeg",
-      ctaText: "Kid-friendly",
+      image: "/Hotel2.jpg",
+      ctaText: "Malte Astotel",
       ctaLink: "#",
     },
     {
-      image: "/image3.jpeg",
-      ctaText: "5-star stay",
+      image:
+        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/90/05/26/club-room--v6081295.jpg?w=300&h=300&s=1",
+      ctaText: "Hotel Therese",
       ctaLink: "#",
     },
     {
-      image: "/image4.jpeg",
-      ctaText: "Breakfast included",
+      image: "/Hotel4jpg",
+      ctaText: "Hotel Francois 1er",
       ctaLink: "#",
     },
   ];
 
   return (
     <>
-      <Hero image="/caption.jpg" className="mt-4 md:rounded-none" />
-
+      <Options showTitle={false} />
+      <Hero
+        image="/hotel-colline-de-france.jpg"
+        className="mt-4 md:rounded-none"
+      />
       <MaxLimitWrapper>
         <section className="py-10 mt-4 px-2 md:px-0">
           <h3>Popular hotels in Paris right now</h3>

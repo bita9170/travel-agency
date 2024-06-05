@@ -37,16 +37,16 @@ const Options: React.FC<OptionsProps> = ({ showTitle = true }) => {
           </Button>
 
           <Button variant={"link"} asChild className="text-black">
-            <Link href="/blog">
-              <ThingsToDoIcon className="mr-1" />
-              Things to Do
+            <Link href="restaurants">
+              <RestaurantsIcon className="mr-1" />
+              Restaurants
             </Link>
           </Button>
 
           <Button variant={"link"} asChild className="text-black">
-            <Link href="restaurants">
-              <RestaurantsIcon className="mr-1" />
-              Restaurants
+            <Link href="/blog">
+              <ThingsToDoIcon className="mr-1" />
+              Things to Do
             </Link>
           </Button>
         </div>
