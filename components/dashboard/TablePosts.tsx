@@ -22,17 +22,17 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { deletePost } from "@/controllers/postController";
-import { useEffect } from "react";
+import { deletePost, updatePost } from "@/controllers/postController";
+import { useEffect, useState } from "react";
 import { Post } from "@/app/dashboard/posts/page";
 
 const TablePosts = (props: any) => {
   const { posts } = props;
+  const [message, setMessage] = useState("");
   useEffect(() => {}, [posts]);
+
   return (
     <div className="container">
-      {/* TODO: You can use  Data-Table component instead of  Table component */}
-      {/* https://ui.shadcn.com/docs/components/data-table */}
       <Table>
         <TableHeader className="text-bold">
           <TableRow>

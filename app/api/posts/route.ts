@@ -4,6 +4,15 @@ import connectMongoDB from "@/lib/mongodb";
 
 import { NextRequest, NextResponse } from "next/server";
 
+export interface IPost {
+  title: string;
+  content: string;
+  author: string;
+  image: string;
+  locationId: string;
+  userId: string;
+}
+
 // POST Request
 export async function POST(req: NextRequest) {
   await connectMongoDB();
@@ -95,23 +104,18 @@ export async function GET(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   await connectMongoDB();
 
-  const postId = req.nextUrl.searchParams.get("postId");
-
-  if (!postId) {
-    return new NextResponse(
-      JSON.stringify({ message: "Post ID is required" }),
-      { status: 400 }
-    );
-  }
-
   try {
-    const updateData = {
-      title: req.body.title,
-      content: req.body.content,
-      author: req.body.author,
-      image: req.body.image,
-      locationId: req.body.locationId,
-    };
+    const { postId, title, content, author, image, locationId } =
+      await req.json();
+
+    if (!postId) {
+      return new NextResponse(
+        JSON.stringify({ message: "Post ID is required" }),
+        { status: 400 }
+      );
+    }
+
+    const updateData = { title, content, author, image, locationId };
 
     const updatedPost = await Post.findByIdAndUpdate(postId, updateData, {
       new: true,
