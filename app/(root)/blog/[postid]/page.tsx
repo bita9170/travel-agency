@@ -4,6 +4,7 @@ import { Post } from "@/app/dashboard/posts/page";
 import AttractionSection from "@/components/blog/AttractionSection";
 import LocationSection from "@/components/blog/LocationSection";
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
+import Options from "@/components/header/Options";
 import Hero from "@/components/hero/Hero";
 import { Separator } from "@/components/ui/separator";
 import { getPostById } from "@/controllers/postController";
@@ -22,18 +23,23 @@ const BlogPage = ({ params }: any) => {
   }, []);
 
   return (
-    <MaxLimitWrapper>
-      {post && (
-        <div className="blog py-20">
-          <h1>{post.title}</h1>
-          <h3>{post.author}</h3>
+    <>
+      <Options />
+      <MaxLimitWrapper>
+        {post && (
+          <div className="blog py-20">
+            <h1>{post.title}</h1>
+            <h3>{post.author}</h3>
 
-          <Hero image={post.image} className="mt-4 md:rounded-none" />
-          <p className="my-4 mb-10">{post.publicationDate}</p>
-          <p className="text-[16px]">{post.content}</p>
-        </div>
-      )}
-    </MaxLimitWrapper>
+            {post.image && (
+              <Hero image={post.image} className="mt-4 md:rounded-none" />
+            )}
+            <p className="my-4 mb-10">{post.publicationDate}</p>
+            <p className="text-[16px]">{post.content}</p>
+          </div>
+        )}
+      </MaxLimitWrapper>
+    </>
   );
 };
 

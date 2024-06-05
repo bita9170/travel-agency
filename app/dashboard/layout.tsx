@@ -9,12 +9,9 @@ import {
   MyFavoritesIcon,
   MyPlanIcon,
   MyPlacesIcon,
-  MyReviewsIcon,
   NewPostIcon,
-  ShowReviewsIcon,
   SocialNetworksIcon,
-  PagesLayoutIcon,
-  EditProfileIcon,
+  DashboardIcon,
 } from "./icons";
 import Link from "next/link";
 import { DialogSaveLocations as Dialog } from "@/components/elements/dialogs/DialogSaveLocations";
@@ -43,18 +40,20 @@ export default async function RootLayout({
   const adminEmails = process.env.ADMIN_EMAIL?.split(",");
 
   return (
-    <>
+    <main className="flex flex-col min-h-screen">
       <Header />
       <Separator />
-      <MaxLimitWrapper className="py-6">
+      <MaxLimitWrapper className="py-6 flex-1 w-full">
         <div className="dashboard-section flex gap-4">
           <div className="flex flex-col side-menu">
             <h3>User Menu</h3>
             <ul>
-              {/* <li>
-                <EditProfileIcon />
-                Edit Profile
-              </li> */}
+              <Link href="/dashboard">
+                <li>
+                  <DashboardIcon />
+                  Dashboard
+                </li>
+              </Link>
               <Dialog userId={user.id} type="plans">
                 <li>
                   <MyPlanIcon />
@@ -113,6 +112,6 @@ export default async function RootLayout({
         </div>
       </MaxLimitWrapper>
       <Footer footerTop={false} />
-    </>
+    </main>
   );
 }

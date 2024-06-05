@@ -11,20 +11,26 @@ import axios from "axios";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { updatePost } from "@/controllers/postController";
-
-// TODO: With postId props = Edit Post --- without postId props = Add new Post
+import { createPost, updatePost } from "@/controllers/postController";
+import { Alert, AlertTitle } from "@/components/ui/alert";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 export function DialogPost({
   children,
   postId = null,
+  callback,
   className,
 }: {
   children: React.ReactNode;
   postId?: string | null;
+  callback: () => void;
   className?: string;
 }) {
   const isFormValid = () => title.trim() && author.trim() && content.trim();
+
+  const { getUser } = useKindeBrowserClient();
+  const user = getUser();
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -32,6 +38,17 @@ export function DialogPost({
   const [image, setImage] = useState("");
   const [locationId, setLocationId] = useState("");
   const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState<{
+    show: boolean;
+    type: string;
+    message: string;
+  }>({
+    show: false,
+    type: "default",
+    message: "",
+  });
+
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (postId) {
@@ -58,7 +75,11 @@ export function DialogPost({
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     if (!isFormValid()) {
-      alert("Please fill in all fields.");
+      setAlert({
+        show: true,
+        type: "destructive",
+        message: "Please fill in all fields.",
+      });
       return;
     }
     setLoading(true);
@@ -67,28 +88,62 @@ export function DialogPost({
       if (postId) {
         // Update existing post
         const updatedData = { title, author, content, image, locationId };
-        console.log("updatedData", updatedData);
-        console.log("postId", postId);
 
-        const result = await updatePost(postId, updatedData);
-        if (result.success) {
-          alert("Post updated successfully!");
+        const res = await updatePost(postId, updatedData);
+        if (res.success) {
+          setAlert({
+            show: true,
+            type: "success",
+            message: "Post updated successfully!",
+          });
+
+          setTimeout(() => {
+            setOpen(false);
+            callback();
+          }, 1000);
         } else {
-          alert(`Error: ${result.message}`);
+          setAlert({
+            show: true,
+            type: "destructive",
+            message: `Error: ${res.message}`,
+          });
         }
       } else {
-        // Create new post
-        await axios.post("/api/posts", {
+        const res = await createPost(
           title,
-          author,
           content,
+          author,
           image,
           locationId,
-        });
-        alert("Post added successfully!");
+          user ? user.id : ""
+        );
+
+        console.log(res);
+        if (res.success) {
+          setAlert({
+            show: true,
+            type: "success",
+            message: "Post added successfully!",
+          });
+
+          setTimeout(() => {
+            setOpen(false);
+            callback();
+          }, 1000);
+        } else {
+          setAlert({
+            show: true,
+            type: "destructive",
+            message: "Failed to save post. Please try again.",
+          });
+        }
       }
     } catch (error) {
-      alert("Failed to save post. Please try again.");
+      setAlert({
+        show: true,
+        type: "destructive",
+        message: "Failed to save post. Please try again.",
+      });
       console.error("Failed to save post", error);
     } finally {
       setLoading(false);
@@ -96,12 +151,29 @@ export function DialogPost({
   };
 
   return (
-    <DialogShadcn>
+    <DialogShadcn open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
-          <DialogTitle>{postId ? "Edit Post" : "Add a New Post"}</DialogTitle>
+          <DialogTitle>
+            {postId ? "Edit Post" : "Add a New Post"} <span></span>
+          </DialogTitle>
         </DialogHeader>
+
+        <Alert
+          variant={
+            alert.type == "success"
+              ? alert.type
+              : alert.type == "destructive"
+              ? alert.type
+              : "default"
+          }
+          className={`${!alert.show && "hidden"}`}
+        >
+          <ExclamationTriangleIcon className="h-4 w-4" />
+          <AlertTitle>{alert.message}</AlertTitle>
+        </Alert>
+
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
           <Input
             type="text"

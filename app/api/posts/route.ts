@@ -105,8 +105,7 @@ export async function PUT(req: NextRequest) {
   await connectMongoDB();
 
   try {
-    const { postId, title, content, author, image, locationId } =
-      await req.json();
+    const { postId, updatedData } = await req.json();
 
     if (!postId) {
       return new NextResponse(
@@ -115,9 +114,7 @@ export async function PUT(req: NextRequest) {
       );
     }
 
-    const updateData = { title, content, author, image, locationId };
-
-    const updatedPost = await Post.findByIdAndUpdate(postId, updateData, {
+    const updatedPost = await Post.findByIdAndUpdate(postId, updatedData, {
       new: true,
       runValidators: true,
     });
