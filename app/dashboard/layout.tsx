@@ -15,7 +15,6 @@ import {
 } from "./icons";
 import Link from "next/link";
 import { DialogSaveLocations as Dialog } from "@/components/elements/dialogs/DialogSaveLocations";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Dashboard | BiHamTha Travel Agency",
