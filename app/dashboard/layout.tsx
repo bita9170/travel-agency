@@ -10,7 +10,6 @@ import {
   MyPlanIcon,
   MyPlacesIcon,
   NewPostIcon,
-  SocialNetworksIcon,
   DashboardIcon,
 } from "./icons";
 import Link from "next/link";

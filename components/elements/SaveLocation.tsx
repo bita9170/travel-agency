@@ -9,19 +9,9 @@ import {
 import { toast } from "sonner";
 import { ISaveLocation } from "@/controllers/saveLocationController";
 import { Heart_f, Location_f, Travelbag_f } from "@/app/dashboard/icons";
-import {
-  LoginLink,
-  RegisterLink,
-  useKindeBrowserClient,
-} from "@kinde-oss/kinde-auth-nextjs";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "../ui/button";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import LoginRegisterLink from "./LoginRegisterLink";
 
 export interface IResult {
   message: string;
@@ -169,12 +159,7 @@ function SaveLocation({
         <DialogContent className="sm:max-w-xl text-center">
           <h3>You must be a member to be able to save a location</h3>
           <div className="grid space-y-4 items-center min-w-60 mx-auto mt-4">
-            <Button variant={"orange"}>
-              <RegisterLink>Register</RegisterLink>
-            </Button>
-            <Button variant={"green"}>
-              <LoginLink>Login</LoginLink>
-            </Button>
+            <LoginRegisterLink />
           </div>
         </DialogContent>
       </Dialog>
