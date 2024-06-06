@@ -34,7 +34,7 @@ function SaveLocation({
   userId: string;
   locationId: string;
 }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const [favorite, setFavorite] = useState<string>("");
   const [plans, setPlans] = useState<string>("");
