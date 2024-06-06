@@ -10,14 +10,9 @@ import {
   ISaveLocation,
   getSaveLocationsByUserId,
 } from "@/controllers/saveLocationController";
-import Layout4 from "../../tiles/Layout4";
-import { LocationDetails } from "@/lib/class/location/LocationDetails";
-import {
-  getAllLocationDetails,
-  getLocationDetailsById,
-} from "@/lib/data/location";
 import { useEffect, useState } from "react";
 import Layout1 from "@/components/tiles/Layout1";
+import { getLocationDetails } from "@/controllers/tripadvisorControllerClient";
 
 export function DialogSaveLocations({
   children,
@@ -30,11 +25,18 @@ export function DialogSaveLocations({
   type: string;
   className?: string;
 }) {
-  let locations: LocationDetails[] = getAllLocationDetails();
-  const [saveLocations, setSaveLocations] = useState<ISaveLocation[]>([]);
+  const [locations, setLocations] = useState<[]>();
   useEffect(() => {
     const fetchData = async () => {
-      setSaveLocations(await getSaveLocationsByUserId(userId));
+      const saveLocations = await getSaveLocationsByUserId(userId);
+      setLocations(
+        await getLocationDetails(
+          saveLocations
+            .filter((item: ISaveLocation) => item.type == type)
+            .map((saveLocation: ISaveLocation) => saveLocation.locationId)
+            .map(Number)
+        )
+      );
     };
 
     // call the function
@@ -42,6 +44,12 @@ export function DialogSaveLocations({
       // make sure to catch any error
       .catch(console.error);
   }, []);
+  const getImage = () => {
+    const arr: number[] = [57, 49, 28, 27, 74, 84, 122, 124, 142, 249];
+    const ind = Math.floor(Math.random() * arr.length);
+
+    return `https://picsum.photos/id/${arr.splice(ind, 1)[0]}/4106/2806`;
+  };
 
   return (
     <DialogShadcn>
@@ -51,26 +59,18 @@ export function DialogSaveLocations({
           <DialogTitle>{type.toUpperCase()}</DialogTitle>
         </DialogHeader>
         <div className="grid md:grid-cols-3 gap-4">
-          {saveLocations.length > 0 &&
-            saveLocations.map(
-              (saveLocation: ISaveLocation) =>
-                saveLocation.type == type &&
-                locations
-                  .filter(
-                    (location) =>
-                      location.getLocationId() === saveLocation.locationId
-                  )
-                  .map(async (item) => (
-                    <Layout1
-                      key={item.getLocationId()}
-                      image={await item.getImage()}
-                      ctaText={item.getName()}
-                      ctaLink={`/${item.getLocationId()}`}
-                      minHeight="min-h-[200px]"
-                    />
-                  ))
-            )}
-          {!saveLocations && <h1>You do not have any {type} location(s)</h1>}
+          {locations &&
+            locations.map(async (location) => (
+              <Layout1
+                key={location["location_id"]}
+                image={getImage()}
+                ctaText={location["name"]}
+                ctaLink={`/${location["location_id"]}`}
+                minHeight="min-h-[200px]"
+              />
+            ))}
+
+          {!locations && <h1>You do not have any {type} location(s)</h1>}
         </div>
       </DialogContent>
     </DialogShadcn>
