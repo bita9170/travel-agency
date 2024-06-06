@@ -106,11 +106,12 @@ export default async function page({ params }: any) {
               {location[0].getDescription()}
             </CardContent>
 
-            {isLogged && user && (
-              <CardFooter className="text-left">
-                <SaveLocation userId={user.id} locationId={locationid} />
-              </CardFooter>
-            )}
+            <CardFooter className="text-left">
+              <SaveLocation
+                userId={user ? user.id : "0"}
+                locationId={user ? locationid : "0"}
+              />
+            </CardFooter>
           </Card>
 
           <div className="h-[500px] w-full border-2 sm:m-auto relative rounded-xl overflow-hidden col-span-2">

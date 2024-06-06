@@ -9,13 +9,33 @@ import {
 import { toast } from "sonner";
 import { ISaveLocation } from "@/controllers/saveLocationController";
 import { Heart_f, Location_f, Travelbag_f } from "@/app/dashboard/icons";
+import {
+  LoginLink,
+  RegisterLink,
+  useKindeBrowserClient,
+} from "@kinde-oss/kinde-auth-nextjs";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "../ui/button";
 
 export interface IResult {
   message: string;
   value: string;
 }
-function SaveLocation(props: any) {
-  const { userId, locationId } = props;
+function SaveLocation({
+  userId,
+  locationId,
+}: {
+  userId: string;
+  locationId: string;
+}) {
+  const [open, setOpen] = useState(true);
+
   const [favorite, setFavorite] = useState<string>("");
   const [plans, setPlans] = useState<string>("");
   const [place, setPlace] = useState<string>("");
@@ -53,65 +73,111 @@ function SaveLocation(props: any) {
       // make sure to catch any error
       .catch(console.error);
   }, [favorite, plans, place]);
+
+  const { isAuthenticated } = useKindeBrowserClient();
   return (
     <div className="flex justify-between w-full">
       <div className="flex space-x-2">
-        <div
-          onClick={async () => {
-            favorite
-              ? (result = await removeSaveLocation(favorite))
-              : (result = await createSaveLocation(
-                  userId,
-                  locationId,
-                  "favorite"
-                ));
-            setFavorite(result.value);
-            toast(result.message, { position: "top-left" });
-          }}
-        >
-          {favorite ? svgIcons.heart_f : svgIcons.heart}
-        </div>
+        {isAuthenticated ? (
+          <div
+            onClick={async () => {
+              favorite
+                ? (result = await removeSaveLocation(favorite))
+                : (result = await createSaveLocation(
+                    userId,
+                    locationId,
+                    "favorite"
+                  ));
+              setFavorite(result.value);
+              toast(result.message, { position: "top-left" });
+            }}
+          >
+            {favorite ? svgIcons.heart_f : svgIcons.heart}
+          </div>
+        ) : (
+          <div
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            {svgIcons.heart}
+          </div>
+        )}
 
-        <div
-          onClick={async () => {
-            place
-              ? (result = await removeSaveLocation(place))
-              : (result = await createSaveLocation(
-                  userId,
-                  locationId,
-                  "place"
-                ));
-            setPlace(result.value);
-            toast(result.message, { position: "top-left" });
-          }}
-        >
-          {place ? svgIcons.location_f : svgIcons.location}
-        </div>
+        {isAuthenticated ? (
+          <div
+            onClick={async () => {
+              place
+                ? (result = await removeSaveLocation(place))
+                : (result = await createSaveLocation(
+                    userId,
+                    locationId,
+                    "place"
+                  ));
+              setPlace(result.value);
+              toast(result.message, { position: "top-left" });
+            }}
+          >
+            {place ? svgIcons.location_f : svgIcons.location}
+          </div>
+        ) : (
+          <div
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            {svgIcons.location}
+          </div>
+        )}
 
-        <div
-          onClick={async () => {
-            plans
-              ? (result = await removeSaveLocation(plans))
-              : (result = await createSaveLocation(
-                  userId,
-                  locationId,
-                  "plans"
-                ));
-            setPlans(result.value);
-            toast(result.message, { position: "top-left" });
-          }}
-        >
-          {plans ? svgIcons.travelbag_f : svgIcons.travelbag}
-        </div>
+        {isAuthenticated ? (
+          <div
+            onClick={async () => {
+              plans
+                ? (result = await removeSaveLocation(plans))
+                : (result = await createSaveLocation(
+                    userId,
+                    locationId,
+                    "plans"
+                  ));
+              setPlans(result.value);
+              toast(result.message, { position: "top-left" });
+            }}
+          >
+            {plans ? svgIcons.travelbag_f : svgIcons.travelbag}
+          </div>
+        ) : (
+          <div
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            {svgIcons.travelbag}
+          </div>
+        )}
       </div>
-      <div className="flex space-x-2 items-center">
+      {/* <div className="flex space-x-2 items-center">
         <Link href="#">
           <div>{svgIcons.link}</div>
         </Link>
         <Link href="#">
           <div>{svgIcons.map}</div>
         </Link>
-      </div>
+      </div> */}
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-xl text-center">
+          <h3>You must be a member to be able to save a location</h3>
+          <div className="grid space-y-4 items-center min-w-60 mx-auto mt-4">
+            <Button variant={"orange"}>
+              <RegisterLink>Register</RegisterLink>
+            </Button>
+            <Button variant={"green"}>
+              <LoginLink>Login</LoginLink>
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

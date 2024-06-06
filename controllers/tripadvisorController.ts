@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import { LocationDetails, LocationPhotos } from "@/lib/class/location";
 
-const TRIPADVISOR_API_KEY = process.env.TRIPADVISOR_API_KEY;
+const TRIPADVISOR_API_KEY = process.env.NEXT_PUBLIC_TRIPADVISOR_API_KEY;
 
 if (!TRIPADVISOR_API_KEY) {
   throw new Error("TripAdvisor API key is missing in environment variables");
@@ -12,7 +12,6 @@ const TRIPADVISOR_BASE_URL =
 
 async function fetchData(url: string) {
   try {
-    console.log("fetchData");
     const options = { method: "GET", headers: { accept: "application/json" } };
     const response = await fetch(url, options);
     if (!response.ok) {
