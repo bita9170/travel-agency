@@ -17,7 +17,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { notFound } from "next/navigation";
 import { getLocationDetails } from "@/controllers/tripadvisorController";
 import Options from "@/components/header/Options";
-
+import Map from "@/components/Map";
 export default async function page({ params }: any) {
   const { getUser, isAuthenticated } = getKindeServerSession();
   const isLogged = await isAuthenticated();
@@ -171,11 +171,18 @@ export default async function page({ params }: any) {
 
           <div className="lg:col-span-1 flex justify-center items-center">
             <div className="w-full h-[300px] relative">
-              <Image
-                src="/map.png"
-                alt="Map of Eiffel Tower Area"
-                fill
-                className="object-cover"
+              <Map
+                center={[
+                  parseFloat(location[0].getLatitude()),
+                  parseFloat(location[0].getLongitude()),
+                ]}
+                zoom={location[0].getCategory().name == "geographic" ? 12 : 16}
+                markers={[
+                  [
+                    parseFloat(location[0].getLatitude()),
+                    parseFloat(location[0].getLongitude()),
+                  ],
+                ]}
               />
             </div>
           </div>

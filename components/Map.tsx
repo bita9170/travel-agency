@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -30,12 +32,7 @@ const Map: React.FC<MapProps> = ({ center, zoom, markers }) => {
   };
 
   return (
-    <div
-      className={`relative ${
-        isFullscreen ? "map-container" : "w-full h-[300px]"
-      }`}
-      onClick={handleMapClick}
-    >
+    <div className="w-full h-[300px]">
       <MapContainer center={center} zoom={zoom} className="w-full h-full">
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -49,7 +46,7 @@ const Map: React.FC<MapProps> = ({ center, zoom, markers }) => {
           </Marker>
         ))}
       </MapContainer>
-      {isFullscreen && (
+      {/* {isFullscreen && (
         <Button
           className="absolute top-4 right-6 bg-white p-2 rounded shadow"
           onClick={(e) => {
@@ -59,7 +56,7 @@ const Map: React.FC<MapProps> = ({ center, zoom, markers }) => {
         >
           <span className="text-gray-600">&times;</span>
         </Button>
-      )}
+      )} */}
     </div>
   );
 };
