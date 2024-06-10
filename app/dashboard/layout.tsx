@@ -9,13 +9,10 @@ import {
   MyFavoritesIcon,
   MyPlanIcon,
   MyPlacesIcon,
-  MyReviewsIcon,
   NewPostIcon,
-  ShowReviewsIcon,
-  SocialNetworksIcon,
-  PagesLayoutIcon,
-  EditProfileIcon,
+  DashboardIcon,
 } from "./icons";
+import Link from "next/link";
 import { DialogSaveLocations as Dialog } from "@/components/elements/dialogs/DialogSaveLocations";
 
 export const metadata: Metadata = {
@@ -38,19 +35,24 @@ export default async function RootLayout({
   if (!user) {
     redirect("/api/auth/login?post_login_redirect_url=/dashboard");
   }
+
+  const adminEmails = process.env.ADMIN_EMAIL?.split(",");
+
   return (
-    <>
+    <main className="flex flex-col min-h-screen">
       <Header />
       <Separator />
-      <MaxLimitWrapper className="py-6">
+      <MaxLimitWrapper className="py-6 flex-1 w-full">
         <div className="dashboard-section flex gap-4">
           <div className="flex flex-col side-menu">
-            <h5 className="font-bold">User Menu</h5>
+            <h3>User Menu</h3>
             <ul>
-              <li>
-                <EditProfileIcon />
-                Edit Profile
-              </li>
+              <Link href="/dashboard">
+                <li>
+                  <DashboardIcon />
+                  Dashboard
+                </li>
+              </Link>
               <Dialog userId={user.id} type="plans">
                 <li>
                   <MyPlanIcon />
@@ -70,42 +72,45 @@ export default async function RootLayout({
                 </li>
               </Dialog>
 
-              <li>
+              {/* <li>
                 <MyReviewsIcon />
                 My Reviews
-              </li>
+              </li> */}
             </ul>
+            {user.email && adminEmails && adminEmails.includes(user.email) && (
+              <div className="mt-12">
+                <h3>Admin Menu</h3>
+                <ul>
+                  <li>
+                    <Link href="/dashboard/posts" className="flex space-x-2">
+                      <NewPostIcon />
+                      Posts
+                    </Link>
+                  </li>
 
-            <div className="mt-12">
-              <h3>Admin Menu</h3>
-              <ul>
-                <li>
-                  <NewPostIcon />
-                  New Post
-                </li>
+                  {/* <li>
+                    <ShowReviewsIcon />
+                    Show Reviews
+                  </li> */}
 
-                <li>
-                  <ShowReviewsIcon />
-                  Show Reviews
-                </li>
+                  {/* <li>
+                    <SocialNetworksIcon />
+                    <Link href="/dashboard/networks">Social Networks</Link>
+                  </li> */}
 
-                <li>
-                  <SocialNetworksIcon />
-                  Socila Networks
-                </li>
-
-                <li>
-                  <PagesLayoutIcon />
-                  Pages Layout
-                </li>
-              </ul>
-            </div>
+                  {/* <li>
+                    <PagesLayoutIcon />
+                    Pages Layout
+                  </li> */}
+                </ul>
+              </div>
+            )}
           </div>
 
           <div className="main w-full flex-1">{children}</div>
         </div>
       </MaxLimitWrapper>
       <Footer footerTop={false} />
-    </>
+    </main>
   );
 }

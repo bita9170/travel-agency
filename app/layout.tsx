@@ -4,8 +4,8 @@ import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
-  title: "Travel Agency",
-  description: "",
+  title: "BiHamTha Travel Agency",
+  description: "BiHamTha Travel Agency",
 };
 
 export default function RootLayout({
@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning={true}>
       <body className={cn("min-h-screen bg-background font-sans antialiased")}>
         {children}
         <Toaster />

@@ -1,19 +1,18 @@
-import React, { use } from "react";
+import React from "react";
 import Logo from "../elements/Logo";
 import Avatar from "../elements/Avatar";
 import MaxLimitWrapper from "../elements/MaxLimitWrapper";
 import Link from "next/link";
-import { Button } from "../ui/button";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import LoginRegisterLink from "../elements/LoginRegisterLink";
 
 async function Header() {
   const { getUser, isAuthenticated } = getKindeServerSession();
   const isLogged = await isAuthenticated();
   const user = await getUser();
   return (
-    <MaxLimitWrapper>
-      <header className="px-2 md:px-0 ">
+    <MaxLimitWrapper className="w-full">
+      <header className="px-2 md:px-0">
         <div className="header-top flex justify-between min-h-[80px] items-center">
           <Link href={"/"}>
             <div className="logo">
@@ -41,9 +40,7 @@ async function Header() {
                 }
               />
             ) : (
-              <Button className="text-black bg-[#34e0a1]">
-                <LoginLink>Login</LoginLink>
-              </Button>
+              <LoginRegisterLink />
             )}
           </div>
         </div>

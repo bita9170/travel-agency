@@ -8,8 +8,6 @@ export interface IPost extends Document {
   image?: string;
   locationId?: string;
   userId: string;
-  createdAt: Date;
-  updatedAt: Date;
 }
 
 const PostSchema: Schema = new Schema(
