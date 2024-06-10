@@ -22,7 +22,7 @@ const Layout3: React.FC<Layout3Props> = ({
       <div className="grid overflow-hidden relative">
         <img
           src={image}
-          alt="layout-2"
+          alt={ctaText}
           className="w-full h-[270px] object-cover rounded-xl"
         />
         <div className="absolute top-2 right-2 z-10">
@@ -39,7 +39,6 @@ const Layout3: React.FC<Layout3Props> = ({
               <p className="mt-2 text-base text-center">{ctaText}</p>
             </Link>
           )}
-
 
           <p>{category}</p>
         </div>

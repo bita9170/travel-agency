@@ -1,24 +1,16 @@
+import HomePagePosts from "@/components/HomePagePosts";
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Options from "@/components/header/Options";
-import Hero from "@/components/hero/Hero";
 import Layout from "@/components/hero/Layout";
 import { SommerContent, SpringContent } from "@/components/tab/content";
 import Tab, { TabProps } from "@/components/tabsection/Tab";
 import Layout1 from "@/components/tiles/Layout1";
 import Layout2 from "@/components/tiles/Layout2";
 import Layout3 from "@/components/tiles/Layout3";
-// import { getLocationDetails } from "@/controllers/tripadvisorController";
 import { LocationDetails } from "@/lib/class/location";
 import { getLocationDetailsByIds } from "@/lib/data/location";
 
-export default async function Home() {
-  // const locationDetails: LocationDetails[] = await getLocationDetails([
-  //   188151, 188757, 188679, 188709,
-  // ]);
-  // const locationDetails: LocationDetails[] = getLocationDetailsByIds([
-  //   188151, 188757, 188679, 188709,
-  // ]);
-
+export default function Home() {
   const images = [
     {
       image: "/image1.jpeg",
@@ -60,14 +52,7 @@ export default async function Home() {
       </MaxLimitWrapper>
 
       <MaxLimitWrapper>
-        <Hero
-          title="World's best hotels for 2024"
-          image="/hero.jpeg"
-          subtitle="See our Travelers' Choice Awards Best of the Best winners."
-          ctaText="See the list"
-          ctaLink="#"
-          className="mt-4"
-        />
+        <HomePagePosts type="hero" />
       </MaxLimitWrapper>
 
       <MaxLimitWrapper>
@@ -108,33 +93,7 @@ export default async function Home() {
         </section>
       </MaxLimitWrapper>
 
-      <section className="bg-[#faf1ed] py-10 mt-4 px-2 md:px-0">
-        <MaxLimitWrapper>
-          <h3>More to explore</h3>
-          <div className="grid md:grid-cols-3 gap-8 my-4">
-            <Layout3
-              image="/image (5).jpeg"
-              ctaText="7 New York City restaurants to try when
-        the top tables are booked"
-              rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
-              ctaLink="#"
-            />
-            <Layout3
-              image="/image (6).jpeg"
-              ctaText="10 best places to visit in May around
-        the world"
-              rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
-              ctaLink="#"
-            />
-            <Layout3
-              image="/image (7).jpeg"
-              ctaText="One perfect day in Milan"
-              rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
-              ctaLink="#"
-            />
-          </div>
-        </MaxLimitWrapper>
-      </section>
+      <HomePagePosts type="3-col-post" />
 
       <MaxLimitWrapper>
         <section className="py-10 mt-4 px-2 md:px-0">

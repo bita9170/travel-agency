@@ -34,7 +34,7 @@ export interface Post {
   author: string;
   publicationDate: string;
   content?: string;
-  image?: string;
+  image: string;
   locationId?: string;
   createdAt?: string;
   updatedAt?: string;

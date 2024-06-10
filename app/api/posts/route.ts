@@ -61,6 +61,7 @@ export async function GET(req: NextRequest) {
   console.log("GET request");
   const userId = req.nextUrl.searchParams.get("userId");
   const postId = req.nextUrl.searchParams.get("postId");
+  const limit = parseInt(req.nextUrl.searchParams.get("limit") || "0");
 
   try {
     let posts: any;
@@ -75,7 +76,7 @@ export async function GET(req: NextRequest) {
         );
       }
     } else if (userId) {
-      posts = await Post.find({ userId });
+      posts = await Post.find({ userId }).sort({ createdAt: -1 });
       if (!posts || posts.length === 0) {
         return NextResponse.json(
           {
@@ -85,7 +86,11 @@ export async function GET(req: NextRequest) {
         );
       }
     } else {
-      posts = await Post.find();
+      posts = Post.find().sort({ createdAt: -1 });
+      if (limit) {
+        posts = posts.limit(limit);
+      }
+      posts = await posts;
     }
 
     return NextResponse.json({ success: true, posts }, { status: 200 });

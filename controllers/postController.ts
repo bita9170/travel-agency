@@ -158,3 +158,26 @@ export async function deletePost(postId: string) {
     };
   }
 }
+
+export async function getLastPosts(limit: number = 5) {
+  try {
+    const res = await axios.get(`/api/posts`, {
+      params: { limit },
+    });
+
+    if (res.status === 200) {
+      return res.data.posts;
+    } else {
+      return {
+        message: "Error in getting the latest posts",
+        value: res.data,
+      };
+    }
+  } catch (error) {
+    console.error("Error in getting the latest posts:", error);
+    return {
+      message: "Internal Server Error",
+      value: error,
+    };
+  }
+}
