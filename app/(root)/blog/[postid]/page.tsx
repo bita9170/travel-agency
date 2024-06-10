@@ -29,8 +29,8 @@ const BlogPage = ({ params }: any) => {
         {post && (
           <div className="blog py-20">
             <h1>{post.title}</h1>
+            <h2>{post.subtitle}</h2> {/* Ensure subtitle is rendered */}
             <h3>{post.author}</h3>
-
             {post.image && (
               <Hero image={post.image} className="mt-4 md:rounded-none" />
             )}

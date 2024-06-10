@@ -25,7 +25,7 @@ function HomePagePosts({ type }: any) {
         <Hero
           title={posts[0].title}
           image={posts[0].image}
-          subtitle="See our Travelers' Choice Awards Best of the Best winners."
+          subtitle={posts[0].subtitle}
           ctaText="Explore now"
           ctaLink={"/blog/" + posts[0]._id}
           className="mt-4"
@@ -40,17 +40,20 @@ function HomePagePosts({ type }: any) {
               <Layout3
                 image={posts[1].image}
                 ctaText={posts[1].title}
+                subtitle={posts[1].subtitle}
                 ctaLink={"/blog/" + posts[1]._id}
               />
               <Layout3
                 image={posts[2].image}
                 ctaText={posts[2].title}
+                subtitle={posts[2].subtitle}
                 ctaLink={"/blog/" + posts[2]._id}
               />
               <Layout3
                 image={posts[3].image}
                 ctaText={posts[3].title}
-                ctaLink={"/blog/" + posts[3]._id}
+                subtitle={posts[3].subtitle}
+                ctaLink={"/blog/" + posts[2]._id}
               />
             </div>
           </MaxLimitWrapper>

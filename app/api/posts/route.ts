@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export interface IPost {
   title: string;
+  subtitle: string;
   content: string;
   author: string;
   image: string;
@@ -17,12 +18,12 @@ export interface IPost {
 export async function POST(req: NextRequest) {
   await connectMongoDB();
 
-  const { userId, title, content, author, image, locationId } =
+  const { userId, title, subtitle, content, author, image, locationId } =
     await req.json();
 
-  if (!userId || !title || !content || !author) {
+  if (!userId || !title || !subtitle || !content || !author) {
     return NextResponse.json({
-      message: "userId, title, content, and author are required.",
+      message: "userId, title, subtitle, content, and author are required.",
       status: 400,
     });
   }
@@ -30,6 +31,7 @@ export async function POST(req: NextRequest) {
   try {
     const newPost = new Post({
       userId,
+      subtitle,
       title,
       content,
       author,

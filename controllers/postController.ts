@@ -38,6 +38,7 @@ export async function getPostById(postId: string) {
  */
 export async function createPost(
   title: string,
+  subtitle: string,
   content: string,
   author: string,
   image: string,
@@ -46,7 +47,15 @@ export async function createPost(
 ) {
   console.log("createPost function called");
   try {
-    if (!title || !content || !author || !image || !userId || !locationId) {
+    if (
+      !title ||
+      !subtitle ||
+      !content ||
+      !author ||
+      !image ||
+      !userId ||
+      !locationId
+    ) {
       console.error("Missing required fields");
       return {
         success: false,
@@ -56,6 +65,7 @@ export async function createPost(
 
     const res = await axios.post("/api/posts", {
       title,
+      subtitle,
       content,
       author,
       image,

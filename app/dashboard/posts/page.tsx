@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 import { DialogPost } from "@/components/elements/dialogs/DialogPost";
 import { Button } from "@/components/ui/button";
@@ -82,6 +82,7 @@ const DashboardPage: React.FC = () => {
               <TableHeader className="text-bold">
                 <TableRow>
                   <TableHead>Post Title</TableHead>
+
                   <TableHead>Author</TableHead>
                   <TableHead>Date Created</TableHead>
                   <TableHead>Last Updated</TableHead>
@@ -92,6 +93,7 @@ const DashboardPage: React.FC = () => {
                 {posts.map((post: Post) => (
                   <TableRow key={post._id} className="border-b">
                     <TableCell>{post.title}</TableCell>
+
                     <TableCell>{post.author}</TableCell>
                     <TableCell>
                       {post.createdAt && formatDate(post.createdAt)}
