@@ -10,7 +10,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export const formatDateTime = (isoString: string): string => {
   const date = new Date(isoString);
-  console.log(date);
+
   const day = String(date.getDate()).padStart(2, "0");
   const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-indexed
   const year = date.getFullYear();
@@ -23,7 +23,6 @@ export const formatDateTime = (isoString: string): string => {
 
 export const formatDate = (isoString: string): string => {
   const date = new Date(isoString);
-  console.log(date);
 
   const day = date.getDate();
   const monthNames = [
