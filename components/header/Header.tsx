@@ -1,11 +1,10 @@
-import React, { use } from "react";
+import React from "react";
 import Logo from "../elements/Logo";
 import Avatar from "../elements/Avatar";
 import MaxLimitWrapper from "../elements/MaxLimitWrapper";
 import Link from "next/link";
-import { Button } from "../ui/button";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import LoginRegisterLink from "../elements/LoginRegisterLink";
 
 async function Header() {
   const { getUser, isAuthenticated } = getKindeServerSession();
@@ -41,9 +40,7 @@ async function Header() {
                 }
               />
             ) : (
-              <Button className="text-black bg-[#34e0a1]">
-                <LoginLink>Login</LoginLink>
-              </Button>
+              <LoginRegisterLink />
             )}
           </div>
         </div>

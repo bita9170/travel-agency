@@ -12,12 +12,12 @@ import {
   RecommendedElement,
   RecommendedElement2,
 } from "@/components/tab/content";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import SaveLocation from "@/components/elements/SaveLocation";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { notFound } from "next/navigation";
 import { getLocationDetails } from "@/controllers/tripadvisorController";
 import Options from "@/components/header/Options";
-
+import Map from "@/components/Map";
 export default async function page({ params }: any) {
   const { getUser, isAuthenticated } = getKindeServerSession();
   const isLogged = await isAuthenticated();
@@ -106,11 +106,12 @@ export default async function page({ params }: any) {
               {location[0].getDescription()}
             </CardContent>
 
-            {isLogged && user && (
-              <CardFooter className="text-left">
-                <SaveLocation userId={user.id} locationId={locationid} />
-              </CardFooter>
-            )}
+            <CardFooter className="text-left">
+              <SaveLocation
+                userId={user ? user.id : "0"}
+                locationId={user ? locationid : "0"}
+              />
+            </CardFooter>
           </Card>
 
           <div className="h-[500px] w-full border-2 sm:m-auto relative rounded-xl overflow-hidden col-span-2">
@@ -170,11 +171,18 @@ export default async function page({ params }: any) {
 
           <div className="lg:col-span-1 flex justify-center items-center">
             <div className="w-full h-[300px] relative">
-              <Image
-                src="/map.png"
-                alt="Map of Eiffel Tower Area"
-                fill
-                className="object-cover"
+              <Map
+                center={[
+                  parseFloat(location[0].getLatitude()),
+                  parseFloat(location[0].getLongitude()),
+                ]}
+                zoom={location[0].getCategory().name == "geographic" ? 12 : 16}
+                markers={[
+                  [
+                    parseFloat(location[0].getLatitude()),
+                    parseFloat(location[0].getLongitude()),
+                  ],
+                ]}
               />
             </div>
           </div>
