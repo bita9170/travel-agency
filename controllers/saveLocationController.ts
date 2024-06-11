@@ -35,7 +35,7 @@ export async function getSaveLocationsByUserId(
       `${baseUrl}/api/saveLocations?userId=${userId}&locationId=${locationId}`,
       {
         method: "GET",
-        cache: "force-cache",
+        cache: "default",
       }
     );
 

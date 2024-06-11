@@ -15,7 +15,7 @@ export async function getPostById(postId: string) {
     }
 
     const res = await fetch(`${baseUrl}/api/posts?postId=${postId}`, {
-      cache: "force-cache",
+      cache: "default",
       method: "GET",
     });
 
@@ -175,7 +175,7 @@ export async function deletePost(postId: string) {
 export async function getLastPosts(limit: number = 5) {
   try {
     const res = await fetch(`${baseUrl}/api/posts/?limit=${limit}`, {
-      cache: "force-cache",
+      cache: "default",
       method: "GET",
     });
 
