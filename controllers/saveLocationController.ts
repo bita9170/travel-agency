@@ -1,8 +1,9 @@
 // lib/controllers/saveLocationController.ts
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getLocationDetailsById } from "@/lib/data/location/index";
 import axios from "axios";
 import { IResult } from "@/components/elements/SaveLocation";
+import { baseUrl } from "@/lib/utils";
 
 export interface ISaveLocation {
   _id: string;
@@ -30,12 +31,18 @@ export async function getSaveLocationsByUserId(
       return "Location not found";
     }
 
-    const res = await axios.get("/api/saveLocations", {
-      params: { userId, locationId },
-    });
+    const res = await fetch(
+      `${baseUrl}/api/saveLocations?userId=${userId}&locationId=${locationId}`,
+      {
+        method: "GET",
+        cache: "force-cache",
+      }
+    );
+
+    const data = await res.json();
 
     if (res.status === 200) {
-      return res.data.saveLocation;
+      return data.saveLocation;
     } else {
       return false;
     }

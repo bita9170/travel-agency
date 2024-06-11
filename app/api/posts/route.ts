@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export interface IPost {
   title: string;
+  subtitle: string;
   content: string;
   author: string;
   image: string;
@@ -17,12 +18,12 @@ export interface IPost {
 export async function POST(req: NextRequest) {
   await connectMongoDB();
 
-  const { userId, title, content, author, image, locationId } =
+  const { userId, title, subtitle, content, author, image, locationId } =
     await req.json();
 
-  if (!userId || !title || !content || !author) {
+  if (!userId || !title || !subtitle || !content || !author) {
     return NextResponse.json({
-      message: "userId, title, content, and author are required.",
+      message: "userId, title, subtitle, content, and author are required.",
       status: 400,
     });
   }
@@ -30,6 +31,7 @@ export async function POST(req: NextRequest) {
   try {
     const newPost = new Post({
       userId,
+      subtitle,
       title,
       content,
       author,
@@ -61,6 +63,7 @@ export async function GET(req: NextRequest) {
   console.log("GET request");
   const userId = req.nextUrl.searchParams.get("userId");
   const postId = req.nextUrl.searchParams.get("postId");
+  const limit = parseInt(req.nextUrl.searchParams.get("limit") || "0");
 
   try {
     let posts: any;
@@ -75,7 +78,7 @@ export async function GET(req: NextRequest) {
         );
       }
     } else if (userId) {
-      posts = await Post.find({ userId });
+      posts = await Post.find({ userId }).sort({ createdAt: -1 });
       if (!posts || posts.length === 0) {
         return NextResponse.json(
           {
@@ -85,7 +88,11 @@ export async function GET(req: NextRequest) {
         );
       }
     } else {
-      posts = await Post.find();
+      posts = Post.find().sort({ createdAt: -1 });
+      if (limit) {
+        posts = posts.limit(limit);
+      }
+      posts = await posts;
     }
 
     return NextResponse.json({ success: true, posts }, { status: 200 });

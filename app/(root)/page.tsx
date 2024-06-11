@@ -1,23 +1,19 @@
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Options from "@/components/header/Options";
-import Hero from "@/components/hero/Hero";
 import Layout from "@/components/hero/Layout";
 import { SommerContent, SpringContent } from "@/components/tab/content";
 import Tab, { TabProps } from "@/components/tabsection/Tab";
 import Layout1 from "@/components/tiles/Layout1";
 import Layout2 from "@/components/tiles/Layout2";
-import Layout3 from "@/components/tiles/Layout3";
-// import { getLocationDetails } from "@/controllers/tripadvisorController";
+import { getLastPosts } from "@/controllers/postController";
 import { LocationDetails } from "@/lib/class/location";
 import { getLocationDetailsByIds } from "@/lib/data/location";
+import { Post } from "../dashboard/posts/page";
+import Hero from "@/components/hero/Hero";
+import Layout3 from "@/components/tiles/Layout3";
 
 export default async function Home() {
-  // const locationDetails: LocationDetails[] = await getLocationDetails([
-  //   188151, 188757, 188679, 188709,
-  // ]);
-  // const locationDetails: LocationDetails[] = getLocationDetailsByIds([
-  //   188151, 188757, 188679, 188709,
-  // ]);
+  const posts: Post[] = await getLastPosts(4);
 
   const images = [
     {
@@ -61,11 +57,11 @@ export default async function Home() {
 
       <MaxLimitWrapper>
         <Hero
-          title="World's best hotels for 2024"
-          image="/hero.jpeg"
-          subtitle="See our Travelers' Choice Awards Best of the Best winners."
-          ctaText="See the list"
-          ctaLink="#"
+          title={posts[0].title}
+          image={posts[0].image}
+          subtitle={posts[0].subtitle}
+          ctaText="Explore now"
+          ctaLink={"/blog/" + posts[0]._id}
           className="mt-4"
         />
       </MaxLimitWrapper>
@@ -112,26 +108,29 @@ export default async function Home() {
         <MaxLimitWrapper>
           <h3>More to explore</h3>
           <div className="grid md:grid-cols-3 gap-8 my-4">
-            <Layout3
-              image="/image (5).jpeg"
-              ctaText="7 New York City restaurants to try when
-        the top tables are booked"
-              rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
-              ctaLink="#"
-            />
-            <Layout3
-              image="/image (6).jpeg"
-              ctaText="10 best places to visit in May around
-        the world"
-              rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
-              ctaLink="#"
-            />
-            <Layout3
-              image="/image (7).jpeg"
-              ctaText="One perfect day in Milan"
-              rating="https://www.tripadvisor.de/img/cdsi/img2/ratings/traveler/4.5-66827-5.svg"
-              ctaLink="#"
-            />
+            {posts[1] && (
+              <Layout3
+                image={posts[1].image}
+                ctaText={posts[1].title}
+                ctaLink={"/blog/" + posts[1]._id}
+              />
+            )}
+
+            {posts[2] && (
+              <Layout3
+                image={posts[2].image}
+                ctaText={posts[2].title}
+                ctaLink={"/blog/" + posts[2]._id}
+              />
+            )}
+
+            {posts[3] && (
+              <Layout3
+                image={posts[3].image}
+                ctaText={posts[3].title}
+                ctaLink={"/blog/" + posts[3]._id}
+              />
+            )}
           </div>
         </MaxLimitWrapper>
       </section>

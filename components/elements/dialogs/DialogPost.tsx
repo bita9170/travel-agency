@@ -33,6 +33,7 @@ export function DialogPost({
   const user = getUser();
 
   const [title, setTitle] = useState("");
+  const [subtitle, setSubtitle] = useState("");
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
@@ -61,6 +62,7 @@ export function DialogPost({
           const post = res.data.posts;
           setTitle(post.title);
           setAuthor(post.author);
+          setSubtitle(post.subtitle);
           setContent(post.content);
           setImage(post.image);
           setLocationId(post.locationId);
@@ -87,7 +89,14 @@ export function DialogPost({
     try {
       if (postId) {
         // Update existing post
-        const updatedData = { title, author, content, image, locationId };
+        const updatedData = {
+          title,
+          subtitle,
+          author,
+          content,
+          image,
+          locationId,
+        };
 
         const res = await updatePost(postId, updatedData);
         if (res.success) {
@@ -111,6 +120,7 @@ export function DialogPost({
       } else {
         const res = await createPost(
           title,
+          subtitle,
           content,
           author,
           image,
@@ -118,7 +128,6 @@ export function DialogPost({
           user ? user.id : ""
         );
 
-        console.log(res);
         if (res.success) {
           setAlert({
             show: true,
@@ -155,9 +164,7 @@ export function DialogPost({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
-          <DialogTitle>
-            {postId ? "Edit Post" : "Add a New Post"} <span></span>
-          </DialogTitle>
+          <DialogTitle>{postId ? "Edit Post" : "Add a New Post"}</DialogTitle>
         </DialogHeader>
 
         <Alert
@@ -180,6 +187,13 @@ export function DialogPost({
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Title"
+            className="shadow-shadowSmall border-2 rounded-xl"
+          />
+          <Input
+            type="text"
+            value={subtitle}
+            onChange={(e) => setSubtitle(e.target.value)}
+            placeholder="Subtitle"
             className="shadow-shadowSmall border-2 rounded-xl"
           />
           <Input

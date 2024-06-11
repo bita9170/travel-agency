@@ -1,3 +1,4 @@
+import { baseUrl } from "@/lib/utils";
 import axios from "axios";
 
 /**
@@ -13,12 +14,15 @@ export async function getPostById(postId: string) {
       };
     }
 
-    const res = await axios.get(`/api/posts`, {
-      params: { postId },
+    const res = await fetch(`${baseUrl}/api/posts?postId=${postId}`, {
+      cache: "force-cache",
+      method: "GET",
     });
 
+    const data = await res.json();
+
     if (res.status === 200) {
-      return res.data.posts;
+      return data.posts;
     } else {
       return {
         message: "Error in get post by id",
@@ -38,6 +42,7 @@ export async function getPostById(postId: string) {
  */
 export async function createPost(
   title: string,
+  subtitle: string,
   content: string,
   author: string,
   image: string,
@@ -46,7 +51,15 @@ export async function createPost(
 ) {
   console.log("createPost function called");
   try {
-    if (!title || !content || !author || !image || !userId || !locationId) {
+    if (
+      !title ||
+      !subtitle ||
+      !content ||
+      !author ||
+      !image ||
+      !userId ||
+      !locationId
+    ) {
       console.error("Missing required fields");
       return {
         success: false,
@@ -56,6 +69,7 @@ export async function createPost(
 
     const res = await axios.post("/api/posts", {
       title,
+      subtitle,
       content,
       author,
       image,
@@ -89,7 +103,7 @@ export async function createPost(
  */
 export async function updatePost(postId: string, updatedData: any) {
   console.log("updatePost function called");
-  console.log(updatedData);
+
   try {
     if (!postId) {
       console.error("Missing required fields");
@@ -101,7 +115,6 @@ export async function updatePost(postId: string, updatedData: any) {
 
     const res = await axios.put("/api/posts", { postId, updatedData });
 
-    console.log(res);
     if (res.status === 200) {
       return {
         success: true,
@@ -155,6 +168,32 @@ export async function deletePost(postId: string) {
     return {
       message: "",
       value: "",
+    };
+  }
+}
+
+export async function getLastPosts(limit: number = 5) {
+  try {
+    const res = await fetch(`${baseUrl}/api/posts/?limit=${limit}`, {
+      cache: "force-cache",
+      method: "GET",
+    });
+
+    const data = await res.json();
+
+    if (res.status === 200) {
+      return data.posts;
+    } else {
+      return {
+        message: "Error in getting the latest posts",
+        value: data,
+      };
+    }
+  } catch (error) {
+    console.error("Error in getting the latest posts:", error);
+    return {
+      message: "Internal Server Error",
+      value: error,
     };
   }
 }

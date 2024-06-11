@@ -1,26 +1,12 @@
-"use client";
-
 import { Post } from "@/app/dashboard/posts/page";
-import AttractionSection from "@/components/blog/AttractionSection";
-import LocationSection from "@/components/blog/LocationSection";
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Options from "@/components/header/Options";
 import Hero from "@/components/hero/Hero";
-import { Separator } from "@/components/ui/separator";
 import { getPostById } from "@/controllers/postController";
-import { useEffect, useState } from "react";
 
-const BlogPage = ({ params }: any) => {
+const BlogPage = async ({ params }: any) => {
   const { postid } = params;
-  const [post, setPost] = useState<Post>();
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      setPost(await getPostById(postid));
-    };
-
-    fetchPosts();
-  }, []);
+  const post: Post = await getPostById(postid);
 
   return (
     <>
@@ -29,8 +15,8 @@ const BlogPage = ({ params }: any) => {
         {post && (
           <div className="blog py-20">
             <h1>{post.title}</h1>
+            <h2>{post.subtitle}</h2> {/* Ensure subtitle is rendered */}
             <h3>{post.author}</h3>
-
             {post.image && (
               <Hero image={post.image} className="mt-4 md:rounded-none" />
             )}
