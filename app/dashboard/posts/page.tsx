@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { deletePost } from "@/controllers/postController";
 import Spinner from "@/components/elements/Spinner";
-import { formatDate } from "@/lib/utils";
+import { formatDateTime } from "@/lib/utils";
 
 export interface Post {
   _id: string;
@@ -93,14 +93,17 @@ const DashboardPage: React.FC = () => {
               <TableBody>
                 {posts.map((post: Post) => (
                   <TableRow key={post._id} className="border-b">
-                    <TableCell>{post.title}</TableCell>
+                    <TableCell>
+                      <p className="font-semibold">{post.title}</p>
+                      <p>{post.subtitle}</p>
+                    </TableCell>
 
                     <TableCell>{post.author}</TableCell>
                     <TableCell>
-                      {post.createdAt && formatDate(post.createdAt)}
+                      {post.createdAt && formatDateTime(post.createdAt)}
                     </TableCell>
                     <TableCell>
-                      {post.updatedAt && formatDate(post.updatedAt)}
+                      {post.updatedAt && formatDateTime(post.updatedAt)}
                     </TableCell>
                     <TableCell className="flex items-end">
                       <div className="text-right flex-1 space-x-2">
