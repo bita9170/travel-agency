@@ -14,10 +14,10 @@ async function fetchData(url: string) {
   try {
     const options = { method: "GET", headers: { accept: "application/json" } };
     const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch data: ${response.statusText}`);
+
+    if (response.status == 200) {
+      return await response.json();
     }
-    return await response.json();
   } catch (error) {
     console.error("Error occurred while fetching data:", error);
     throw error;
@@ -33,7 +33,6 @@ export async function searchAllLocations(
 
   // Extract location_id values
   const locationIds = results.data.map((location: any) => location.location_id);
-
   return await getLocationDetails(locationIds);
 }
 
@@ -77,25 +76,15 @@ export async function getLocationDetails(
     });
 
     const results = await Promise.all(promises);
-    return results.map((data) => new LocationDetails(data));
+
+    return results
+      .filter((data) => data !== undefined)
+      .map((data) => new LocationDetails(data));
   } else {
     const url = `${TRIPADVISOR_BASE_URL}/${locationId}/details?language=${language}&key=${TRIPADVISOR_API_KEY}`;
     const data = await fetchData(url);
     return [new LocationDetails(data)];
   }
-}
-
-export async function getLocationPhotos(
-  locationIds: number,
-  language: string = "en"
-): Promise<LocationPhotos[]> {
-  const url = `${TRIPADVISOR_BASE_URL}/${locationIds}/photos?language=${language}&key=${TRIPADVISOR_API_KEY}`;
-  const result = await fetchData(url);
-
-  const locationPhotos = Array.isArray(result.data)
-    ? result.data.map((item: LocationPhotos) => new LocationPhotos(item))
-    : [new LocationPhotos(result.data)];
-  return locationPhotos;
 }
 
 export async function getLocationReviews(

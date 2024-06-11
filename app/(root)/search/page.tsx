@@ -20,7 +20,7 @@ async function SearchPage({
   const query =
     typeof searchParams.query === "string" ? searchParams.query : undefined;
 
-  let locations: LocationDetails[] | undefined = undefined;
+  let locations: LocationDetails[] | undefined;
 
   switch (type) {
     case "hotels":
@@ -48,18 +48,20 @@ async function SearchPage({
           )}
           {query && locations && locations.length > 0 && (
             <div className="grid md:grid-cols-4 gap-8 my-4">
-              {locations.map(
-                async (location: LocationDetails, index: number) => (
+              {locations
+                .filter(
+                  (location) => location !== undefined && location !== null
+                )
+                .map((location: LocationDetails, index: number) => (
                   <Layout2
                     key={index}
-                    image={await location.getImage()}
+                    image={location.getImage()}
                     ctaText={location.getName()}
                     rating={location.getRatingImageUrl()}
                     category={location.getCategory().name}
                     ctaLink={`/${location.getLocationId()}`}
                   />
-                )
-              )}
+                ))}
             </div>
           )}
         </div>

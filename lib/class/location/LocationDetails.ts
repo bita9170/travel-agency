@@ -1,6 +1,4 @@
-import { getLocationPhotos } from "@/controllers/tripadvisorController";
 import { LocationPhotos } from "./LocationPhotos";
-
 interface AddressObj {
   street1: string;
   city: string;
@@ -200,12 +198,9 @@ export class LocationDetails {
     return photos.map((photo: any) => new LocationPhotos(photo));
   }
 
-  async getImage(): Promise<string> {
+  getImage(): string {
     const arr: number[] = [57, 49, 28, 27, 74, 84, 122, 124, 142, 249];
     const ind = Math.floor(Math.random() * arr.length);
-    const photos = await this.getPhotos();
-    return photos.length > 0
-      ? photos[0].getLarge().url
-      : `https://picsum.photos/id/${arr.splice(ind, 1)[0]}/4106/2806`;
+    return `https://picsum.photos/id/${arr.splice(ind, 1)[0]}/1920/1080`;
   }
 }
