@@ -128,7 +128,6 @@ export function DialogPost({
           user ? user.id : ""
         );
 
-        console.log(res);
         if (res.success) {
           setAlert({
             show: true,

@@ -1,4 +1,3 @@
-import HomePagePosts from "@/components/HomePagePosts";
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Options from "@/components/header/Options";
 import Layout from "@/components/hero/Layout";
@@ -6,11 +5,16 @@ import { SommerContent, SpringContent } from "@/components/tab/content";
 import Tab, { TabProps } from "@/components/tabsection/Tab";
 import Layout1 from "@/components/tiles/Layout1";
 import Layout2 from "@/components/tiles/Layout2";
-import Layout3 from "@/components/tiles/Layout3";
+import { getLastPosts } from "@/controllers/postController";
 import { LocationDetails } from "@/lib/class/location";
 import { getLocationDetailsByIds } from "@/lib/data/location";
+import { Post } from "../dashboard/posts/page";
+import Hero from "@/components/hero/Hero";
+import Layout3 from "@/components/tiles/Layout3";
 
-export default function Home() {
+export default async function Home() {
+  const posts: Post[] = await getLastPosts(4);
+
   const images = [
     {
       image: "/image1.jpeg",
@@ -52,7 +56,14 @@ export default function Home() {
       </MaxLimitWrapper>
 
       <MaxLimitWrapper>
-        <HomePagePosts type="hero" />
+        <Hero
+          title={posts[0].title}
+          image={posts[0].image}
+          subtitle={posts[0].subtitle}
+          ctaText="Explore now"
+          ctaLink={"/blog/" + posts[0]._id}
+          className="mt-4"
+        />
       </MaxLimitWrapper>
 
       <MaxLimitWrapper>
@@ -93,7 +104,36 @@ export default function Home() {
         </section>
       </MaxLimitWrapper>
 
-      <HomePagePosts type="3-col-post" />
+      <section className="bg-[#faf1ed] py-10 mt-4 px-2 md:px-0">
+        <MaxLimitWrapper>
+          <h3>More to explore</h3>
+          <div className="grid md:grid-cols-3 gap-8 my-4">
+            {posts[1] && (
+              <Layout3
+                image={posts[1].image}
+                ctaText={posts[1].title}
+                ctaLink={"/blog/" + posts[1]._id}
+              />
+            )}
+
+            {posts[2] && (
+              <Layout3
+                image={posts[2].image}
+                ctaText={posts[2].title}
+                ctaLink={"/blog/" + posts[2]._id}
+              />
+            )}
+
+            {posts[3] && (
+              <Layout3
+                image={posts[3].image}
+                ctaText={posts[3].title}
+                ctaLink={"/blog/" + posts[3]._id}
+              />
+            )}
+          </div>
+        </MaxLimitWrapper>
+      </section>
 
       <MaxLimitWrapper>
         <section className="py-10 mt-4 px-2 md:px-0">

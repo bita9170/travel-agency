@@ -31,6 +31,7 @@ import { formatDate } from "@/lib/utils";
 export interface Post {
   _id: string;
   title: string;
+  subtitle: string;
   author: string;
   publicationDate: string;
   content?: string;

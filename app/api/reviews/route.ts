@@ -24,7 +24,6 @@ export async function GET(req: NextRequest) {
 
 // Create a review
 export async function POST(req: NextRequest) {
-  console.log(req.body);
   try {
     const { userId, text, rating, locationId } = await req.json();
     await connectMongoDB();

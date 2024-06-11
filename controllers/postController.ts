@@ -1,3 +1,4 @@
+import { baseUrl } from "@/lib/utils";
 import axios from "axios";
 
 /**
@@ -13,12 +14,15 @@ export async function getPostById(postId: string) {
       };
     }
 
-    const res = await axios.get(`/api/posts`, {
-      params: { postId },
+    const res = await fetch(`${baseUrl}/api/posts?postId=${postId}`, {
+      cache: "force-cache",
+      method: "GET",
     });
 
+    const data = await res.json();
+
     if (res.status === 200) {
-      return res.data.posts;
+      return data.posts;
     } else {
       return {
         message: "Error in get post by id",
@@ -99,7 +103,7 @@ export async function createPost(
  */
 export async function updatePost(postId: string, updatedData: any) {
   console.log("updatePost function called");
-  console.log(updatedData);
+
   try {
     if (!postId) {
       console.error("Missing required fields");
@@ -111,7 +115,6 @@ export async function updatePost(postId: string, updatedData: any) {
 
     const res = await axios.put("/api/posts", { postId, updatedData });
 
-    console.log(res);
     if (res.status === 200) {
       return {
         success: true,
@@ -171,16 +174,19 @@ export async function deletePost(postId: string) {
 
 export async function getLastPosts(limit: number = 5) {
   try {
-    const res = await axios.get(`/api/posts`, {
-      params: { limit },
+    const res = await fetch(`${baseUrl}/api/posts/?limit=${limit}`, {
+      cache: "force-cache",
+      method: "GET",
     });
 
+    const data = await res.json();
+
     if (res.status === 200) {
-      return res.data.posts;
+      return data.posts;
     } else {
       return {
         message: "Error in getting the latest posts",
-        value: res.data,
+        value: data,
       };
     }
   } catch (error) {
