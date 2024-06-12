@@ -4,6 +4,11 @@ import { twMerge } from "tailwind-merge";
 export const baseUrl =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
+export const TRIPADVISOR_API_KEY_1 = process.env.NEXT_PUBLIC_TRIPADVISOR_API_KEY_1;
+export const TRIPADVISOR_API_KEY_2 = process.env.NEXT_PUBLIC_TRIPADVISOR_API_KEY_2;
+export const TRIPADVISOR_API_KEY_3 = process.env.NEXT_PUBLIC_TRIPADVISOR_API_KEY_3;
+export const TRIPADVISOR_API_KEY_4 = process.env.NEXT_PUBLIC_TRIPADVISOR_API_KEY_4;
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }

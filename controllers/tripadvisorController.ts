@@ -1,22 +1,47 @@
 import fetch from "node-fetch";
 import { LocationDetails } from "@/lib/class/location";
+import {
+  TRIPADVISOR_API_KEY_1,
+  TRIPADVISOR_API_KEY_2,
+  TRIPADVISOR_API_KEY_3,
+  TRIPADVISOR_API_KEY_4,
+} from "@/lib/utils";
 
-const TRIPADVISOR_API_KEY = process.env.NEXT_PUBLIC_TRIPADVISOR_API_KEY;
+const TRIPADVISOR_API_KEYS = [
+  TRIPADVISOR_API_KEY_1,
+  TRIPADVISOR_API_KEY_2,
+  TRIPADVISOR_API_KEY_3,
+  TRIPADVISOR_API_KEY_4,
+];
 
-if (!TRIPADVISOR_API_KEY) {
-  throw new Error("TripAdvisor API key is missing in environment variables");
+if (TRIPADVISOR_API_KEYS.some((key) => !key)) {
+  throw new Error("TripAdvisor API keys are missing in environment variables");
 }
 
 const TRIPADVISOR_BASE_URL =
   "https://api.content.tripadvisor.com/api/v1/location";
 
-async function fetchData(url: string) {
+async function fetchData(url: string, apiKeyIndex: number = 0) {
   try {
     const options = { method: "GET", headers: { accept: "application/json" } };
-    const response = await fetch(url, options);
+    const response = await fetch(
+      `${TRIPADVISOR_BASE_URL}${url}&key=${TRIPADVISOR_API_KEYS[apiKeyIndex]}`,
+      options
+    );
+    console.log(
+      `${TRIPADVISOR_BASE_URL}${url}&key=${TRIPADVISOR_API_KEYS[apiKeyIndex]}`,
+      response.status
+    );
 
-    if (response.status == 200) {
+    if (response.status === 200) {
       return await response.json();
+    } else if (
+      (response.status === 401 || response.status === 429) &&
+      apiKeyIndex < TRIPADVISOR_API_KEYS.length - 1
+    ) {
+      return await fetchData(url, apiKeyIndex + 1);
+    } else {
+      throw new Error(`Failed to fetch data. Status: ${response.status}`);
     }
   } catch (error) {
     console.error("Error occurred while fetching data:", error);
@@ -28,7 +53,7 @@ export async function searchAllLocations(
   searchQuery: string,
   language: string = "en"
 ) {
-  const url = `${TRIPADVISOR_BASE_URL}/search?searchQuery=${searchQuery}&language=${language}&key=${TRIPADVISOR_API_KEY}`;
+  const url = `/search?searchQuery=${searchQuery}&language=${language}`;
   const results = await fetchData(url);
 
   // Extract location_id values
@@ -40,7 +65,7 @@ export async function searchHotels(
   searchQuery: string,
   language: string = "en"
 ) {
-  const url = `${TRIPADVISOR_BASE_URL}/search?searchQuery=${searchQuery}&category=hotels&language=${language}&key=${TRIPADVISOR_API_KEY}`;
+  const url = `/search?searchQuery=${searchQuery}&category=hotels&language=${language}`;
   return fetchData(url);
 }
 
@@ -48,7 +73,7 @@ export async function searchAttractions(
   searchQuery: string,
   language: string = "en"
 ) {
-  const url = `${TRIPADVISOR_BASE_URL}/search?searchQuery=${searchQuery}&category=attractions&language=${language}&key=${TRIPADVISOR_API_KEY}`;
+  const url = `/search?searchQuery=${searchQuery}&category=attractions&language=${language}`;
   return fetchData(url);
 }
 
@@ -56,12 +81,12 @@ export async function searchRestaurants(
   searchQuery: string,
   language: string = "en"
 ) {
-  const url = `${TRIPADVISOR_BASE_URL}/search?searchQuery=${searchQuery}&category=restaurants&language=${language}&key=${TRIPADVISOR_API_KEY}`;
+  const url = `/search?searchQuery=${searchQuery}&category=restaurants&language=${language}`;
   return fetchData(url);
 }
 
 export async function searchGeos(searchQuery: string, language: string = "en") {
-  const url = `${TRIPADVISOR_BASE_URL}/search?searchQuery=${searchQuery}&category=geos&language=${language}&key=${TRIPADVISOR_API_KEY}`;
+  const url = `/search?searchQuery=${searchQuery}&category=geos&language=${language}`;
   return fetchData(url);
 }
 
@@ -71,7 +96,7 @@ export async function getLocationDetails(
 ): Promise<LocationDetails[]> {
   if (Array.isArray(locationId)) {
     const promises = locationId.map((id) => {
-      const url = `${TRIPADVISOR_BASE_URL}/${id}/details?language=${language}&key=${TRIPADVISOR_API_KEY}`;
+      const url = `/${id}/details?language=${language}`;
       return fetchData(url);
     });
 
@@ -81,7 +106,7 @@ export async function getLocationDetails(
       .filter((data) => data !== undefined)
       .map((data) => new LocationDetails(data));
   } else {
-    const url = `${TRIPADVISOR_BASE_URL}/${locationId}/details?language=${language}&key=${TRIPADVISOR_API_KEY}`;
+    const url = `/${locationId}/details?language=${language}`;
     const data = await fetchData(url);
     return [new LocationDetails(data)];
   }
@@ -91,7 +116,7 @@ export async function getLocationPhotos(
   locationId: number,
   language: string = "en"
 ) {
-  const url = `${TRIPADVISOR_BASE_URL}/${locationId}/photos?language=${language}&key=${TRIPADVISOR_API_KEY}&limit=1`;
+  const url = `/${locationId}/photos?language=${language}&limit=1`;
   return fetchData(url);
 }
 
@@ -101,19 +126,19 @@ export async function getLocationReviews(
 ) {
   if (Array.isArray(locationId)) {
     const promises = locationId.map((id) => {
-      const url = `${TRIPADVISOR_BASE_URL}/${id}/reviews?language=${language}&key=${TRIPADVISOR_API_KEY}`;
+      const url = `/${id}/reviews?language=${language}`;
       return fetchData(url);
     });
 
     return Promise.all(promises);
   } else {
-    const url = `${TRIPADVISOR_BASE_URL}/${locationId}/reviews?language=${language}&key=${TRIPADVISOR_API_KEY}`;
+    const url = `/${locationId}/reviews?language=${language}`;
     return fetchData(url);
   }
 }
 
 export async function nearbySearch(latLong: string, language: string = "en") {
-  const url = `${TRIPADVISOR_BASE_URL}/nearby_search?language=${language}&latLong=${latLong}&key=${TRIPADVISOR_API_KEY}&language=en`;
+  const url = `/nearby_search?language=${language}&latLong=${latLong}&language=en`;
   return fetchData(url);
 }
 
@@ -121,7 +146,7 @@ export async function nearbySearchHotels(
   latLong: string,
   language: string = "en"
 ) {
-  const url = `${TRIPADVISOR_BASE_URL}/nearby_search?language=${language}&latLong=${latLong}&category=hotels&key=${TRIPADVISOR_API_KEY}`;
+  const url = `/nearby_search?language=${language}&latLong=${latLong}&category=hotels`;
   return fetchData(url);
 }
 
@@ -129,7 +154,7 @@ export async function nearbySearchAttractions(
   latLong: string,
   language: string = "en"
 ) {
-  const url = `${TRIPADVISOR_BASE_URL}/nearby_search?language=${language}&latLong=${latLong}&category=attractions&key=${TRIPADVISOR_API_KEY}`;
+  const url = `/nearby_search?language=${language}&latLong=${latLong}&category=attractions`;
   return fetchData(url);
 }
 
@@ -137,7 +162,7 @@ export async function nearbySearchRestaurants(
   latLong: string,
   language: string = "en"
 ) {
-  const url = `${TRIPADVISOR_BASE_URL}/nearby_search?language=${language}&latLong=${latLong}&category=restaurants&key=${TRIPADVISOR_API_KEY}`;
+  const url = `/nearby_search?language=${language}&latLong=${latLong}&category=restaurants`;
   return fetchData(url);
 }
 
@@ -145,6 +170,6 @@ export async function nearbySearchGeos(
   latLong: string,
   language: string = "en"
 ) {
-  const url = `${TRIPADVISOR_BASE_URL}/nearby_search?language=${language}&latLong=${latLong}&category=geos&key=${TRIPADVISOR_API_KEY}`;
+  const url = `/nearby_search?language=${language}&latLong=${latLong}&category=geos`;
   return fetchData(url);
 }
