@@ -203,8 +203,14 @@ export class LocationDetails {
     const TRIPADVISOR_PHOTO = process.env.NEXT_PUBLIC_TRIPADVISOR_PHOTO;
     if (TRIPADVISOR_PHOTO === "1") {
       const res = await getLocationPhotos(this.data.location_id);
-      if (res.data.length > 0) {
-        return res.data[0].images.large.url;
+      try {
+        if (res.data.length > 0) {
+          return res.data[0].images.large.url;
+        }
+      } catch (error) {
+        const arr: number[] = [57, 49, 28, 27, 74, 84, 122, 124, 142, 249];
+        const ind = Math.floor(Math.random() * arr.length);
+        return `https://picsum.photos/id/${arr.splice(ind, 1)[0]}/1920/1080`;
       }
     }
 
