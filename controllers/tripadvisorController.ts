@@ -21,7 +21,7 @@ if (TRIPADVISOR_API_KEYS.some((key) => !key)) {
 const TRIPADVISOR_BASE_URL =
   "https://api.content.tripadvisor.com/api/v1/location";
 
-async function fetchData(url: string, apiKeyIndex: number = 0) {
+async function fetchData(url: string, apiKeyIndex: number = 0): Promise<any> {
   try {
     const options = { method: "GET", headers: { accept: "application/json" } };
     const response = await fetch(
