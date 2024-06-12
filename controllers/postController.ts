@@ -38,6 +38,42 @@ export async function getPostById(postId: string) {
 }
 
 /**
+ *  GET Last post - default 5
+ */
+export async function getLastPosts(limit: number = 5) {
+  try {
+    if (!limit) {
+      console.error("Missing required fields");
+      return {
+        message: "Error in get last post by",
+        value: limit,
+      };
+    }
+
+    const res = await fetch(`${baseUrl}/api/posts/?limit=${limit}`, {
+      cache: "default",
+      method: "GET",
+    });
+
+    const data = await res.json();
+
+    if (res.status === 200) {
+      return data.posts;
+    } else {
+      return {
+        message: "Error in getting the latest posts",
+        value: IdleDeadline,
+      };
+    }
+  } catch (error) {
+    return {
+      message: "",
+      value: error,
+    };
+  }
+}
+
+/**
  *  CREATE post
  */
 export async function createPost(
@@ -168,32 +204,6 @@ export async function deletePost(postId: string) {
     return {
       message: "",
       value: "",
-    };
-  }
-}
-
-export async function getLastPosts(limit: number = 5) {
-  try {
-    const res = await fetch(`${baseUrl}/api/posts/?limit=${limit}`, {
-      cache: "default",
-      method: "GET",
-    });
-
-    const data = await res.json();
-
-    if (res.status === 200) {
-      return data.posts;
-    } else {
-      return {
-        message: "Error in getting the latest posts",
-        value: data,
-      };
-    }
-  } catch (error) {
-    console.error("Error in getting the latest posts:", error);
-    return {
-      message: "Internal Server Error",
-      value: error,
     };
   }
 }

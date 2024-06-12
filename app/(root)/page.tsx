@@ -56,7 +56,7 @@ export default async function Home() {
       </MaxLimitWrapper>
 
       <MaxLimitWrapper>
-        {posts && (
+        {posts[0] && (
           <Hero
             title={posts[0].title}
             image={posts[0].image}
