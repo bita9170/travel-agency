@@ -1,7 +1,7 @@
 import MaxLimitWrapper from "@/components/elements/MaxLimitWrapper";
 import Options from "@/components/header/Options";
 import Layout from "@/components/hero/Layout";
-import { SommerContent, SpringContent } from "@/components/tab/content";
+import { SummerContent, SpringContent } from "@/components/tab/content";
 import Tab, { TabProps } from "@/components/tabsection/Tab";
 import Layout1 from "@/components/tiles/Layout1";
 import Layout2 from "@/components/tiles/Layout2";
@@ -45,7 +45,7 @@ export default async function Home() {
     },
     {
       title: "Summer Destinations",
-      content: <SommerContent />,
+      content: <SummerContent />,
     },
   ];
 
@@ -56,14 +56,16 @@ export default async function Home() {
       </MaxLimitWrapper>
 
       <MaxLimitWrapper>
-        <Hero
-          title={posts[0].title}
-          image={posts[0].image}
-          subtitle={posts[0].subtitle}
-          ctaText="Explore now"
-          ctaLink={"/blog/" + posts[0]._id}
-          className="mt-4"
-        />
+        {posts && (
+          <Hero
+            title={posts[0].title}
+            image={posts[0].image}
+            subtitle={posts[0].subtitle}
+            ctaText="Explore now"
+            ctaLink={"/blog/" + posts[0]._id}
+            className="mt-4"
+          />
+        )}
       </MaxLimitWrapper>
 
       <MaxLimitWrapper>

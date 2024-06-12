@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { LocationDetails, LocationPhotos } from "@/lib/class/location";
+import { LocationDetails } from "@/lib/class/location";
 
 const TRIPADVISOR_API_KEY = process.env.NEXT_PUBLIC_TRIPADVISOR_API_KEY;
 
@@ -85,6 +85,14 @@ export async function getLocationDetails(
     const data = await fetchData(url);
     return [new LocationDetails(data)];
   }
+}
+
+export async function getLocationPhotos(
+  locationId: number,
+  language: string = "en"
+) {
+  const url = `${TRIPADVISOR_BASE_URL}/${locationId}/photos?language=${language}&key=${TRIPADVISOR_API_KEY}&limit=1`;
+  return fetchData(url);
 }
 
 export async function getLocationReviews(

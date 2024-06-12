@@ -52,10 +52,10 @@ async function SearchPage({
                 .filter(
                   (location) => location !== undefined && location !== null
                 )
-                .map((location: LocationDetails, index: number) => (
+                .map(async (location: LocationDetails, index: number) => (
                   <Layout2
                     key={index}
-                    image={location.getImage()}
+                    image={await location.getImage()}
                     ctaText={location.getName()}
                     rating={location.getRatingImageUrl()}
                     category={location.getCategory().name}

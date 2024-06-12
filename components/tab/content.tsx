@@ -2,8 +2,132 @@ import React from "react";
 import Layout2 from "@/components/tiles/Layout2";
 import { LocationDetails } from "@/lib/class/location/LocationDetails";
 import {
-  getLocationDetailsByIds,
-} from "@/lib/data/location";
+  getLocationDetails,
+  nearbySearchAttractions,
+  nearbySearchGeos,
+  nearbySearchHotels,
+  nearbySearchRestaurants,
+} from "@/controllers/tripadvisorController";
+
+export const Attractions = async ({
+  locationId,
+  latLong,
+}: {
+  locationId: string;
+  latLong: string;
+}) => {
+  const nearbyLocations = await nearbySearchAttractions(latLong);
+  const locationsIds = nearbyLocations.data
+    .map((location: any) => location.location_id)
+    .filter((item: string) => item != locationId)
+    .map(Number);
+
+  return (
+    <div className="grid md:grid-cols-4 gap-4">
+      {(await getLocationDetails(locationsIds.slice(0, 4))).map(
+        async (location: LocationDetails) => (
+          <Layout2
+            key={location.getLocationId()}
+            image={await location.getImage()}
+            ctaText={location.getName()}
+            rating={location.getRatingImageUrl()}
+            ctaLink={`/${location.getLocationId()}`}
+          />
+        )
+      )}
+    </div>
+  );
+};
+
+export const Restaurants = async ({
+  locationId,
+  latLong,
+}: {
+  locationId: string;
+  latLong: string;
+}) => {
+  const nearbyLocations = await nearbySearchRestaurants(latLong);
+  const locationsIds = nearbyLocations.data
+    .map((location: any) => location.location_id)
+    .filter((item: string) => item != locationId)
+    .map(Number);
+
+  return (
+    <div className="grid md:grid-cols-4 gap-4">
+      {(await getLocationDetails(locationsIds.slice(0, 4))).map(
+        async (location: LocationDetails) => (
+          <Layout2
+            key={location.getLocationId()}
+            image={await location.getImage()}
+            ctaText={location.getName()}
+            rating={location.getRatingImageUrl()}
+            ctaLink={`/${location.getLocationId()}`}
+          />
+        )
+      )}
+    </div>
+  );
+};
+
+export const Hotels = async ({
+  locationId,
+  latLong,
+}: {
+  locationId: string;
+  latLong: string;
+}) => {
+  const nearbyLocations = await nearbySearchHotels(latLong);
+  const locationsIds = nearbyLocations.data
+    .map((location: any) => location.location_id)
+    .filter((item: string) => item != locationId)
+    .map(Number);
+
+  return (
+    <div className="grid md:grid-cols-4 gap-4">
+      {(await getLocationDetails(locationsIds.slice(0, 4))).map(
+        async (location: LocationDetails) => (
+          <Layout2
+            key={location.getLocationId()}
+            image={await location.getImage()}
+            ctaText={location.getName()}
+            rating={location.getRatingImageUrl()}
+            ctaLink={`/${location.getLocationId()}`}
+          />
+        )
+      )}
+    </div>
+  );
+};
+
+export const Geos = async ({
+  locationId,
+  latLong,
+}: {
+  locationId: string;
+  latLong: string;
+}) => {
+  const nearbyLocations = await nearbySearchGeos(latLong);
+  const locationsIds = nearbyLocations.data
+    .map((location: any) => location.location_id)
+    .filter((item: string) => item != locationId)
+    .map(Number);
+
+  return (
+    <div className="grid md:grid-cols-4 gap-4">
+      {(await getLocationDetails(locationsIds.slice(0, 4))).map(
+        async (location: LocationDetails) => (
+          <Layout2
+            key={location.getLocationId()}
+            image={await location.getImage()}
+            ctaText={location.getName()}
+            rating={location.getRatingImageUrl()}
+            ctaLink={`/${location.getLocationId()}`}
+          />
+        )
+      )}
+    </div>
+  );
+};
 
 export const SpringContent = () => {
   return (
@@ -22,7 +146,7 @@ export const SpringContent = () => {
   );
 };
 
-export const SommerContent = () => {
+export const SummerContent = () => {
   return (
     <div className="grid xs:grid-cols-2 md:grid-cols-4 w-full ">
       {Array(4)
@@ -35,42 +159,6 @@ export const SommerContent = () => {
             <li>Washington DC</li>
           </ul>
         ))}
-    </div>
-  );
-};
-
-export const RecommendedElement = ():JSX.Element => {
-  return (
-    <div className="grid md:grid-cols-4 gap-4">
-      {getLocationDetailsByIds([188151, 188757, 188679, 188709]).map(
-        (location: LocationDetails) => (
-          <Layout2
-            key={location.getLocationId()}
-            image={location.getPhotos()[0].getLarge().url}
-            ctaText={location.getName()}
-            rating={location.getRatingImageUrl()}
-            ctaLink="#"
-          />
-        )
-      )}
-    </div>
-  );
-};
-
-export const RecommendedElement2 = ():JSX.Element => {
-  return (
-    <div className="grid md:grid-cols-4 gap-4">
-      {getLocationDetailsByIds([188679, 188757]).map(
-        (location: LocationDetails) => (
-          <Layout2
-            key={location.getLocationId()}
-            image={location.getPhotos()[0].getLarge().url}
-            ctaText={location.getName()}
-            rating={location.getRatingImageUrl()}
-            ctaLink="#"
-          />
-        )
-      )}
     </div>
   );
 };

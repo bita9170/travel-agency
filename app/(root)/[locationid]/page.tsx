@@ -9,8 +9,10 @@ import {
 import Image from "next/image";
 import Tab, { TabProps } from "@/components/tabsection/Tab";
 import {
-  RecommendedElement,
-  RecommendedElement2,
+  Attractions,
+  Restaurants,
+  Hotels,
+  Geos,
 } from "@/components/tab/content";
 import SaveLocation from "@/components/elements/SaveLocation";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
@@ -32,20 +34,40 @@ export default async function page({ params }: any) {
 
   const dataDrop: TabProps[] = [
     {
-      title: "Recommended",
-      content: <RecommendedElement />,
+      title: "Attraction",
+      content: (
+        <Attractions
+          locationId={locationid}
+          latLong={`${location[0].getLatitude()},${location[0].getLongitude()}`}
+        />
+      ),
     },
     {
-      title: "Walking & Biking",
-      content: <RecommendedElement2 />,
+      title: "Restaurants",
+      content: (
+        <Restaurants
+          locationId={locationid}
+          latLong={`${location[0].getLatitude()},${location[0].getLongitude()}`}
+        />
+      ),
     },
     {
-      title: "Cultural & Theme Tours",
-      content: <RecommendedElement />,
+      title: "Hotels",
+      content: (
+        <Hotels
+          locationId={locationid}
+          latLong={`${location[0].getLatitude()},${location[0].getLongitude()}`}
+        />
+      ),
     },
     {
-      title: "Sightseeing Tickets&",
-      content: <RecommendedElement2 />,
+      title: "Geos",
+      content: (
+        <Geos
+          locationId={locationid}
+          latLong={`${location[0].getLatitude()},${location[0].getLongitude()}`}
+        />
+      ),
     },
   ];
 
@@ -99,7 +121,7 @@ export default async function page({ params }: any) {
           </div>
         )}
 
-        <div className="grid md:grid-cols-3 gap-4 ">
+        <div className="grid md:grid-cols-3 gap-4">
           <Card className="shadow-shadowSmall border-2 rounded-xl flex flex-col">
             <CardHeader className="font-bold">About</CardHeader>
             <CardContent className="flex-1">
@@ -122,13 +144,6 @@ export default async function page({ params }: any) {
               className="object-cover"
             />
           </div>
-        </div>
-
-        <div className="my-8">
-          <Tab
-            data={dataDrop}
-            tabsHeading="Top way to experience Eiffel Tower"
-          />
         </div>
 
         <div className="my-8 grid md:grid-cols-2">
@@ -186,6 +201,13 @@ export default async function page({ params }: any) {
               />
             </div>
           </div>
+        </div>
+
+        <div className="my-8">
+          <Tab
+            data={dataDrop}
+            tabsHeading={`Places near the ${location[0].getName()}`}
+          />
         </div>
       </MaxLimitWrapper>
     </>
