@@ -69,9 +69,12 @@ export function DialogSaveLocations({
                 minHeight="min-h-[200px]"
               />
             ))}
-
-          {!locations && <h1>You do not have any {type} location(s)</h1>}
         </div>
+        {!locations && (
+          <h3 className="text-center">
+            You do not have any {type} location(s)
+          </h3>
+        )}
       </DialogContent>
     </DialogShadcn>
   );

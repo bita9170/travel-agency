@@ -16,11 +16,14 @@ async function Page() {
     ? await getSaveLocationsByUserId(user.id)
     : [];
 
-  const counts = saveLocations.reduce((acc, item) => {
-    const type = item.type.toLowerCase(); // Normalizing the case for consistent counting
-    acc[type] = (acc[type] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const counts =
+    saveLocations.length > 0
+      ? saveLocations.reduce((acc, item) => {
+          const type = item.type.toLowerCase(); // Normalizing the case for consistent counting
+          acc[type] = (acc[type] || 0) + 1;
+          return acc;
+        }, {} as Record<string, number>)
+      : { favorite: 0, place: 0, plans: 0 };
 
   return (
     <div>
