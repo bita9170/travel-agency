@@ -25,7 +25,7 @@ const Hero: React.FC<HeroProps> = ({
     <section className={cn("hero-container", className)}>
       <div className="absolute inset-0 z-0"></div>
       <Image src={image} alt="Hero Image" fill className="object-cover" />
-      <div className="absolute bottom-5 left-5 space-y-4 z-10">
+      <div className="absolute bottom-5 left-5 space-y-4 z-10 p-4 backdrop-blur-0 bg-black/30">
         <h2 className="text-4xl font-bold">{title}</h2>
         {subtitle && <p className="text-lg">{subtitle}</p>}
         {ctaText && ctaLink && (
