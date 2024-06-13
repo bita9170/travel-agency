@@ -10,7 +10,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { createPost, updatePost } from "@/controllers/postController";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
@@ -161,11 +160,6 @@ export function DialogPost({
     }
   };
 
-  // CKEditor configuration object
-  const editorConfiguration = {
-    height: 400, // Set the height here
-  };
-
   return (
     <DialogShadcn open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -210,17 +204,14 @@ export function DialogPost({
             placeholder="Author"
             className="shadow-shadowSmall border-2 rounded-xl"
           />
-
           <CKEditor
             editor={ClassicEditor}
             data={content}
             onChange={(event, editor) => {
               const data = editor.getData();
               setContent(data);
-              console.log({ event, editor, data });
             }}
           />
-
           <Input
             type="text"
             value={image}
