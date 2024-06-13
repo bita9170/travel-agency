@@ -15,6 +15,8 @@ import { createPost, updatePost } from "@/controllers/postController";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 export function DialogPost({
   children,
@@ -159,10 +161,15 @@ export function DialogPost({
     }
   };
 
+  // CKEditor configuration object
+  const editorConfiguration = {
+    height: 400, // Set the height here
+  };
+
   return (
     <DialogShadcn open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-2xl">
+      <DialogContent className="sm:max-w-5xl">
         <DialogHeader>
           <DialogTitle>{postId ? "Edit Post" : "Add a New Post"}</DialogTitle>
         </DialogHeader>
@@ -203,12 +210,17 @@ export function DialogPost({
             placeholder="Author"
             className="shadow-shadowSmall border-2 rounded-xl"
           />
-          <Textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Content"
-            className="shadow-shadowSmall border-2 rounded-xl"
+
+          <CKEditor
+            editor={ClassicEditor}
+            data={content}
+            onChange={(event, editor) => {
+              const data = editor.getData();
+              setContent(data);
+              console.log({ event, editor, data });
+            }}
           />
+
           <Input
             type="text"
             value={image}

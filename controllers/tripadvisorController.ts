@@ -28,10 +28,6 @@ async function fetchData(url: string, apiKeyIndex: number = 0): Promise<any> {
       `${TRIPADVISOR_BASE_URL}${url}&key=${TRIPADVISOR_API_KEYS[apiKeyIndex]}`,
       options
     );
-    console.log(
-      `${TRIPADVISOR_BASE_URL}${url}&key=${TRIPADVISOR_API_KEYS[apiKeyIndex]}`,
-      response.status
-    );
 
     if (response.status === 200) {
       return await response.json();
