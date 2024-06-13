@@ -22,6 +22,16 @@ h3 {
   @apply text-xl font-bold;
 }
 
+h4 {
+  @apply text-lg font-bold;
+}
+
 p {
-  @apply text-xs;
+  @apply text-base;
+}
+
+.ck {
+  &.ck-content {
+    @apply max-h-64 min-h-40;
+  }
 }

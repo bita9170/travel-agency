@@ -32,9 +32,12 @@ const BlogPage = async ({ params }: any) => {
             {post.image && (
               <Hero image={post.image} className="mt-4 md:rounded-none" />
             )}
-            <p className="text-base max-w-screen-lg mx-auto my-8">
-              {post.content}
-            </p>
+            {post.content && (
+              <div
+                className="text-base max-w-screen-lg mx-auto my-8"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
+            )}
           </div>
         )}
       </MaxLimitWrapper>

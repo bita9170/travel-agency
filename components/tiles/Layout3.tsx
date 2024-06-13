@@ -36,7 +36,7 @@ const Layout3: React.FC<Layout3Props> = ({
         <div>
           {ctaText && ctaLink && (
             <Link href={ctaLink}>
-              <p className="mt-2 text-base text-center">{ctaText}</p>
+              <p className="mt-2 text-base text-center font-bold">{ctaText}</p>
             </Link>
           )}
 

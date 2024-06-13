@@ -13,7 +13,7 @@ import Hero from "@/components/hero/Hero";
 import Layout3 from "@/components/tiles/Layout3";
 
 export default async function Home() {
-  const posts: Post[] = await getLastPosts(4);
+  const posts: Post[] = await getLastPosts(5);
 
   const images = [
     {
@@ -109,7 +109,7 @@ export default async function Home() {
       <section className="bg-[#faf1ed] py-10 mt-4 px-2 md:px-0">
         <MaxLimitWrapper>
           <h3>More to explore</h3>
-          <div className="grid md:grid-cols-3 gap-8 my-4">
+          <div className="grid md:grid-cols-2 gap-8 my-4">
             {posts[1] && (
               <Layout3
                 image={posts[1].image}
@@ -131,6 +131,14 @@ export default async function Home() {
                 image={posts[3].image}
                 ctaText={posts[3].title}
                 ctaLink={"/blog/" + posts[3]._id}
+              />
+            )}
+
+            {posts[4] && (
+              <Layout3
+                image={posts[4].image}
+                ctaText={posts[4].title}
+                ctaLink={"/blog/" + posts[4]._id}
               />
             )}
           </div>

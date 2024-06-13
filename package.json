@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^41.4.2",
+    "@ckeditor/ckeditor5-react": "^7.0.0",
     "@hookform/resolvers": "^3.4.0",
     "@kinde-oss/kinde-auth-nextjs": "^2.2.9",
     "@nestjs/cli": "^10.3.2",
